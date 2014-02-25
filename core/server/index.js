@@ -14,7 +14,7 @@ function setup(server) {
     "@PORT: " + config().server.port
   ];
 
-  function startGhost() {
+  function startScout() {
     
   }
 
@@ -26,7 +26,7 @@ function setup(server) {
   server.listen(
     config().server.port,
     config().server.host,
-    startGhost
+    startScout
   );
 }
 
