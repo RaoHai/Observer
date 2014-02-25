@@ -1,8 +1,27 @@
-var path = require('path'),
-  when = require('when'),
-  _ = require('underscore'),
-  scoutConfig = {};
+/**
+ * config 
+ */
+var path          =     require('path'),
+    when          =     require('when'),
+    _             =     require('lodash'),
+    scoutConfig   =     {},
+    appRoot       =     path.resolve(__dirname, '../../../'),
+    corePath      =     path.resolve(appRoot, 'core/');
 
+function updateConfig(config) {
+  config = config || {};
+
+  config.server.logLevel = config.server.logLevel || 'debug';
+  _.merge(config, {
+    paths : {
+      config : path.join(appRoot, 'config.js')
+    }
+  });
+
+  // console.log('updateConfig:', config);
+  return config;
+
+}
 
 function config() {
   // @TODO: get rid of require statement.
@@ -14,8 +33,11 @@ function config() {
       scoutConfig = require(path.resolve(__dirname, '../../../', 'config.js'))[process.env.NODE_ENV] || {};
     } catch (ignore) { /*jslint sloppy: true */ }
   }
-
+  scoutConfig = updateConfig(scoutConfig);
+  // console.log('scoutConfig', scoutConfig)
   return scoutConfig;
 }
+
+
 
 module.exports = config;

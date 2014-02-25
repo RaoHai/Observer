@@ -1,8 +1,14 @@
-var _ = require('underscore'),
+var _ = require('lodash'),
+  log = require('./log'),
   errors;
 
 errors = {
-  throwError: function (err) {
+  logAndThrowError: function (err) {
+    log({
+      type : 'error',
+      message : err
+    });
+
     if (!err) {
       err = new Error("An error occurred");
     }
@@ -10,14 +16,14 @@ errors = {
     if (_.isString(err)) {
       throw new Error(err);
     }
-
     throw err;
+
   }
 };
 
 
 _.each([
-  'throwError'
+  'logAndThrowError'
 ], function (funcName) {
   errors[funcName] = errors[funcName].bind(errors);
 });

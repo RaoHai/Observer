@@ -3,7 +3,8 @@
  */
 
 var bootstrap = require('./bootstrap'),
-    errors    = require('./errorHandling');
+  errors = require('./errorHandling'),
+  scoutServer = require('./server');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -13,10 +14,11 @@ function scout(options) {
 
 scout.prototype.watch = function() {
   var self = this;
-  bootstrap(self.options.config).then(function () {
-      var scoutServer = require('./server');
-      scoutServer(self.options.app);
-  }).otherwise(errors.throwError);
+  bootstrap(self.options.config).then(function() {
+ 
+    scoutServer(self.options.app);
+
+  }).otherwise(errors.logAndThrowError);
 };
 
 module.exports = scout;

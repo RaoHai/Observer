@@ -1,17 +1,27 @@
-var express = require('express'),
-  _ = require('underscore'),
-  config = require('./config'),
-  when = require('when');
+var express   =   require('express'),
+    _         =   require('lodash'),
+    config    =   require('./config'),
+    log       =   require('../log'),
+    when      =   require('when');
 
 
 
 function setup(server) {
 
-  console.log('setup server:');
+  var runMessage = [
+    'Scout is Ready !',
+    "@HOST: " + config().server.host,
+    "@PORT: " + config().server.port
+  ];
+
   function startGhost() {
     
   }
 
+  log({
+    type : 'info',
+    message : runMessage
+  });
 
   server.listen(
     config().server.port,
@@ -23,10 +33,12 @@ function setup(server) {
 
 function init(app) {
 
+
   if (!app) {
     app = express();
   }
   
+
   setup(app);
 
 }
