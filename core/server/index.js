@@ -1,12 +1,35 @@
-var express   =   require('express'),
-    _         =   require('lodash'),
-    config    =   require('./config'),
-    log       =   require('../log'),
-    models    =   require('./models'),
-    routes    =   require('./routes'),
-    when      =   require('when');
+var express     =   require('express'),
+    _           =   require('lodash'),
+    api         =   require('./api'),
+    config      =   require('./config'),
+    log         =   require('../log'),
+    uuid        =   require('node-uuid'),
+    models      =   require('./models'),
+    errors      =   require('../errorHandling'),
+    middleware  =   require('./middleware'),
+    routes      =   require('./routes'),
+    when        =   require('when'),
 
 
+    dbHash;
+
+
+function initDbHashAndFirstRun() {
+    console.log(api);
+
+    return when(api.settings.read('dbHash')).then(function (hash) {
+        dbHash = hash.value;
+
+        if (dbHash === null) {
+            var initHash = uuid.v4();
+            return when(api.settings.edit('dbHash', initHash)).then(function (settings) {
+                dbHash = settings.dbHash;
+                return dbHash;
+            }).then(doFirstRun);
+        }
+        return dbHash.value;
+    }, errors.logAndThrowError);
+}
 
 function setup(server) {
 
@@ -19,10 +42,17 @@ function setup(server) {
   function startScout() {
     
   }
-  
+
+
+  middleware(server, dbHash);
+
   routes.frontend(server);
 
-  models.init().then(function () {
+  models.init()
+  .then(function () {
+    return initDbHashAndFirstRun();
+  })
+  .then(function () {
     log({
       type : 'info',
       message : runMessage
