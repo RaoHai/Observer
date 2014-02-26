@@ -12,6 +12,13 @@ colors.setTheme({
 
 function log(options) {
 
+  if (typeof options === 'string') {
+    options = {
+      type : 'debug',
+      message : options
+    }
+  }
+
   var filterlevel = config().server.logLevel,
 
   levels = {

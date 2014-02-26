@@ -1,4 +1,5 @@
 var 
+  // api         = require('../api'),
   when        = require('when'),
   Route       = require('express').Route,
   config      = require('../config'),
