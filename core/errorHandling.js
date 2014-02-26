@@ -4,6 +4,7 @@ var _ = require('lodash'),
 
 errors = {
   logAndThrowError: function (err) {
+    
     log({
       type : 'error',
       message : err

@@ -2,6 +2,8 @@ var express   =   require('express'),
     _         =   require('lodash'),
     config    =   require('./config'),
     log       =   require('../log'),
+    models    =   require('./models'),
+    routes    =   require('./routes'),
     when      =   require('when');
 
 
@@ -17,17 +19,21 @@ function setup(server) {
   function startScout() {
     
   }
+  
+  routes.frontend(server);
 
-  log({
-    type : 'info',
-    message : runMessage
+  models.init().then(function () {
+    log({
+      type : 'info',
+      message : runMessage
+    });
+
+    server.listen(
+      config().server.port,
+      config().server.host,
+      startScout
+    );
   });
-
-  server.listen(
-    config().server.port,
-    config().server.host,
-    startScout
-  );
 }
 
 

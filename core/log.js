@@ -11,6 +11,7 @@ colors.setTheme({
 });
 
 function log(options) {
+
   var filterlevel = config().server.logLevel,
 
   levels = {
@@ -35,10 +36,16 @@ function log(options) {
 
   colorfunction = levels[logLevel].color;
 
-  _.forEach(options.message, function (line) {
-    var m = ("[" + logLevel + "]").toUpperCase()[colorfunction] + " " + line;
-    console.log(m);
-  });
+  var message;
+  if (options.message.stack) {
+    console.log(("[" + logLevel + "]").toUpperCase()[colorfunction] + " " + options.message.stack);
+  } else {
+    options.message = options.message.length ? options.message : [options.message];
+    _.forEach(options.message, function (line) {
+      var m = ("[" + logLevel + "]").toUpperCase()[colorfunction] + " " + line;
+      console.log(m);
+    });
+  }
 
   // console.log(options.message);
   // message = options.message.join('\n');

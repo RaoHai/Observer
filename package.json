@@ -20,6 +20,7 @@
         "when": "2.7.0",
         "lodash":"2.4.1",
         "express":"3.4.8",
+        "bookshelf":"",
         "colors":"0.6.2"
     },
     "devDependencies": {

@@ -9,9 +9,11 @@ var path          =     require('path'),
     corePath      =     path.resolve(appRoot, 'core/');
 
 function updateConfig(config) {
+  
   config = config || {};
 
   config.server.logLevel = config.server.logLevel || 'debug';
+
   _.merge(config, {
     paths : {
       config : path.join(appRoot, 'config.js')
@@ -28,6 +30,8 @@ function config() {
   // This is currently needed for tests to load config file
   // successfully.  While running application we should never
   // have to directly delegate to the config.js file.
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+  
   if (_.isEmpty(scoutConfig)) {
     try {
       scoutConfig = require(path.resolve(__dirname, '../../../', 'config.js'))[process.env.NODE_ENV] || {};
