@@ -12,7 +12,12 @@ scoutBookshelf.client = config().database.client;
 
 
 scoutBookshelf.Model = scoutBookshelf.Model.extend({
-
+  hasTimestamps: true,
+},{
+  findAll:  function (options) {
+      options = options || {};
+      return scoutBookshelf.Collection.forge([], {model: this}).fetch(options);
+  },
 });
 
 

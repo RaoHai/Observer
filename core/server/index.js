@@ -17,18 +17,21 @@ var express     =   require('express'),
 function initDbHashAndFirstRun() {
     console.log(api);
 
-    return when(api.settings.read('dbHash')).then(function (hash) {
-        dbHash = hash.value;
-
-        if (dbHash === null) {
-            var initHash = uuid.v4();
-            return when(api.settings.edit('dbHash', initHash)).then(function (settings) {
-                dbHash = settings.dbHash;
-                return dbHash;
-            }).then(doFirstRun);
-        }
-        return dbHash.value;
+    when(api.settings.read('dbHash')).then(function (hash) {
+      console.log("read hash >", hash);
     }, errors.logAndThrowError);
+    // return when(api.settings.read('dbHash')).then(function (hash) {
+    //     dbHash = hash.value;
+
+    //     if (dbHash === null) {
+    //         var initHash = uuid.v4();
+    //         return when(api.settings.edit('dbHash', initHash)).then(function (settings) {
+    //             dbHash = settings.dbHash;
+    //             return dbHash;
+    //         }).then(doFirstRun);
+    //     }
+    //     return dbHash.value;
+    // }, errors.logAndThrowError);
 }
 
 function setup(server) {
@@ -49,6 +52,9 @@ function setup(server) {
   routes.frontend(server);
 
   models.init()
+  .then(function () {
+    return models.Settings.populateDefaults();
+  })
   .then(function () {
     return initDbHashAndFirstRun();
   })

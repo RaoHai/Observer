@@ -22,6 +22,7 @@
   module.exports = {
     User: require('./user').User,
     Session: require('./session').Session,
+    Settings : require('./settings').Settings,
 
     init: function () {
       var deferred = when.defer();

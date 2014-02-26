@@ -4,11 +4,19 @@ var _ = require('lodash'),
 
 errors = {
   logAndThrowError: function (err) {
-    
-    log({
-      type : 'error',
-      message : err
-    });
+    var errorObject ;
+    if (typeof err === 'object') {
+      errorObject = err;
+      err.message = [err.message];
+      err.type = 'error';
+    } else {
+      errorObject = {
+        type : 'error',
+        message : err
+      }
+    }
+
+    log(err);
 
     if (!err) {
       err = new Error("An error occurred");
