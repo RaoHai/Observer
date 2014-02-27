@@ -26,8 +26,8 @@ defaultSettings = parseDefaultSettings();
 Settings = scoutBookShelf.Model.extend({
   tableName : 'settings',
 
-  permittedAttributes: ['id', 'uuid', 'key', 'value', 'type', 'created_at', 'created_by', 'updated_at', 'update_by'],
-},{
+  permittedAttributes: ['id', 'key', 'value', 'type', 'created_at', 'created_by', 'updated_at', 'update_by'],
+},{ 
   
   populateDefaults : function () {
     return this.findAll().then(function(allSettings) {
@@ -53,7 +53,33 @@ Settings = scoutBookShelf.Model.extend({
       return when.all(insertOperations);
 
     });
-  }
+  }, 
+
+  read: function (_key) {
+
+    if (!_.isObject(_key)) {
+        _key = { key: _key };
+    }
+    return scoutBookShelf.Model.read.call(this, _key);
+   
+  },
+
+  edit: function (_data, t) {
+      var settings = this;
+      if (!Array.isArray(_data)) {
+          _data = [_data];
+      }
+      return when.map(_data, function (item) {
+        // item = item.attributes;
+        return settings.forge({ key: item.get('key') }).fetch({transacting: t}).then(function (setting) {
+          if (setting) {
+              return setting.set('value', item.get('value')).save(null, {transacting: t});
+          }
+          return settings.forge({ key: item.get('key'), value: item.get('value') }).save(null, {transacting: t});
+        });
+      });
+
+  },
 });
 
 module.exports = {

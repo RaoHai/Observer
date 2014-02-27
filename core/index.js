@@ -18,7 +18,8 @@ scout.prototype.watch = function() {
  
     scoutServer(self.options.app);
 
-  }).otherwise(errors.logAndThrowError);
+  })
+  .otherwise(errors.logAndThrowError);
 };
 
 module.exports = scout;

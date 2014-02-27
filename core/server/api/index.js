@@ -1,8 +1,14 @@
 
-var api = {};
+var api = {},
+settings = require('./settings'),
 
+init;
 
-api.settings = require('./settings');
+init = function () {
+  return settings.updateSettingsCache();
+}
 
-
-module.exports = api;
+module.exports = {
+  settings : settings,
+  init : init
+}

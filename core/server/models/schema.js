@@ -7,14 +7,12 @@ var db = {
         },
         settings: {
             id: {type: 'increments', nullable: false, primary: true},
-            uuid: {type: 'string', maxlength: 36, nullable: false},
             key: {type: 'string', maxlength: 150, nullable: false, unique: true},
             value: {type: 'text', maxlength: 65535, nullable: true},
+            defaultValue: {type: 'text', maxlength: 65535, nullable: true},
             type: {type: 'string', maxlength: 150, nullable: false, defaultTo: 'core'},
             created_at: {type: 'dateTime', nullable: false},
-            created_by: {type: 'integer', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
-            updated_by: {type: 'integer', nullable: true}
         },
     };
 
