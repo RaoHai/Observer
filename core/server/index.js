@@ -47,12 +47,12 @@ function initDbHashAndFirstRun() {
 function setup(server) {
 
   var runMessage = [
-    'Scout is Ready !',
+    'observer is Ready !',
     "@HOST: " + config().server.host,
     "@PORT: " + config().server.port
   ];
 
-  function startScout() {
+  function startobserver() {
     
   }
 
@@ -77,7 +77,7 @@ function setup(server) {
     server.listen(
       config().server.port,
       config().server.host,
-      startScout
+      startobserver
     );
   });
 }

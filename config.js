@@ -13,7 +13,7 @@ config = {
         database: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, '/content/data/scout-dev.db')
+                filename: path.join(__dirname, '/content/data/observer-dev.db')
             },
             debug: false
         },

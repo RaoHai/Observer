@@ -1,9 +1,9 @@
 
 /**
- * Scout Bootloader
+ * observer Bootloader
  */
 
-var Scout = require('./core');
+var observer = require('./core');
 
-var scout = new Scout();
-scout.watch();
+var observer = new observer();
+observer.watch();

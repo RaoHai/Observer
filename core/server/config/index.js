@@ -4,7 +4,7 @@
 var path          =     require('path'),
     when          =     require('when'),
     _             =     require('lodash'),
-    scoutConfig   =     {},
+    observerConfig   =     {},
     appRoot       =     path.resolve(__dirname, '../../../'),
     corePath      =     path.resolve(appRoot, 'core/');
 
@@ -32,14 +32,14 @@ function config() {
   // have to directly delegate to the config.js file.
   process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   
-  if (_.isEmpty(scoutConfig)) {
+  if (_.isEmpty(observerConfig)) {
     try {
-      scoutConfig = require(path.resolve(__dirname, '../../../', 'config.js'))[process.env.NODE_ENV] || {};
+      observerConfig = require(path.resolve(__dirname, '../../../', 'config.js'))[process.env.NODE_ENV] || {};
     } catch (ignore) { /*jslint sloppy: true */ }
   }
-  scoutConfig = updateConfig(scoutConfig);
-  // console.log('scoutConfig', scoutConfig)
-  return scoutConfig;
+  observerConfig = updateConfig(observerConfig);
+  // console.log('observerConfig', observerConfig)
+  return observerConfig;
 }
 
 

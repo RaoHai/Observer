@@ -1,4 +1,4 @@
-var scoutBookshelf,
+var observerBookshelf,
   Bookshelf = require('bookshelf'),
   when      = require('when'),
   moment    = require('moment'),
@@ -8,16 +8,16 @@ var scoutBookshelf,
 
 
 
-scoutBookshelf = Bookshelf.scout = Bookshelf.initialize(config().database);
-scoutBookshelf.client = config().database.client;
+observerBookshelf = Bookshelf.observer = Bookshelf.initialize(config().database);
+observerBookshelf.client = config().database.client;
 
 
-scoutBookshelf.Model = scoutBookshelf.Model.extend({
+observerBookshelf.Model = observerBookshelf.Model.extend({
   hasTimestamps: true,
 },{
   findAll:  function (options) {
       options = options || {};
-      return scoutBookshelf.Collection.forge([], {model: this}).fetch(options);
+      return observerBookshelf.Collection.forge([], {model: this}).fetch(options);
   },
 
   edit: function (editedObj, options) {
@@ -67,4 +67,4 @@ scoutBookshelf.Model = scoutBookshelf.Model.extend({
 
 
 
-module.exports = scoutBookshelf;
+module.exports = observerBookshelf;

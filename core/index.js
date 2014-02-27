@@ -1,25 +1,25 @@
 /**
- * Scout core
+ * observer core
  */
 
 var bootstrap = require('./bootstrap'),
   errors = require('./errorHandling'),
-  scoutServer = require('./server');
+  observerServer = require('./server');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-function scout(options) {
+function observer(options) {
   this.options = options || {};
 }
 
-scout.prototype.watch = function() {
+observer.prototype.watch = function() {
   var self = this;
   bootstrap(self.options.config).then(function() {
  
-    scoutServer(self.options.app);
+    observerServer(self.options.app);
 
   })
   .otherwise(errors.logAndThrowError);
 };
 
-module.exports = scout;
+module.exports = observer;

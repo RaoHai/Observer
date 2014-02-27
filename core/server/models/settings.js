@@ -1,5 +1,5 @@
 var Settings,
-  scoutBookShelf = require('./base'),
+  observerBookShelf = require('./base'),
   uuid           = require('node-uuid'),
   _              = require('lodash'),
   log            = require('../../log'),
@@ -23,7 +23,7 @@ function parseDefaultSettings() {
 
 defaultSettings = parseDefaultSettings();
 
-Settings = scoutBookShelf.Model.extend({
+Settings = observerBookShelf.Model.extend({
   tableName : 'settings',
 
   permittedAttributes: ['id', 'key', 'value', 'type', 'created_at', 'created_by', 'updated_at', 'update_by'],
@@ -60,7 +60,7 @@ Settings = scoutBookShelf.Model.extend({
     if (!_.isObject(_key)) {
         _key = { key: _key };
     }
-    return scoutBookShelf.Model.read.call(this, _key);
+    return observerBookShelf.Model.read.call(this, _key);
    
   },
 

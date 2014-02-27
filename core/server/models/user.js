@@ -2,11 +2,11 @@ var User,
     Users,
     _              = require('lodash'),
     when           = require('when'),
-    scoutBookshelf = require('./base');
+    observerBookshelf = require('./base');
 
 
 
-User = scoutBookshelf.Model.extend({
+User = observerBookshelf.Model.extend({
   
   tableName : 'users',
 
@@ -18,7 +18,7 @@ User = scoutBookshelf.Model.extend({
 });
 
 
-Users = scoutBookshelf.Collection.extend({
+Users = observerBookshelf.Collection.extend({
     model: User
 });
 

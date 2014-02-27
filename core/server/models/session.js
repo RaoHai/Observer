@@ -1,8 +1,8 @@
-var scoutBookshelf = require('./base'),
+var observerBookshelf = require('./base'),
     Session,
     Sessions;
 
-Session = scoutBookshelf.Model.extend({
+Session = observerBookshelf.Model.extend({
 
     tableName: 'sessions',
 
@@ -15,14 +15,14 @@ Session = scoutBookshelf.Model.extend({
 }, {
     destroyAll:  function (options) {
         options = options || {};
-        return scoutBookshelf.Collection.forge([], {model: this}).fetch().
+        return observerBookshelf.Collection.forge([], {model: this}).fetch().
             then(function (collection) {
                 collection.invokeThen('destroy', options);
             });
     }
 });
 
-Sessions = scoutBookshelf.Collection.extend({
+Sessions = observerBookshelf.Collection.extend({
     model: Session
 });
 
