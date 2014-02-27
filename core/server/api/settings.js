@@ -7,9 +7,25 @@
   settings,
   settingsObject,
   settingsCollection,
+  readSettingsResult,
   settingsCache = {}
 
+  readSettingsResult = function (result) {
+   return when(_.map(result.models, function (member) {
+      if (!settings.hasOwnProperty(member.attributes.key)) {
+          var val = {};
+          val.value = member.attributes.value;
+          val.type = member.attributes.type;
+          settings[member.attributes.key] = val;
+          return val;
+      }
+    })).then(function () {
+      return settings;
+    });
+  };
+
   updateSettingsCache = function (settings) {
+    // console.log('updateSettingsCache....', settings);
       settings = settings || {};
 
       if (!_.isEmpty(settings)) {
@@ -19,7 +35,8 @@
       } else {
           return when(dataProvider.Settings.findAll()).then(function (result) {
               return when(readSettingsResult(result)).then(function (s) {
-                  settingsCache = s;
+                // console.log('settingsCache:', s);
+                settingsCache = s;
               });
           });
       }
@@ -33,13 +50,16 @@
 
       if (settingsCache) {
           return when(settingsCache[options.key]).then(function (setting) {
-              if (!setting) {
-                  return when.reject({errorCode: 404, message: 'Unable to find setting: ' + options.key});
-              }
-              var res = {};
-              res.key = options.key;
-              res.value = setting.value;
-              return res;
+            var deferred = when.defer();
+            if (!setting) {
+                return when.reject({errorCode: 404, message: 'Unable to find setting: ' + options.key});
+            }
+            var res = {};
+            res.key = options.key;
+            res.value = setting.value;
+            deferred.resolve(res);
+            return deferred.promise;
+
           }, errors.logAndThrowError);
       }
     },
@@ -56,13 +76,24 @@
           // console.log(dataProvider.Settings.create.toString());
           return dataProvider.Settings.add(options);
         } else {
+
           setting.set('value', value);
+
           return dataProvider.Settings.edit(setting).then(function (result) {
-            // console.log('result:', result);
-            settingsCache[_.first(result).attributes.key].value = _.first(result).attributes.value;
+            var deferred = when.defer();
+            var _key = _.first(result).get('key');
+            if (!settingsCache[_key]) {
+              settingsCache[_key] = {}
+            }
+            settingsCache[_key].value = _.first(result).get('value');
+            console.log('value->:',settingsCache[_key]);
+            deferred.resolve(_.first(result).get('value'));
+            return deferred.promise;
+            // settingsCache[_.first(result).attributes.key].value = _.first(result).attributes.value;
           });
+
         }
-      }, errors.logAndThrowError);
+      });
     }
   };
 

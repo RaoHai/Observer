@@ -15,33 +15,20 @@ var express     =   require('express'),
 
 
 function initDbHashAndFirstRun() {
-    
-    var retval = when(api.settings.read('dbHash')).then(function (hash) {
-      console.log("read hash >", hash);
+    return when(api.settings.read('dbHash')).then(function (hash) {
+      dbHash = hash.value;
+      console.log("read hash >", dbHash);
     }, function (e) {
       //if dbHash not found..
+      console.log('dbHash not found');
       if (e.errorCode === 404) {
         var initHash = uuid.v4();
-        return when(api.settings.edit('dbHash', initHash)).then(function (settings) {
-            dbHash = settings.dbHash;
-            return dbHash;
-        }).then(doFirstRun);
+        return when(api.settings.edit('dbHash', initHash)).then(function (_dbHash) {
+          dbHash = _dbHash;
+          return dbHash;
+        });
       };
     }, errors.logAndThrowError);
-
-    console.log('initDbHashAndFirstRun:', retval);
-    // return when(api.settings.read('dbHash')).then(function (hash) {
-    //     dbHash = hash.value;
-
-    //     if (dbHash === null) {
-    //         var initHash = uuid.v4();
-    //         return when(api.settings.edit('dbHash', initHash)).then(function (settings) {
-    //             dbHash = settings.dbHash;
-    //             return dbHash;
-    //         }).then(doFirstRun);
-    //     }
-    //     return dbHash.value;
-    // }, errors.logAndThrowError);
 }
 
 function setup(server) {
@@ -64,6 +51,9 @@ function setup(server) {
   models.init()
   .then(function () {
     return models.Settings.populateDefaults();
+  })
+  .then(function () {
+    return api.init();
   })
   .then(function () {
     return initDbHashAndFirstRun();
