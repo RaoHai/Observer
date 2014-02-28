@@ -17,7 +17,7 @@ var express     =   require('express'),
 function initDbHashAndFirstRun() {
     return when(api.settings.read('dbHash')).then(function (hash) {
       dbHash = hash.value;
-      console.log("read hash >", dbHash);
+      console.log("read hash >", hash);
     }, function (e) {
       //if dbHash not found..
       console.log('dbHash not found');
@@ -59,6 +59,10 @@ function setup(server) {
     return initDbHashAndFirstRun();
   })
   .then(function () {
+
+    middleware(server, dbHash);
+
+
     log({
       type : 'info',
       message : runMessage

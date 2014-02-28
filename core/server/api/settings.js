@@ -51,12 +51,13 @@
       if (settingsCache) {
           return when(settingsCache[options.key]).then(function (setting) {
             var deferred = when.defer();
-            if (!setting) {
+            if (!setting || setting.value === null) {
                 return when.reject({errorCode: 404, message: 'Unable to find setting: ' + options.key});
             }
             var res = {};
             res.key = options.key;
             res.value = setting.value;
+
             deferred.resolve(res);
             return deferred.promise;
 
