@@ -1,15 +1,16 @@
 var express     =   require('express'),
     _           =   require('lodash'),
+    hbs         =   require('express-hbs'),
+    uuid        =   require('node-uuid'),
+    when        =   require('when'),
+    path        =   require('path'),
     api         =   require('./api'),
     config      =   require('./config'),
-    log         =   require('../log'),
-    uuid        =   require('node-uuid'),
     models      =   require('./models'),
-    errors      =   require('../errorHandling'),
     middleware  =   require('./middleware'),
     routes      =   require('./routes'),
-    when        =   require('when'),
-
+    log         =   require('../log'),
+    errors      =   require('../errorHandling'),
 
     dbHash;
 
@@ -43,11 +44,6 @@ function setup(server) {
     
   }
 
-
-  middleware(server, dbHash);
-
-  routes.frontend(server);
-
   models.init()
   .then(function () {
     return models.Settings.populateDefaults();
@@ -62,6 +58,14 @@ function setup(server) {
 
     middleware(server, dbHash);
 
+    // console.log('subdir', config().paths.contentPath);
+
+    server.engine('hbs', hbs.express3());
+    server.set('view engine', 'hbs');
+    server.set('views', path.join(__dirname,"views"));
+    server.use(express.static(path.join(config().paths.contentPath, "assets")));
+    routes.frontend(server);
+    
 
     log({
       type : 'info',

@@ -5,9 +5,10 @@ var _ = require('lodash'),
 errors = {
   logAndThrowError: function (err) {
     var errorObject ;
+
     if (typeof err === 'object') {
       errorObject = err;
-      err.message = [err.message];
+      err.message = err.stack ? [err.stack] : [err.message];
       err.type = 'error';
     } else {
       errorObject = {

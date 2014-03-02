@@ -20,6 +20,11 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
       return observerBookshelf.Collection.forge([], {model: this}).fetch(options);
   },
 
+
+  browse: function () {
+      return this.findAll.apply(this, arguments);
+  },
+
   edit: function (editedObj, options) {
     options = options || {};
     return this.forge({id: editedObj.id}).fetch(options).then(function (foundObj) {

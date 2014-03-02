@@ -8,9 +8,14 @@ var
 
 frontendControllers = {
   'homepage' : function (req, res, next) {
-    res.end('hello world!');
-    // return next();
+    res.render('index');
+  },
+  'login': function (req, res) {
+      /*jslint unparam:true*/
+      res.render('login');
   }
+
+
 }
 
 

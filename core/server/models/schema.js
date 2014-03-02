@@ -13,7 +13,7 @@ var db = {
             type: {type: 'string', maxlength: 150, nullable: false, defaultTo: 'core'},
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
-        },
+        }
     };
 
 function isPost(jsonData) {

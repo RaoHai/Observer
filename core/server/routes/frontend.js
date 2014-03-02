@@ -1,4 +1,5 @@
-var frontend    = require('../controllers/frontend');
+var frontend    = require('../controllers/frontend'),
+    middleware = require('../middleware').middleware;
 
 
 module.exports = function (server) {
@@ -6,4 +7,9 @@ module.exports = function (server) {
 
     // ### Frontend routes
     server.get('/', frontend.homepage);
+
+
+
+    server.get('/signin/', middleware.redirectToSignup, middleware.redirectToDashboard, frontend.login);
+    server.get('/signup/', middleware.redirectToDashboard, frontend.login);
 };

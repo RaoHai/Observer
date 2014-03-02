@@ -1,7 +1,7 @@
 
 var api = {},
 settings = require('./settings'),
-
+users = require('./user'),
 init;
 
 init = function () {
@@ -10,5 +10,6 @@ init = function () {
 
 module.exports = {
   settings : settings,
-  init : init
+  init : init,
+  users : users
 }

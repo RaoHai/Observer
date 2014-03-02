@@ -23,6 +23,9 @@
         "bookshelf":"0.6.4",
         "knex":"0.5.7",
         "colors":"0.6.2",
+        "url":"0.7.9",
+        "hbs":"2.5.0",
+        "express-hbs":"0.7.9",
         "node-uuid":"1.4.1"
     },
     "devDependencies": {

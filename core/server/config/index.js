@@ -1,25 +1,43 @@
 /**
  * config 
  */
-var path          =     require('path'),
-    when          =     require('when'),
-    _             =     require('lodash'),
-    observerConfig   =     {},
-    appRoot       =     path.resolve(__dirname, '../../../'),
-    corePath      =     path.resolve(appRoot, 'core/');
+var path            =     require('path'),
+    when            =     require('when'),
+    _               =     require('lodash'),
+    url             = require('url'),
+    observerConfig  =     {},
+    appRoot         =     path.resolve(__dirname, '../../../'),
+    corePath        =     path.resolve(appRoot, 'core/');
 
 function updateConfig(config) {
-  
+  var localPath;
+
   config = config || {};
 
   config.server.logLevel = config.server.logLevel || 'debug';
+  
+
+  config.paths = config.paths || {};
+
+  // Parse local path location
+  if (config.url) {
+      localPath = url.parse(config.url).path;
+      // Remove trailing slash
+      if (localPath !== '/') {
+          localPath = localPath.replace(/\/$/, '');
+      }
+  }
+
+  subdir = localPath === '/' ? '' : localPath;
 
   _.merge(config, {
     paths : {
+      subdir : subdir,
       config : path.join(appRoot, 'config.js')
     }
   });
 
+  
   // console.log('updateConfig:', config);
   return config;
 
