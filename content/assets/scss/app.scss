@@ -1,6 +1,10 @@
+@import "font";
 @import "settings";
 @import "foundation";
 
+body {
+  font-family: 'latoregular';
+}
 
 header {
   max-width: 75em;
@@ -8,5 +12,24 @@ header {
   padding-right: 25px;
   margin-left: auto;
   margin-right: auto;
+
+  a.logo {
+    background-image: url(/images/logo.png);
+    width: 175px;
+    height: 57px;
+    display: inline-block;
+  }
+
+  nav.main-nav {
+    float: right;
+    ul > li {
+      line-height: 70px;
+      display: inline-block;
+      font-size: 16px;
+      margin-left: 1.6em;
+      color:#666;
+
+    }
+  }
 }
 

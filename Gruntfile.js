@@ -1,31 +1,30 @@
-
-
 module.exports = function(grunt) {
-
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express-server');
   
+  
+
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON("package.json"),
+
+     watch: {
+      express:{
+        files: ['core/**/*.js'],
+        tasks:['express:dev']
+      },
+      compass:{
+        files: ['content/assets/scss/*.scss'],
+        tasks:['sass']
+      },
+
+    },
 
     express: {
-      options: {
-          script: 'index.js',
-          output: 'Ghost is running'
-      },
-
       dev: {
-          options: {
-              //output: 'Express server listening on address:.*$'
-          }
-      },
-      test: {
-          options: {
-              node_env: 'testing'
-          }
+        options: {
+          script: 'index.js'
+        }
       }
     },
+
 
     sass: {
       options: {
@@ -41,29 +40,20 @@ module.exports = function(grunt) {
       }
     },
 
-    watch: {
-      grunt: { files: ['Gruntfile.js'] },
-
-      sass: {
-        files: 'content/assets/scss/**/*.scss',
-        tasks: ['sass', 'express']
-      },
-
-      express: {
-                    // Restart any time client or server js files change
-          files:  ['core/server.js', 'core/server/**/*.js'],
-          tasks:  ['express:dev'],
-          options: {
-              //Without this option specified express won't be reloaded
-              nospawn: true
-          }
-      }
-
+    jshint: {
+      jshintrc: "./jshint.json",
+      browser_files: ["./content/assets/**/*.js"],
+      server_files: ["./core/**/*.js"]
     },
 
-  }); 
 
-  grunt.registerTask('server', [ 'express:dev', 'watch' ])
+  });
+  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-exec');
 
-
+  grunt.registerTask("default", ["compass", "jshint"]);
+  grunt.registerTask("server", ['express:dev', 'watch']);
 };
