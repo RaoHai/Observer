@@ -1,0 +1,24 @@
+@import "compass/css3";
+
+
+button {
+  &.flat {
+    @include box-shadow(0 1px 2px rgba(0,0,0,0.05));
+    margin-bottom: 0;
+    // border-bottom: 2px solid ;
+    &.small{
+
+      padding: 6px 7px 6px 10px;
+      border-radius: 5px;
+      font-family: "source_sans_proregular";
+      font-weight: 600 !important;
+      font-size: 14px;
+      border-bottom: 2px solid #138a72;
+
+      a {
+        color:white;
+      }
+    }
+
+  }
+}

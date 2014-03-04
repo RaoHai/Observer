@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       },
       compass:{
         files: ['content/assets/scss/*.scss'],
-        tasks:['sass']
+        tasks:['compass:dev']
       },
 
     },
@@ -25,20 +25,25 @@ module.exports = function(grunt) {
       }
     },
 
-
-    sass: {
-      options: {
-        includePaths: ['content/assets/bower_components/foundation/scss']
-      },
-      dist: {
-        options: {
-          outputStyle: 'compressed'
-        },
-        files: {
-          'content/assets/css/app.css': 'content/assets/scss/app.scss'
-        }        
+    compass: {
+      dev: {
+        config : 'config.rb',
+        
       }
     },
+    // sass: {
+    //   options: {
+    //     includePaths: ['content/assets/bower_components/foundation/scss']
+    //   },
+    //   dist: {
+    //     options: {
+    //       outputStyle: 'compressed'
+    //     },
+    //     files: {
+    //       'content/assets/css/app.css': 'content/assets/scss/app.scss'
+    //     }        
+    //   }
+    // },
 
     jshint: {
       jshintrc: "./jshint.json",
@@ -53,6 +58,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   grunt.registerTask("default", ["compass", "jshint"]);
   grunt.registerTask("server", ['express:dev', 'watch']);

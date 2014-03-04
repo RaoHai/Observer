@@ -1,13 +1,23 @@
 @import "font";
 @import "settings";
 @import "foundation";
+@import "controller";
+
+$header-height : 75px;
+
+*:focus {
+  outline: none;
+}
 
 body {
   font-family: 'latoregular';
 }
 
+
+
 header {
   max-width: 75em;
+  height:$header-height;
   padding-left: 25px;
   padding-right: 25px;
   margin-left: auto;
@@ -16,20 +26,38 @@ header {
   a.logo {
     background-image: url(/images/logo.png);
     width: 175px;
-    height: 57px;
+    height: $header-height;
+    background-position: center;
+    background-repeat: no-repeat;
     display: inline-block;
   }
 
   nav.main-nav {
     float: right;
-    ul > li {
-      line-height: 70px;
-      display: inline-block;
-      font-size: 16px;
-      margin-left: 1.6em;
-      color:#666;
-
+    ul {
+      margin: 0.8em 0 0 0;
+      & > li {
+        line-height: $header-height;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 1.6em;
+        color:#666;
+        
+        &.spec {
+          font-family: "source_sans_proregular";
+          font-weight: 600 !important;
+          font-size: 14px;
+        }
+      }
     }
   }
 }
 
+
+
+section.banner {
+  background-color: #16a085;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
