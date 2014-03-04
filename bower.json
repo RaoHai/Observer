@@ -1,6 +1,9 @@
 {
-  "name": "foundation-libsass-template",
+  "name": "Observer-client",
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "foundation": "zurb/bower-foundation",
+    "requirejs": "",
+    "backbone": "",
+    "handlebars":""
   }
 }

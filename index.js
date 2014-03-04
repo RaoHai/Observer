@@ -1,4 +1,4 @@
-
+/*globals require*/
 /**
  * observer Bootloader
  */
