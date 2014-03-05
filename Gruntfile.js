@@ -18,6 +18,10 @@ module.exports = function(grunt) {
       concat: {
         files: ['core/client/**/*.js'],
         tasks:['concat:dev']
+      },
+      handlebars: {
+        files: ['core/client/tpl/**/*.hbs'],
+        tasks:['handlebars']
       }
 
     },
@@ -41,10 +45,30 @@ module.exports = function(grunt) {
           'content/assets/js/views.js': [
             'core/client/views/**/*.js',
             'core/client/router.js'
-          ]
+          ],
+
+          'content/assets/js/templates.js': [
+                'core/client/tpl/hbs-tpl.js'
+            ],
         }
       }
     },
+
+    handlebars: {
+      core: {
+        options: {
+          namespace: 'JST',
+          processName: function (filename) {
+            filename = filename.replace('core/client/tpl/', '');
+            return filename.replace('.hbs', '');
+          }
+        },
+        files: {
+          'core/client/tpl/hbs-tpl.js': 'core/client/tpl/**/*.hbs'
+        }
+      }
+    },
+
 
     express: {
       dev: {
@@ -89,7 +113,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
 
   grunt.registerTask('default', ['compass', 'jshint']);
-  grunt.registerTask('server', ['concat:dev','express:dev', 'watch']);
+  grunt.registerTask('server', ['handlebars','concat:dev','express:dev', 'watch']);
 };

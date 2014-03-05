@@ -1,4 +1,4 @@
-/*global Observer, Backbone, Handlebars*/
+/*global Observer, Backbone, _, JST*/
 (function () {
   "use strict";
 
@@ -6,7 +6,8 @@
     templateName: "widget",
 
     template : function (data) {
-      return Handlebars.compile(data);
+      console.log("data:", this.templateName);
+      return JST[this.templateName](data);
     },
 
     templateData : function () {
@@ -22,8 +23,15 @@
     },
 
     render : function () {
+      if (_.isFunction(this.beforeRender)) {
+        this.beforeRender();
+      }
 
       this.$el.html(this.template(this.templateData()));
+
+      if (_.isFunction(this.afterRender)) {
+        this.afterRender();
+      }
 
       return this;
     }

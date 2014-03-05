@@ -7822,4 +7822,15 @@ section.banner {
   color: white;
   padding-top: 30px;
   padding-bottom: 30px;
+  min-height: 300px;
+}
+
+/* line 66, ../scss/app.scss */
+.main {
+  max-width: 75em;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
