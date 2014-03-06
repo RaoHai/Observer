@@ -7834,3 +7834,24 @@ section.banner {
   margin-right: auto;
   position: relative;
 }
+
+/* line 75, ../scss/app.scss */
+.sign-up-group {
+  position: relative;
+  top: -255px;
+}
+/* line 79, ../scss/app.scss */
+.sign-up-group .signup-box {
+  background-color: white;
+  padding: 20px;
+  border: 4px solid #16A085;
+  border-radius: 10px;
+}
+/* line 86, ../scss/app.scss */
+.sign-up-group .signup-box button {
+  margin-bottom: 0;
+}
+/* line 92, ../scss/app.scss */
+.sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
+  color: white;
+}
