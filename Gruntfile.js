@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       },
       compass:{
         files: ['content/assets/scss/*.scss'],
-        tasks:['compass:dev']
+        tasks:['compass:dev', 'concat:dev']
       },
       concat: {
         files: ['core/client/**/*.js'],
@@ -24,6 +24,22 @@ module.exports = function(grunt) {
         tasks:['handlebars']
       }
 
+    },
+
+    copy : {
+      main:{
+        files: [
+          {
+            expand: true, 
+            src: [
+              'content/assets/bower_components/font-awesome/fonts/*'
+            ], 
+            dest: 'content/assets/fonts/', 
+            filter: 'isFile',
+            flatten: true
+          }
+        ]
+      }
     },
 
     concat: {
@@ -40,6 +56,7 @@ module.exports = function(grunt) {
 
           'content/assets/js/helpers.js': [
               'core/client/init.js',
+              'core/client/helpers/**/*.js'
           ],
 
           'content/assets/js/views.js': [
@@ -48,8 +65,13 @@ module.exports = function(grunt) {
           ],
 
           'content/assets/js/templates.js': [
-                'core/client/tpl/hbs-tpl.js'
-            ],
+            'core/client/tpl/hbs-tpl.js'
+          ],
+
+          'content/assets/css/observer.css': [
+            'content/assets/css/app.css',
+            'content/assets/bower_components/font-awesome/css/font-awesome.css'
+          ]
         }
       }
     },
@@ -114,7 +136,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('default', ['compass', 'jshint']);
-  grunt.registerTask('server', ['handlebars','concat:dev','express:dev', 'watch']);
+  grunt.registerTask('server', ['handlebars','copy','concat:dev','express:dev', 'watch']);
 };

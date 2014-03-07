@@ -40,6 +40,7 @@
 
   Observer.View = Observer.TemplateView.extend({
 
+
   });
 
 

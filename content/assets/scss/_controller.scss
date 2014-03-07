@@ -5,20 +5,61 @@ button {
   &.flat {
     @include box-shadow(0 1px 2px rgba(0,0,0,0.05));
     margin-bottom: 0;
+    border-radius: 5px;
+    border-bottom: 2px solid #138a72;
+    text-transform:uppercase;
+    padding: 10px 0;
+    font-family: "source_sans_proregular";
+    font-weight: 600 !important;
+    font-size: 14px;
     // border-bottom: 2px solid ;
+    // 
+    &.full {
+      width:  100%;
+    }
     &.small{
 
       padding: 6px 7px 6px 10px;
-      border-radius: 5px;
-      font-family: "source_sans_proregular";
-      font-weight: 600 !important;
-      font-size: 14px;
-      border-bottom: 2px solid #138a72;
-
+      
       a {
         color:white;
       }
     }
 
+  }
+}
+
+.sign-up-group {
+  .input-wrap {
+    position: relative;
+    i.fa{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      font-size: 18px;
+      color:#666;
+      top: 20px;
+      left: 10px;
+
+      @include transition(color 300ms ease-out);
+
+      &.focus {
+        color: #1bc4a3;
+      }
+    }
+  }
+  input[type="text"] , input[type="password"], input[type="email"]{
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    padding: 20px 10px 20px 35px;
+    height: auto;
+    @include box-shadow(none);
+
+    &:focus {
+      background-color: white;
+      border-color:#1bc4a3;
+    }
   }
 }

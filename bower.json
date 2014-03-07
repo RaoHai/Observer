@@ -4,6 +4,7 @@
     "foundation": "zurb/bower-foundation",
     "requirejs": "",
     "backbone": "",
-    "handlebars":""
+    "handlebars":"",
+    "font-awesome":"4.0.3"
   }
 }

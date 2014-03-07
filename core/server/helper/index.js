@@ -4,8 +4,19 @@ var _              = require('lodash'),
     isProduction   = process.env.NODE_ENV === 'production',
     coreHelpers    = {},
     scriptTemplate = _.template('<script src="<%= source %>?v=<%= version %>"></script>'),
+    styleTemplate  = _.template('<link rel="stylesheet" href="<%= source %>?v=<%= version %>" />'),
 
     registerHelpers,
+    
+    styleFiles = {
+      development: [
+        'observer.css'
+      ],
+      production: [
+        'observer.min.css'
+      ]
+    },
+
     scriptFiles = {
       production : [
         'observer.min.js'
@@ -18,6 +29,21 @@ var _              = require('lodash'),
         'views.js'
       ]
     };
+
+coreHelpers.ObserverStyleTags = function () {
+  var styleList = isProduction ? styleFiles.production : styleFiles.development;
+
+  styleList = _.map(styleList, function (fileName) {
+    return styleTemplate({
+      source: '/css/' + fileName,
+      version: coreHelpers.assetHash
+    });
+  });
+
+  return styleList.join('');
+
+};
+
 
 coreHelpers.ObserverScriptTags = function() {
   var scriptList = isProduction ? scriptFiles.production : scriptFiles.development;
@@ -41,6 +67,7 @@ registerHelpers = function (assetHash) {
 
 
   registerHelper('ObserverScriptTags', coreHelpers.ObserverScriptTags);
+  registerHelper('ObserverStyleTags', coreHelpers.ObserverStyleTags);
 };
 
 module.exports = coreHelpers;
