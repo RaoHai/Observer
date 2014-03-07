@@ -90,6 +90,18 @@ section.banner {
   .signup-banner {
     h2, h3{
       color: white;
+      line-height: 1;
+    }
+
+    h2 {
+      font-family: "source_sans_proregular";
+      font-size: 3.75rem;
+      font-weight: bold;
+      margin: 10px 0 ;
+    }
+
+    h3 {
+      font-size: 1.3em;
     }
   }
 }

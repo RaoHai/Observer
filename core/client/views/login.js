@@ -78,7 +78,7 @@
       this.submitted = 'yes';
 
       $.ajax({
-        url : '/signin',
+        url : '/signup',
         type: 'POST',
         data: {
           name : name,

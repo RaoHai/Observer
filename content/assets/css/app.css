@@ -7898,4 +7898,16 @@ section.banner {
 /* line 91, ../scss/app.scss */
 .sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
   color: white;
+  line-height: 1;
+}
+/* line 96, ../scss/app.scss */
+.sign-up-group .signup-banner h2 {
+  font-family: "source_sans_proregular";
+  font-size: 3.75rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+/* line 103, ../scss/app.scss */
+.sign-up-group .signup-banner h3 {
+  font-size: 1.3em;
 }

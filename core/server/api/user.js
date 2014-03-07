@@ -27,7 +27,11 @@ users = {
 
           return omitted;
       });
-  }
+  },
+
+  add: function add(userData) {
+        return dataProvider.User.add(userData);
+    },
 };
 
 module.exports = users;
