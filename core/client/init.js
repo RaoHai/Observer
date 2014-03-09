@@ -1,4 +1,4 @@
-/*globals _,Backbone*/
+/*globals _,Backbone, Validator*/
 (function () {
   'use strict';
 
@@ -17,6 +17,7 @@
     Views         :   {},
     Collections   :   {},
     Models        :   {},
+    Validate      :   new Validator(),
 
     paths: observerPaths(),
 
@@ -38,6 +39,44 @@
     });
 
   };
+
+  Observer.Validate.handleErrors = function (errors) {
+    console.log(this._errors);
+  };
+
+  Observer.Validate.error = function (object) {
+    this.$error.html(object);
+    this._errors.push(object);
+    return this;
+  };
+
+  Observer.Validate.check = function (targetEl, fail_msg) {
+
+    if (typeof targetEl === 'object' && targetEl.selector) {
+      this.str = targetEl.val();
+      this.$el = targetEl;
+      this.$error = targetEl.parent().find('.error');
+      this.$error.html('');
+    }
+
+    if (typeof targetEl === 'string') {
+      this.str = typeof( targetEl ) === 'undefined' || targetEl === null || (isNaN(targetEl) && targetEl.length === undefined) ? '' : targetEl+'';
+    }
+
+    this.msg = fail_msg;
+    this._errors = this._errors || [];
+    return this;
+
+  };
+  // Observer.Validate.check = function (validates) {
+    
+  //   if (validates.length) {
+  //     var result = validates.reduce(function (prev, curr) {
+  //       return prev && curr;
+  //     });
+  //   }
+
+  // };
 
 
   window.Observer = Observer;

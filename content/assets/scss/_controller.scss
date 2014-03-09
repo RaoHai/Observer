@@ -30,8 +30,10 @@ button {
 }
 
 .sign-up-group {
+
   .input-wrap {
     position: relative;
+
     i.fa{
       position: absolute;
       width: 20px;
@@ -48,12 +50,21 @@ button {
         color: #1bc4a3;
       }
     }
+
+    .error {
+      font-size: 14px;
+      line-height: 16px;
+      color:#d38888;
+      margin-left: 34px;
+    }
   }
+
   input[type="text"] , input[type="password"], input[type="email"]{
     border-top:none;
     border-left: none;
     border-right: none;
     padding: 20px 10px 20px 35px;
+    margin-bottom: 0;
     height: auto;
     @include box-shadow(none);
 

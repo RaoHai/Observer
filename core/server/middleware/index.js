@@ -8,6 +8,20 @@ var   api    = require('../api'),
 
   expressServer
 
+function ObserverLocals(req, res, next) {
+  res.locals = req.locals || {};
+
+  res.locals.csrfToken = req.csrfToken(); 
+  if (req.session && req.session.user) {
+    api.users.read({id: req.session.user}).then(function (user) {
+      res.locals.currentUser = user;
+
+      next();
+    });
+  } else {
+    next();
+  }
+}
 
 function redirectToSignup(req, res, next) {
     /*jslint unparam:true*/
@@ -20,7 +34,6 @@ function redirectToSignup(req, res, next) {
         return next(new Error(err));
     });
 }
-
 
 
 module.exports = function (server, dbHash) {
@@ -51,6 +64,9 @@ module.exports = function (server, dbHash) {
   expressServer.use(express.cookieParser(dbHash));
 
   expressServer.use(express.session());
+
+  expressServer.use(middleware.conditionalCSRF);
+  expressServer.use(ObserverLocals);
 
   expressServer.use(subdir, expressServer.router);
   console.log('middleware finished');

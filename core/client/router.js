@@ -15,7 +15,7 @@
     },
 
     login : function () {
-      Observer.currentView = new Observer.Views.login({ el : '.login-box'});
+      Observer.currentView = new Observer.Views.Login({ el : '.login-box'});
     },
 
     subject: function () {

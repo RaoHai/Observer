@@ -25,6 +25,11 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
       return this.findAll.apply(this, arguments);
   },
 
+  destroy: function (_identifier, options) {
+        options = options || {};
+        return this.forge({id: _identifier}).destroy(options);
+    },
+    
   edit: function (editedObj, options) {
     options = options || {};
     return this.forge({id: editedObj.id}).fetch(options).then(function (foundObj) {
@@ -47,7 +52,7 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
    * @param options (optional)
    */
   add: function (newObj, options) {
-      console.log('add:', newObj);
+      // console.log('add:', newObj);
       options = options || {};
       var instance = this.forge(newObj);
       // We allow you to disable timestamps
@@ -58,11 +63,10 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
       if (options.importing) {
           instance.hasTimestamps = false;
       }
-      var result = instance.save(null, options).then(function () {
-        console.log('save successed!');
+      return instance.save(null, options).then(function (res) {
+        return res;
       }, errors.logAndThrowError);
-      console.log(result);
-      return result;
+      
   },
 
   create: function () {

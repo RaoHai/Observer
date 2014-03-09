@@ -2,11 +2,18 @@
   // Details: https://github.com/victorporof/Sublime-JSHint#using-your-own-jshintrc-options
   // Example: https://github.com/jshint/jshint/blob/master/examples/.jshintrc
   // Documentation: http://www.jshint.com/docs/
+
   "browser": true,
   "esnext": true,
-  "globals": {"module"},
+  //globals
+  "predef":[
+    "module",
+    "require",
+    "console"
+  ],
+  "globals": {"module":true, "require":true},
   "globalstrict": false,
-  "quotmark": true,
+  "quotmark": false,
   "smarttabs": true,
   "trailing": true,
   "undef": true,

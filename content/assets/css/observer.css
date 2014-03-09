@@ -7771,11 +7771,11 @@ button.flat.small a {
   color: white;
 }
 
-/* line 33, ../scss/_controller.scss */
+/* line 34, ../scss/_controller.scss */
 .sign-up-group .input-wrap {
   position: relative;
 }
-/* line 35, ../scss/_controller.scss */
+/* line 37, ../scss/_controller.scss */
 .sign-up-group .input-wrap i.fa {
   position: absolute;
   width: 20px;
@@ -7790,22 +7790,30 @@ button.flat.small a {
   -o-transition: color 300ms ease-out;
   transition: color 300ms ease-out;
 }
-/* line 47, ../scss/_controller.scss */
+/* line 49, ../scss/_controller.scss */
 .sign-up-group .input-wrap i.fa.focus {
   color: #1bc4a3;
 }
-/* line 52, ../scss/_controller.scss */
+/* line 54, ../scss/_controller.scss */
+.sign-up-group .input-wrap .error {
+  font-size: 14px;
+  line-height: 16px;
+  color: #d38888;
+  margin-left: 34px;
+}
+/* line 62, ../scss/_controller.scss */
 .sign-up-group input[type="text"], .sign-up-group input[type="password"], .sign-up-group input[type="email"] {
   border-top: none;
   border-left: none;
   border-right: none;
   padding: 20px 10px 20px 35px;
+  margin-bottom: 0;
   height: auto;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 60, ../scss/_controller.scss */
+/* line 71, ../scss/_controller.scss */
 .sign-up-group input[type="text"]:focus, .sign-up-group input[type="password"]:focus, .sign-up-group input[type="email"]:focus {
   background-color: white;
   border-color: #1bc4a3;
@@ -7885,29 +7893,33 @@ section.banner {
   top: -255px;
 }
 /* line 78, ../scss/app.scss */
-.sign-up-group .signup-box {
+.sign-up-group .signup-box, .sign-up-group .login-box {
   background-color: white;
   padding: 20px;
   border: 4px solid #16A085;
   border-radius: 10px;
 }
 /* line 85, ../scss/app.scss */
-.sign-up-group .signup-box button {
+.sign-up-group .signup-box button, .sign-up-group .login-box button {
   margin-bottom: 0;
 }
-/* line 91, ../scss/app.scss */
+/* line 89, ../scss/app.scss */
+.sign-up-group .signup-box .meta, .sign-up-group .login-box .meta {
+  margin-top: 10px;
+}
+/* line 95, ../scss/app.scss */
 .sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
   color: white;
   line-height: 1;
 }
-/* line 96, ../scss/app.scss */
+/* line 100, ../scss/app.scss */
 .sign-up-group .signup-banner h2 {
   font-family: "source_sans_proregular";
   font-size: 3.75rem;
   font-weight: bold;
   margin: 10px 0;
 }
-/* line 103, ../scss/app.scss */
+/* line 107, ../scss/app.scss */
 .sign-up-group .signup-banner h3 {
   font-size: 1.3em;
 }

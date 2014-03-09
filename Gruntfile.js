@@ -51,6 +51,7 @@ module.exports = function(grunt) {
             'content/assets/bower_components/handlebars/handlebars.js',
             'content/assets/bower_components/underscore/underscore.js',
             'content/assets/bower_components/backbone/backbone.js',
+            'content/assets/bower_components/validator/validator.js'
 
           ],
 
@@ -106,6 +107,16 @@ module.exports = function(grunt) {
         
       }
     },
+
+    
+    mochaTest:{
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['core/test/index.js']
+      }
+    },
     // sass: {
     //   options: {
     //     includePaths: ['content/assets/bower_components/foundation/scss']
@@ -137,7 +148,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('default', ['compass', 'jshint']);
-  grunt.registerTask('server', ['handlebars','copy','concat:dev','express:dev', 'watch']);
+  grunt.registerTask('server', ['handlebars','concat:dev','express:dev', 'watch']);
+  grunt.registerTask('test', 'Run unit tests (mocha)', ['mochaTest']);
 };

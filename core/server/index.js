@@ -16,6 +16,7 @@ var     express     =   require('express'),
     log             =   require('../log'),
     errors          =   require('../errorHandling'),
     packageInfo     =   require('../../package.json'),
+
     
     dbHash;
 
@@ -87,6 +88,8 @@ function setup(server) {
       config().server.host,
       startobserver
     );
+  }, function (err) {
+    console.log("ERROR:", err);
   });
 }
 

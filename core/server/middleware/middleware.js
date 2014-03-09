@@ -30,6 +30,12 @@ var middleware = {
 
       next();
   },
+
+  conditionalCSRF: function (req, res, next) {
+    var csrf = express.csrf();
+    // CSRF is needed for admin only
+    csrf(req, res, next);
+  },
 };
 
 
