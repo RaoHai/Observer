@@ -45,8 +45,9 @@
   };
 
   Observer.Validate.error = function (object) {
-    this.$error.html(object);
+    this.$error.html(object).show();
     this._errors.push(object);
+    this.$error.parent().addClass('error');
     return this;
   };
 
@@ -55,8 +56,9 @@
     if (typeof targetEl === 'object' && targetEl.selector) {
       this.str = targetEl.val();
       this.$el = targetEl;
+      targetEl.parent().removeClass('error');
       this.$error = targetEl.parent().find('.error');
-      this.$error.html('');
+      this.$error.html('').hide();
     }
 
     if (typeof targetEl === 'string') {
