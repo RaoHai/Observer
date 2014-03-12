@@ -44,9 +44,16 @@ User = observerBookshelf.Model.extend({
 
 
   },
-  check: function() {
-
-
+  check: function(_user) {
+    var self = this;
+    return self.getByEmail(_user.email).then(function (result) {
+      if (result.get('password') === _user.password) {
+        return when.resolve(result.get('id'));
+      }
+      return when.reject(new Error('Incorrect Password'));
+    }, function () {
+      return when.reject(new Error('Incorrect Password'));
+    });
   },
 
   getByEmail: function (email) {

@@ -73,8 +73,17 @@
 
       var email = this.$el.find('.email').val(),
           password = this.$el.find('.password').val();
+
+      Observer.Validate.clean();
+      Observer.Validate.check(this.$('.email'), 'Illegal Email Format').isEmail();
+      Observer.Validate.check(this.$('.password'), 'Password length must greater than 8').len(8);
+
+      if (Observer.Validate._errors.length > 0) {
+        return Observer.Validate.handleErrors();
+      }
+
         $.ajax({
-          url: '/signin',
+          url: '/login',
           type: 'POST',
           headers: {
             'X-CSRF-Token': $("meta[name='csrf-param']").attr('content')
@@ -86,8 +95,8 @@
           success: function (msg) {
             window.location.href = msg.redirect;
           },
-          error: function () {
-
+          error: function (msg) {
+            console.log('error:', msg);
           }
         });
 
@@ -125,6 +134,7 @@
           email = this.$('.email').val(),
           password = this.$('.password').val();
       
+      Observer.Validate.clean();
       Observer.Validate.check(this.$('.name'), 'name length must between 4 and 10').len(4, 10);
       Observer.Validate.check(this.$('.email'), 'Illegal Email Format').isEmail();
       Observer.Validate.check(this.$('.password'), 'Password length must greater than 8').len(8);
@@ -148,8 +158,8 @@
         success: function (msg) {
           window.location.href = msg.redirect;
         },
-        error : function () {
-
+        error : function (msg) {
+          console.log('error:', msg);
         }
       });
     }

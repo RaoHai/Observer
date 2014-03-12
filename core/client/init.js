@@ -51,6 +51,10 @@
     return this;
   };
 
+  Observer.Validate.clean = function () {
+    this._errors = [];
+  };
+
   Observer.Validate.check = function (targetEl, fail_msg) {
 
     if (typeof targetEl === 'object' && targetEl.selector) {

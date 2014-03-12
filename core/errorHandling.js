@@ -1,5 +1,5 @@
-var _ = require('lodash'),
-  log = require('./log'),
+  var _  = require('lodash'),
+  log    = require('./log'),
   errors;
 
 errors = {
@@ -28,7 +28,8 @@ errors = {
     }
     throw err;
 
-  }
+  },
+
 };
 
 

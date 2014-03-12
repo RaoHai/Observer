@@ -10,7 +10,7 @@ module.exports = function (server) {
 
 
 
-    server.get('/signin', middleware.redirectToSignup, middleware.redirectToDashboard, frontend.login);
+    server.get('/signin', frontend.login);
     server.get('/signup', middleware.redirectToDashboard, frontend.signup);
 
     server.post('/signup', frontend.doSignup);

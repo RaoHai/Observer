@@ -1,10 +1,11 @@
 /*globals require, console*/
 var
-  api    = require('../api'),
-  when   = require('when'),
-  Route  = require('express').Route,
-  config = require('../config'),
-  frontendControllers;
+    api    = require('../api'),
+    when   = require('when'),
+    Route  = require('express').Route,
+    errors = require('../../errorHandling'),
+    config = require('../config'),
+    frontendControllers;
 
 
 frontendControllers = {
@@ -38,14 +39,29 @@ frontendControllers = {
       res.json(200, {redirect: '/'});
 
     }).otherwise(function (err) {
-      res.json(422, err);
+      res.error(422, err);
     });
 
   },
 
-  'doLogin': function () {
+  'doLogin': function (req, res) {
     var email = req.body.email,
       password = req.body.password;
+
+    return api.users.check({
+      email: email,
+      password: password
+    }).then(function (userid) {
+      if (userid) {
+        req.session.user = userid; 
+        res.json(200, {redirect: '/'});
+      } else {
+        res.error(400, new Error('password incorrect!'));
+      }
+    }, function (err) {
+      console.log("error:", err);
+      res.error(422, new Error('password incorrect!'));
+    });
   }
 
 

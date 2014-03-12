@@ -5,7 +5,7 @@ var   api    = require('../api'),
   models     = require('../models'),
   hbs        = require('express-hbs'),
   express    = require('express'),
-
+  resError   = require('./resError'),
   expressServer
 
 function ObserverLocals(req, res, next) {
@@ -55,7 +55,8 @@ module.exports = function (server, dbHash) {
   };
 
  
-
+  expressServer.use(resError);
+  
   expressServer.use(express.json());
   expressServer.use(express.urlencoded());
 

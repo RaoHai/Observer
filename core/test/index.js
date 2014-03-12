@@ -42,9 +42,19 @@ describe("User Api Test", function() {
   it("user browse test", function() {
 
     return api.users.browse().then(function (users) {
-      users.length.should.be.above(1);
+      users.length.should.be.above(0);
     });
 
+  });
+
+  it("user find test", function () {
+    var _user = {
+      email: 'tester@gmail.com'
+    };
+
+    return api.users.read(_user).then(function (user) {
+      console.log("user: ", user);
+    });
   });
 
 
