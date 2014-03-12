@@ -7,6 +7,18 @@ var db = {
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
         },
+
+        targets : {
+            id: {type: 'increments', nullable: false, primary: true},
+            name: {type : 'string', maxlength: 150, nullable: false},
+            url: {type: 'string', maxlength: 300, nullable: false},
+            description: {type: 'string', maxlength:300, nullable:true},
+            period: {type: 'string', maxlength:10, nullable:false},
+            created_at: {type: 'dateTime', nullable: false},
+            updated_at: {type: 'dateTime', nullable: true},
+            user: {type: 'integer', nullable:false}
+        },
+
         settings: {
             id: {type: 'increments', nullable: false, primary: true},
             key: {type: 'string', maxlength: 150, nullable: false, unique: true},

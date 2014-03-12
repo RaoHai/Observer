@@ -19,8 +19,12 @@
           <li>BLOG</li>
           <li>SUPPORT</li>
           <li>|</li>
+          {{#if currentUser}}
+          <li>{{currentUser.name}}</li>
+          {{else}}
           <li class='spec'><a href='/signin'>LOG IN</a></li>
           <li><button class='flat small'><a href='/signup'>SIGN UP</a></button></li>
+          {{/if}}
         </ul>
       </nav>
     </header>
