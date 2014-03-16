@@ -10,7 +10,19 @@ var
 
 frontendControllers = {
   'homepage': function(req, res) {
-    res.render('index');
+    return when.all([
+      api.brands.browse(),
+      api.trainings.browse()
+    ])
+    .then(function(result) {
+      var brands = result[0],
+        trainings = result[1];
+
+      res.render('index', {
+        brands: brands,
+        trainings : trainings
+      });
+    });
   },
 
   'login': function(req, res) {

@@ -109,3 +109,43 @@ button {
 .button-save{
   margin-top: 15px;
 }
+
+
+.thirdParty {
+  color: #6f6f6f;
+  margin: 12px 0 6px 0;  
+  font-size: 14px;
+
+  ul.buttons {
+    float: right;
+    margin: 0;
+    li {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      a {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-image: url(/images/bgs.png);
+
+        &.weibo {
+          background-position: 0 0;
+        }
+        &.qq {
+          background-position: -25px 0;
+        }
+        &.renren {
+          background-position: -50px 0;
+        }
+      }
+
+
+    }
+  }
+}
+
+textarea.fixed-size {
+  resize:none;
+  height: 200px;
+}

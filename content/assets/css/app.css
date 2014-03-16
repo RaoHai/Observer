@@ -7852,6 +7852,49 @@ button.flat.small a {
   margin-top: 15px;
 }
 
+/* line 114, ../scss/_controller.scss */
+.thirdParty {
+  color: #6f6f6f;
+  margin: 12px 0 6px 0;
+  font-size: 14px;
+}
+/* line 119, ../scss/_controller.scss */
+.thirdParty ul.buttons {
+  float: right;
+  margin: 0;
+}
+/* line 122, ../scss/_controller.scss */
+.thirdParty ul.buttons li {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+/* line 126, ../scss/_controller.scss */
+.thirdParty ul.buttons li a {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/images/bgs.png);
+}
+/* line 132, ../scss/_controller.scss */
+.thirdParty ul.buttons li a.weibo {
+  background-position: 0 0;
+}
+/* line 135, ../scss/_controller.scss */
+.thirdParty ul.buttons li a.qq {
+  background-position: -25px 0;
+}
+/* line 138, ../scss/_controller.scss */
+.thirdParty ul.buttons li a.renren {
+  background-position: -50px 0;
+}
+
+/* line 148, ../scss/_controller.scss */
+textarea.fixed-size {
+  resize: none;
+  height: 200px;
+}
+
 /* line 8, ../scss/app.scss */
 *:focus {
   outline: none;
@@ -7922,37 +7965,115 @@ section.banner {
 
 /* line 73, ../scss/app.scss */
 .sign-up-group {
-  position: relative;
+  position: absolute;
   top: -255px;
+  width: 100%;
 }
-/* line 78, ../scss/app.scss */
+/* line 79, ../scss/app.scss */
 .sign-up-group .signup-box, .sign-up-group .login-box {
   background-color: white;
   padding: 20px;
   border: 4px solid #16A085;
   border-radius: 10px;
 }
-/* line 85, ../scss/app.scss */
+/* line 86, ../scss/app.scss */
 .sign-up-group .signup-box button, .sign-up-group .login-box button {
   margin-bottom: 0;
 }
-/* line 89, ../scss/app.scss */
+/* line 90, ../scss/app.scss */
 .sign-up-group .signup-box .meta, .sign-up-group .login-box .meta {
   margin-top: 10px;
 }
-/* line 95, ../scss/app.scss */
+/* line 96, ../scss/app.scss */
 .sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
   color: white;
   line-height: 1;
 }
-/* line 100, ../scss/app.scss */
+/* line 101, ../scss/app.scss */
 .sign-up-group .signup-banner h2 {
   font-family: "source_sans_proregular";
   font-size: 3.75rem;
   font-weight: bold;
   margin: 10px 0;
 }
-/* line 107, ../scss/app.scss */
+/* line 108, ../scss/app.scss */
 .sign-up-group .signup-banner h3 {
   font-size: 1.3em;
+}
+
+/* line 115, ../scss/app.scss */
+img.height-fix {
+  max-height: 50px;
+}
+
+/* line 119, ../scss/app.scss */
+table.full-width {
+  width: 100%;
+}
+
+/* line 124, ../scss/app.scss */
+.brands h2.title {
+  font-size: 1.3em;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+/* line 130, ../scss/app.scss */
+.brands ul.lists {
+  list-style: none;
+  margin: 0;
+  border: 1px solid #E2E2E2;
+  padding: 12px 8px 8px 8px;
+  -webkit-box-shadow: 0 3px 3px -2px #595959;
+  -moz-box-shadow: 0 3px 3px -2px #595959;
+  box-shadow: 0 3px 3px -2px #595959;
+}
+/* line 137, ../scss/app.scss */
+.brands ul.lists li {
+  display: inline-block;
+  width: 220px;
+  height: 60px;
+  text-align: center;
+}
+/* line 142, ../scss/app.scss */
+.brands ul.lists li img {
+  max-height: 42px;
+}
+/* line 145, ../scss/app.scss */
+.brands ul.lists li .name {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #595959;
+}
+
+/* line 159, ../scss/app.scss */
+.trainings h2.title {
+  font-size: 1.3em;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+/* line 165, ../scss/app.scss */
+.trainings ul.lists {
+  list-style: none;
+  margin: 0;
+  border: 1px solid #E2E2E2;
+  padding: 12px 8px 8px 8px;
+}
+/* line 171, ../scss/app.scss */
+.trainings ul.lists li {
+  display: inline-block;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+/* line 178, ../scss/app.scss */
+.trainings ul.lists li img.cover {
+  width: 100%;
+  margin-top: -15%;
+}
+
+/* line 186, ../scss/app.scss */
+.reveal-modal {
+  width: 1000px;
 }

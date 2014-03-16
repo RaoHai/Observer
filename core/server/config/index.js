@@ -33,7 +33,9 @@ function updateConfig(config) {
   _.merge(config, {
     paths : {
       subdir : subdir,
-      config : path.join(appRoot, 'config.js')
+      config : path.join(appRoot, 'config.js'),
+      viewPath : path.join(corePath, 'server', 'views'),
+      uploadPath : path.join(appRoot, 'content', 'assets', 'uploads')
     }
   });
 

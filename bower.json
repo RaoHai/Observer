@@ -6,6 +6,7 @@
     "backbone": "",
     "handlebars":"",
     "font-awesome":"4.0.3",
-    "validator":"https://github.com/chriso/validator.js.git#2.0.0"
+    "validator":"https://github.com/chriso/validator.js.git#2.0.0",
+    "when": ""
   }
 }

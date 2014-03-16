@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="columns large-12">
+        <button data-reveal-id="create_brand" >
+            添加品牌
+        </button>
+    </div>
+</div>
+<div class="row">
+  <div class="columns large-12">
+  <table class='full-width'>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>品牌名</th>
+        <th>url</th>
+        <th>图标</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+
+  </div>
+</div>
+
+
+<div id="create_brand" class="reveal-modal" data-reveal>
+  <h2>添加品牌</h2>
+  <div class="brand-box">
+  <form id="brand" action='/brands' class="brand-form" method="post" novalidate="novalidate" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" class='csrf'> 
+    <div class="input-wrap email-wrap">
+        <input class="name" type="text" placeholder="品牌名称" name="name" autocapitalize="off" autocorrect="off">
+        <div class="error"></div>
+    </div>
+    <div class="input-wrap url-wrap">
+        <input class="url" type="text" placeholder="品牌网址" name="url">
+        <div class="error"></div>
+    </div>
+
+    <div class="input-wrap image-wrap">
+        <label for="file">选择品牌商标：</label>
+        <input id='file' type="file" name="image">
+        <div class="error"></div>
+    </div>
+
+    <button class="button-save flat full" type="submit">提交</button>
+
+</form>
+
+  </div>
+   <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="edit_brand" class="reveal-modal" data-reveal>
+</div>

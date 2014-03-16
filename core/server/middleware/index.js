@@ -1,4 +1,5 @@
-var   api    = require('../api'),
+  var   api  = require('../api'),
+  path       = require('path'),
   config     = require('../config'),
   middleware = require('./middleware'),
   BSStore    = require('../bookshelf-session'),
@@ -59,12 +60,18 @@ module.exports = function (server, dbHash) {
   
   expressServer.use(express.json());
   expressServer.use(express.urlencoded());
-
-  expressServer.use(express.bodyParser());
+  expressServer.use(express.bodyParser({uploadDir: config().paths.uploadPath}));
   expressServer.use(express.methodOverride());
   expressServer.use(express.cookieParser(dbHash));
 
   expressServer.use(express.session());
+
+  expressServer.use(function (req, res, next) {
+    if (req.body._csrf) {
+      res.locals.token = req.body._csrf;
+    }
+    next();
+  });
 
   expressServer.use(middleware.conditionalCSRF);
   expressServer.use(ObserverLocals);

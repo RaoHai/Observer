@@ -66,9 +66,10 @@ function setup(server) {
     middleware(server, dbHash);
 
     // console.log('subdir', config().paths.contentPath);
-    server.use(slash());
+    server.use(slash());  
+    hbsOptions = { partialsDir: [ path.join(config().paths.viewPath, 'partials') ] };
 
-    server.engine('hbs', hbs.express3());
+    server.engine('hbs', hbs.express3(hbsOptions));
     server.set('view engine', 'hbs');
     server.set('views', path.join(__dirname,"views"));
     server.use(express.static(path.join(config().paths.contentPath, "assets")));
@@ -76,6 +77,7 @@ function setup(server) {
     helper.loadCoreHelpers(assetHash);
 
     routes.frontend(server);
+    routes.admin(server);
     
 
     log({

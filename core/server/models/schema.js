@@ -8,15 +8,26 @@ var db = {
             updated_at: {type: 'dateTime', nullable: true},
         },
 
-        targets : {
+        brands : {
             id: {type: 'increments', nullable: false, primary: true},
-            name: {type : 'string', maxlength: 150, nullable: false},
-            url: {type: 'string', maxlength: 300, nullable: false},
-            description: {type: 'string', maxlength:300, nullable:true},
-            period: {type: 'string', maxlength:10, nullable:false},
+            name : {type: 'string', maxlength: 150, nullable: false, unique: true},
+            url: {type: 'string', maxlength:150, nullable: true},
+            image : {type: 'string', maxlength:150, nullable: true},
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
-            user: {type: 'integer', nullable:false}
+        },
+        
+        trainings : {
+            id: {type: 'increments', nullable: false, primary: true},
+            name :  {type: 'string', maxlength: 150, nullable: false, unique: true},
+            adver : {type: 'string', maxlength:150, nullable: true},
+            desc : {type: 'string', maxlength: 4000, nullable: true},
+            brand_id : {type: 'integer', nullable: false},
+            ages : {type : 'integer', nullable: false},
+            category : {type: 'integer', nullable: false},
+            area : {type: 'integer', nullable: false},
+            created_at: {type: 'dateTime', nullable: false},
+            updated_at: {type: 'dateTime', nullable: true}
         },
 
         settings: {

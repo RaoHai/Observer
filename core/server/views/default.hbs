@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-param" content="{{csrfToken}}">
-    <title>Observer</title>
+    <title>{{title}} - Observer</title>
     
     {{{ObserverStyleTags}}}
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -14,16 +14,16 @@
       <a href="/" class="logo" title='Observer'></a>
       <nav class="main-nav">
         <ul>
-          <li>WATCHING</li>
-          <li>BROWSER</li>
-          <li>BLOG</li>
-          <li>SUPPORT</li>
+          <li>选课报班</li>
+          <li>在线咨询</li>
+          <li>在线测试</li>
+          <li>资料库</li>
           <li>|</li>
           {{#if currentUser}}
           <li>{{currentUser.name}}</li>
           {{else}}
-          <li class='spec'><a href='/signin'>LOG IN</a></li>
-          <li><button class='flat small'><a href='/signup'>SIGN UP</a></button></li>
+          <li class='spec'><a href='/signin'>登录</a></li>
+          <li><button class='flat small'><a href='/signup'>注册</a></button></li>
           {{/if}}
         </ul>
       </nav>
@@ -33,7 +33,9 @@
       
     </section>
     <div class="main">
-     {{{body}}}
+    
+    {{{body}}}
+    
     </div>
 
     {{{ObserverScriptTags}}}

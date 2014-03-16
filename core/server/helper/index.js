@@ -24,8 +24,8 @@ var _              = require('lodash'),
       development : [
         'vendor.js',
         'helpers.js',
-        'templates.js',
         'models.js',
+        'templates.js',
         'views.js'
       ]
     };
@@ -44,6 +44,12 @@ coreHelpers.ObserverStyleTags = function () {
 
 };
 
+coreHelpers.select = function (value, options) {
+  console.log('value:', value);
+  return options.fn(this).replace(
+        new RegExp(' value=[\"\']' + value + '[\"\']'),
+        '$& selected="selected"');
+};
 
 coreHelpers.ObserverScriptTags = function() {
   var scriptList = isProduction ? scriptFiles.production : scriptFiles.development;
@@ -68,6 +74,7 @@ registerHelpers = function (assetHash) {
 
   registerHelper('ObserverScriptTags', coreHelpers.ObserverScriptTags);
   registerHelper('ObserverStyleTags', coreHelpers.ObserverStyleTags);
+  registerHelper('select', coreHelpers.select);
 };
 
 module.exports = coreHelpers;

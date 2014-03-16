@@ -1,0 +1,13 @@
+<td>{{@index}}</td>
+<td>{{this.name}}</td>
+<td>{{this.desc}}</td>
+<td><img src="/uploads/{{this.adver}}" class='height-fix'></td>
+<td>{{this.ages_string}}</td>
+<td>{{this.category_string}}</td>
+<td>{{this.area_string}}</td>
+<td>
+  <a class='button tiny' href="/trainings/{{this.id}}/edit" data-reveal-id="edit_training" data-reveal-ajax="true">
+    编辑
+  </a>
+  <a href="/trainings/{{this.id}}/delete" class="button tiny alert delete">删除</a>
+</td>

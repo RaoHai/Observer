@@ -61,6 +61,7 @@ module.exports = function(grunt) {
           ],
 
           'content/assets/js/views.js': [
+            'core/client/views/base.js',
             'core/client/views/**/*.js',
             'core/client/router.js'
           ],
@@ -68,6 +69,12 @@ module.exports = function(grunt) {
           'content/assets/js/templates.js': [
             'core/client/tpl/hbs-tpl.js'
           ],
+
+          'content/assets/js/models.js': [
+            'core/client/models/**/*.js'
+          ],
+
+
 
           'content/assets/css/observer.css': [
             'content/assets/css/app.css',

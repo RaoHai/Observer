@@ -33,7 +33,7 @@
         this.afterRender();
       }
 
-      return this;
+      return this.$el;
     }
 
   });

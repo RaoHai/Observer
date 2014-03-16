@@ -14,6 +14,10 @@ function cacheServer(server) {
 var middleware = {
 
   auth: function (req, res, next) {
+    if (config().debug === true) {
+      return next();
+    }
+    
     console.log('middleware auth:', req.session);
     if (!req.session.user) {
       return res.redirect('/signin/');

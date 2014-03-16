@@ -1,2 +1,63 @@
 {{!< default}}
-<b>index</b>
+
+{{#if currentUser}}
+
+    {{else}}
+      <div class="sign-up-group">
+        <div class="row">
+
+          <div class="columns large-7">
+
+            <div class="signup-banner">
+              <h2>Sign up FREE</h2>
+              <h3>and use it free forever</h3>
+            </div>
+
+          </div>
+
+
+          <div class="columns large-5">
+
+            <div class="signup-box">
+              
+            </div>
+            
+          </div>
+        
+          
+
+        </div>
+      </div>
+    {{/if}}
+    
+<section class="brands">
+  <h2 class="title">教育品牌</h2>
+  <ul class="lists">
+    {{#each brands}}
+    <li>
+    <img src="/uploads/{{this.image}}" alt="{{this.name}}">
+    <div class='name'>{{this.name}}</div>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+
+<div class="row">
+  <div class="columns large-8">
+    <section class="trainings">
+      <h2 class="title">课程列表</h2>
+      <ul class="lists">
+        {{#each trainings}}
+        <li>
+        <img class='cover' src="/uploads/{{this.adver}}" alt="{{this.name}}">
+        <div class='name'>{{this.name}}</div>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+
+  <div class="columns large-4">
+    
+  </div>
+</div>
