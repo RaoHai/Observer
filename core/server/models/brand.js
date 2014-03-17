@@ -1,11 +1,18 @@
 var Brand,
   Brands,
-  _ = require('lodash'),
-  when = require('when'),
+  _                 = require('lodash'),
+  when              = require('when'),
+  // Trainings         = require('./training').Trainings,
   observerBookshelf = require('./base');
+  
 
+// console.log('training:', Trainings);
 Brand = observerBookshelf.Model.extend({
   tableName: 'brands',
+  trainings: function () {
+    return this.hasMany(require('./training').Trainings, 'brand_id');
+  },
+
 }, {
 
   add: function(_brand) {

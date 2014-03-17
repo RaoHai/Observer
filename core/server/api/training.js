@@ -16,7 +16,21 @@ trainings = {
 
             return when.reject({errorCode: 404, message: 'Training not found'});
         });
-    },
+  },
+
+  findAll : function findAll(options) {
+    return dataProvider.Training.findAll().then(function(result) {
+      var i = 0,
+        omitted = {};
+
+      if (result) {
+        omitted = result.toJSON();
+      }
+
+      return omitted;
+    });
+
+  },
   // **takes:** options object
   browse: function browse(options) {
     // **returns:** a promise for a collection of users in a json object

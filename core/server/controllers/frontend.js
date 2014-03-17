@@ -10,13 +10,15 @@ var
 
 frontendControllers = {
   'homepage': function(req, res) {
+
     return when.all([
       api.brands.browse(),
-      api.trainings.browse()
+      api.trainings.findAll()
     ])
     .then(function(result) {
       var brands = result[0],
         trainings = result[1];
+        console.log('trainings:', trainings);
 
       res.render('index', {
         brands: brands,

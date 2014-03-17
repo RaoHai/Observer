@@ -183,7 +183,7 @@ select {
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  max-width: 62.5rem;
+  max-width: 1200px;
   *zoom: 1;
 }
 /* line 130, ../bower_components/foundation/scss/foundation/components/_global.scss */
@@ -5777,7 +5777,7 @@ meta.foundation-mq-topbar {
 
   /* line 442, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
   .contain-to-grid .top-bar {
-    max-width: 62.5rem;
+    max-width: 1200px;
     margin: 0 auto;
     margin-bottom: 0;
   }
@@ -7907,7 +7907,7 @@ body {
 
 /* line 18, ../scss/app.scss */
 header {
-  max-width: 62.5rem;
+  max-width: 1200px;
   height: 75px;
   padding-left: 25px;
   padding-right: 25px;
@@ -7946,78 +7946,83 @@ header nav.main-nav ul > li.spec {
   font-size: 14px;
 }
 
-/* line 58, ../scss/app.scss */
-section.banner {
-  background-color: #16a085;
-  color: white;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  min-height: 300px;
+/* line 56, ../scss/app.scss */
+.banner-wrap {
+  background-color: #92d6fb;
 }
 
-/* line 66, ../scss/app.scss */
+/* line 60, ../scss/app.scss */
+section.banner {
+  color: white;
+  min-height: 300px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 69, ../scss/app.scss */
 .main {
-  max-width: 62.5rem;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
 }
 
-/* line 73, ../scss/app.scss */
+/* line 76, ../scss/app.scss */
 .sign-up-group {
   position: absolute;
-  top: -255px;
+  top: -300px;
   width: 100%;
 }
-/* line 79, ../scss/app.scss */
+/* line 82, ../scss/app.scss */
 .sign-up-group .signup-box, .sign-up-group .login-box {
   background-color: white;
   padding: 20px;
   border: 4px solid #16A085;
   border-radius: 10px;
 }
-/* line 86, ../scss/app.scss */
+/* line 89, ../scss/app.scss */
 .sign-up-group .signup-box button, .sign-up-group .login-box button {
   margin-bottom: 0;
 }
-/* line 90, ../scss/app.scss */
+/* line 93, ../scss/app.scss */
 .sign-up-group .signup-box .meta, .sign-up-group .login-box .meta {
   margin-top: 10px;
 }
-/* line 96, ../scss/app.scss */
+/* line 99, ../scss/app.scss */
 .sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
   color: white;
   line-height: 1;
 }
-/* line 101, ../scss/app.scss */
+/* line 104, ../scss/app.scss */
 .sign-up-group .signup-banner h2 {
   font-family: "source_sans_proregular";
   font-size: 3.75rem;
   font-weight: bold;
   margin: 10px 0;
 }
-/* line 108, ../scss/app.scss */
+/* line 111, ../scss/app.scss */
 .sign-up-group .signup-banner h3 {
   font-size: 1.3em;
 }
 
-/* line 115, ../scss/app.scss */
+/* line 118, ../scss/app.scss */
 img.height-fix {
   max-height: 50px;
 }
 
-/* line 119, ../scss/app.scss */
+/* line 122, ../scss/app.scss */
 table.full-width {
   width: 100%;
 }
 
-/* line 124, ../scss/app.scss */
+/* line 127, ../scss/app.scss */
 .brands h2.title {
   font-size: 1.3em;
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
 }
-/* line 130, ../scss/app.scss */
+/* line 133, ../scss/app.scss */
 .brands ul.lists {
   list-style: none;
   margin: 0;
@@ -8027,18 +8032,18 @@ table.full-width {
   -moz-box-shadow: 0 3px 3px -2px #595959;
   box-shadow: 0 3px 3px -2px #595959;
 }
-/* line 137, ../scss/app.scss */
+/* line 140, ../scss/app.scss */
 .brands ul.lists li {
   display: inline-block;
   width: 220px;
   height: 60px;
   text-align: center;
 }
-/* line 142, ../scss/app.scss */
+/* line 145, ../scss/app.scss */
 .brands ul.lists li img {
   max-height: 42px;
 }
-/* line 145, ../scss/app.scss */
+/* line 148, ../scss/app.scss */
 .brands ul.lists li .name {
   width: 100%;
   text-align: center;
@@ -8046,20 +8051,20 @@ table.full-width {
   color: #595959;
 }
 
-/* line 159, ../scss/app.scss */
+/* line 162, ../scss/app.scss */
 .trainings h2.title {
   font-size: 1.3em;
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
 }
-/* line 165, ../scss/app.scss */
+/* line 168, ../scss/app.scss */
 .trainings ul.lists {
   list-style: none;
   margin: 0;
   border: 1px solid #E2E2E2;
   padding: 12px 8px 8px 8px;
 }
-/* line 171, ../scss/app.scss */
+/* line 174, ../scss/app.scss */
 .trainings ul.lists li {
   display: inline-block;
   width: 100%;
@@ -8067,13 +8072,28 @@ table.full-width {
   overflow: hidden;
   position: relative;
 }
-/* line 178, ../scss/app.scss */
+/* line 180, ../scss/app.scss */
+.trainings ul.lists li .img-wrap {
+  width: 75%;
+  height: 120px;
+  overflow: hidden;
+}
+/* line 185, ../scss/app.scss */
 .trainings ul.lists li img.cover {
   width: 100%;
   margin-top: -15%;
 }
+/* line 189, ../scss/app.scss */
+.trainings ul.lists li .meta {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24%;
+  height: 120px;
+}
 
-/* line 186, ../scss/app.scss */
+/* line 201, ../scss/app.scss */
 .reveal-modal {
   width: 1000px;
 }

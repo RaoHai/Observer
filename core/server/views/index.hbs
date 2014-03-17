@@ -6,17 +6,13 @@
       <div class="sign-up-group">
         <div class="row">
 
-          <div class="columns large-7">
+          <div class="columns large-8">
 
-            <div class="signup-banner">
-              <h2>Sign up FREE</h2>
-              <h3>and use it free forever</h3>
-            </div>
 
           </div>
 
 
-          <div class="columns large-5">
+          <div class="columns large-4">
 
             <div class="signup-box">
               
@@ -49,8 +45,15 @@
       <ul class="lists">
         {{#each trainings}}
         <li>
-        <img class='cover' src="/uploads/{{this.adver}}" alt="{{this.name}}">
-        <div class='name'>{{this.name}}</div>
+        <div class="img-wrap">
+          <img class='cover' src="/uploads/{{this.adver}}" alt="
+        {{this.name}}">
+        </div>
+        <div class="meta">
+          <div class="brand"><img src="/uploads/{{this.brand.image}}" alt=""></div>
+          <div class='name'>课程名称：{{this.name}}</div>
+          <button class="tiny">马上报名</button>
+        </div>
         </li>
         {{/each}}
       </ul>

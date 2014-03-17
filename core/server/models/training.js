@@ -2,12 +2,22 @@
   Trainings,
   _                 = require('lodash'),
   when              = require('when'),
+  // Brand             = require('./brand').Brand,
   observerBookshelf = require('./base');
+  
+
 
 Training = observerBookshelf.Model.extend({
   tableName: 'trainings',
+  brand : function () {
+    return this.belongsTo(require('./brand').Brand, 'brand_id');
+  }
 }, {
-
+  findAll : function (options) {
+    options = options || {};
+    options.withRelated = [ 'brand'];
+    return observerBookshelf.Model.findAll.call(this, options);
+  },
   add: function(_training) {
     var self = this,
       trainingData = _.extend({}, _training);
@@ -20,7 +30,6 @@ Training = observerBookshelf.Model.extend({
         return observerBookshelf.Model.add.call(self, trainingData);
 
       });
-
 
   },
    getByName: function (name) {
