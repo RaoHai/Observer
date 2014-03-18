@@ -20,6 +20,14 @@ var     express     =   require('express'),
     
     dbHash;
 
+function createDefaultUser() {
+  return api.users.add({
+    name : 'admin',
+    email : 'admin@gmail.com',
+    password : 'administrator',
+    role : 'admin'
+  });
+}
 
 function initDbHashAndFirstRun() {
     return when(api.settings.read('dbHash')).then(function (hash) {
@@ -33,7 +41,7 @@ function initDbHashAndFirstRun() {
         return when(api.settings.edit('dbHash', initHash)).then(function (_dbHash) {
           dbHash = _dbHash;
           return dbHash;
-        });
+        }).then(createDefaultUser);
       };
     }, errors.logAndThrowError);
 }

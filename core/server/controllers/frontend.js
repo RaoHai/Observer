@@ -45,7 +45,8 @@ frontendControllers = {
     return api.users.add({
       name: name,
       email: email,
-      password: password
+      password: password,
+      role: 'user'
     }).then(function(user) {
       if (req.session.user === undefined ) {
         req.session.user = user.id;      

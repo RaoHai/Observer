@@ -3,6 +3,8 @@ var User,
   Users,
   _                 = require('lodash'),
   when              = require('when'),
+  nodefn            = require('when/node/function'),
+  bcrypt            = require('bcryptjs'),
   observerBookshelf = require('./base');
 
 function validatePasswordLength(password) {
@@ -11,6 +13,14 @@ function validatePasswordLength(password) {
     return deferred.reject(new Error('password is too short'));
   }
   return deferred.resolve();
+}
+
+
+function generatePasswordHash (password) {
+  return nodefn.call(bcrypt.genSalt).then(function (salt) {
+    // Hash the provided password with bcrypt
+    return nodefn.call(bcrypt.hash, password, salt);
+  });
 }
 
 User = observerBookshelf.Model.extend({
@@ -36,8 +46,10 @@ User = observerBookshelf.Model.extend({
       .then(function (result) {
         return when.reject(new Error('A user is aleady registered with this Email'));
       }, function (error) {
-        return observerBookshelf.Model.add.call(self, userData);
-
+        return generatePasswordHash(userData.password).then(function (hash) {
+          userData.password = hash;
+          return observerBookshelf.Model.add.call(self, userData);
+        });
       });
 
     });
@@ -47,10 +59,14 @@ User = observerBookshelf.Model.extend({
   check: function(_user) {
     var self = this;
     return self.getByEmail(_user.email).then(function (result) {
-      if (result.get('password') === _user.password) {
+      return nodefn.call(bcrypt.compare, _user.password, result.get('password')).then(function (matched) {
+        if (!matched) {
+          return when.reject(new Error('Incorrect Password'));
+        }
+
         return when.resolve(result.get('id'));
-      }
-      return when.reject(new Error('Incorrect Password'));
+      });
+
     }, function () {
       return when.reject(new Error('Incorrect Password'));
     });

@@ -34,6 +34,10 @@
     <img src="/uploads/{{this.image}}" alt="{{this.name}}">
     <div class='name'>{{this.name}}</div>
     </li>
+    {{else}}
+    <li class="blank">
+        -- 没有品牌 --
+    </li>
     {{/each}}
   </ul>
 </section>
@@ -54,6 +58,10 @@
           <div class='name'>课程名称：{{this.name}}</div>
           <button class="tiny">马上报名</button>
         </div>
+        </li>
+        {{else}}
+        <li class="blank">
+        -- 没有品牌 --
         </li>
         {{/each}}
       </ul>
