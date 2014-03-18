@@ -8074,22 +8074,23 @@ table.full-width {
 .trainings ul.lists li {
   display: inline-block;
   width: 100%;
-  height: 120px;
+  height: 130px;
+  margin: 10px 0;
   overflow: hidden;
   position: relative;
 }
-/* line 183, ../scss/app.scss */
+/* line 184, ../scss/app.scss */
 .trainings ul.lists li .img-wrap {
   width: 75%;
   height: 120px;
   overflow: hidden;
 }
-/* line 188, ../scss/app.scss */
+/* line 189, ../scss/app.scss */
 .trainings ul.lists li img.cover {
   width: 100%;
   margin-top: -15%;
 }
-/* line 192, ../scss/app.scss */
+/* line 193, ../scss/app.scss */
 .trainings ul.lists li .meta {
   text-align: center;
   position: absolute;
@@ -8099,28 +8100,35 @@ table.full-width {
   height: 120px;
 }
 
-/* line 204, ../scss/app.scss */
+/* line 206, ../scss/app.scss */
+.search-panel {
+  margin-top: 40px;
+  border: 1px solid #E2E2E2;
+  padding: 15px;
+}
+
+/* line 211, ../scss/app.scss */
 .reveal-modal {
   width: 1000px;
   margin-left: -500px;
 }
 
-/* line 209, ../scss/app.scss */
+/* line 216, ../scss/app.scss */
 li.blank {
   text-align: center;
 }
 
-/* line 213, ../scss/app.scss */
+/* line 220, ../scss/app.scss */
 .main {
   padding: 25px 0;
 }
 
-/* line 217, ../scss/app.scss */
+/* line 224, ../scss/app.scss */
 .footer-wrap {
   background-color: #323232;
   width: 100%;
 }
-/* line 222, ../scss/app.scss */
+/* line 229, ../scss/app.scss */
 .footer-wrap footer {
   max-width: 1200px;
   margin-left: auto;
@@ -8128,36 +8136,36 @@ li.blank {
   padding: 15px 0;
   font-family: "source_sans_proregular";
 }
-/* line 229, ../scss/app.scss */
+/* line 236, ../scss/app.scss */
 .footer-wrap footer .sitemap {
   float: left;
 }
-/* line 232, ../scss/app.scss */
+/* line 239, ../scss/app.scss */
 .footer-wrap footer .copyright {
   width: 100%;
   float: left;
 }
-/* line 235, ../scss/app.scss */
+/* line 242, ../scss/app.scss */
 .footer-wrap footer .copyright ul {
   width: 100%;
 }
-/* line 237, ../scss/app.scss */
+/* line 244, ../scss/app.scss */
 .footer-wrap footer .copyright ul li {
   padding: 0 10px;
   float: left;
 }
-/* line 240, ../scss/app.scss */
+/* line 247, ../scss/app.scss */
 .footer-wrap footer .copyright ul li.right {
   float: right;
 }
-/* line 247, ../scss/app.scss */
+/* line 254, ../scss/app.scss */
 .footer-wrap footer ul {
   width: 200px;
   float: left;
   color: #666666;
   list-style: none;
 }
-/* line 252, ../scss/app.scss */
+/* line 259, ../scss/app.scss */
 .footer-wrap footer ul li.title {
   color: #999999;
 }
