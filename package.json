@@ -29,7 +29,8 @@
         "express-slash":"1.0.0",
         "matchdep":"0.3.0",
         "node-uuid":"1.4.1",
-        "bcryptjs": "0.7.12"
+        "bcryptjs": "0.7.12",
+        "request":"2.34.0"
     },
     "devDependencies": {
         "grunt": "~0.4.1",
@@ -46,6 +47,7 @@
         "grunt-exec": "~0.4.2",
         "grunt-bump": "~0.0.11",
         "grunt-sass": "0.11.0",
+        "grunt-develop": "~0.2.2",
         "grunt-contrib-watch": "~0.5.3",
         "grunt-express-server": "~0.4.11",
         "grunt-groc": "~0.4.0",

@@ -1,15 +1,24 @@
+var reloadPort = 35729;
 
+var request = require('request');
 module.exports = function(grunt) {
   
   
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    develop: {
+      server: {
+        file: 'index.js'
+      }
+    },
      watch: {
-      express:{
+      options: {
+        nospawn: true,
+        livereload: reloadPort
+      },
+      server:{
         files: ['core/server/**/*.js'],
-        tasks:['express:dev']
+        tasks:['develop','delayed-livereload']
       },
       compass:{
         files: ['content/assets/scss/*.scss'],
@@ -30,11 +39,11 @@ module.exports = function(grunt) {
       main:{
         files: [
           {
-            expand: true, 
+            expand: true,
             src: [
               'content/assets/bower_components/font-awesome/fonts/*'
-            ], 
-            dest: 'content/assets/fonts/', 
+            ],
+            dest: 'content/assets/fonts/',
             filter: 'isFile',
             flatten: true
           }
@@ -151,13 +160,30 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-develop');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-mocha-test');
 
+
+  grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function () {
+    var done = this.async();
+    setTimeout(function () {
+      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','),  function (err, res) {
+          var reloaded = !err && res.statusCode === 200;
+          if (reloaded) {
+            grunt.log.ok('Delayed live reload successful.');
+          } else {
+            grunt.log.error('Unable to make a delayed live reload.');
+          }
+          done(reloaded);
+        });
+    }, 500);
+  });
+
   grunt.registerTask('default', ['compass', 'jshint']);
-  grunt.registerTask('server', ['handlebars','concat:dev','express:dev', 'watch']);
+  grunt.registerTask('server', ['handlebars','concat:dev','develop', 'watch']);
   grunt.registerTask('test', 'Run unit tests (mocha)', ['mochaTest']);
 };

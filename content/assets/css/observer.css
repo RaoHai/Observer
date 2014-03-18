@@ -8102,24 +8102,25 @@ table.full-width {
 /* line 204, ../scss/app.scss */
 .reveal-modal {
   width: 1000px;
+  margin-left: -500px;
 }
 
-/* line 208, ../scss/app.scss */
+/* line 209, ../scss/app.scss */
 li.blank {
   text-align: center;
 }
 
-/* line 212, ../scss/app.scss */
+/* line 213, ../scss/app.scss */
 .main {
   padding: 25px 0;
 }
 
-/* line 216, ../scss/app.scss */
+/* line 217, ../scss/app.scss */
 .footer-wrap {
   background-color: #323232;
   width: 100%;
 }
-/* line 221, ../scss/app.scss */
+/* line 222, ../scss/app.scss */
 .footer-wrap footer {
   max-width: 1200px;
   margin-left: auto;
@@ -8127,36 +8128,36 @@ li.blank {
   padding: 15px 0;
   font-family: "source_sans_proregular";
 }
-/* line 228, ../scss/app.scss */
+/* line 229, ../scss/app.scss */
 .footer-wrap footer .sitemap {
   float: left;
 }
-/* line 231, ../scss/app.scss */
+/* line 232, ../scss/app.scss */
 .footer-wrap footer .copyright {
   width: 100%;
   float: left;
 }
-/* line 234, ../scss/app.scss */
+/* line 235, ../scss/app.scss */
 .footer-wrap footer .copyright ul {
   width: 100%;
 }
-/* line 236, ../scss/app.scss */
+/* line 237, ../scss/app.scss */
 .footer-wrap footer .copyright ul li {
   padding: 0 10px;
   float: left;
 }
-/* line 239, ../scss/app.scss */
+/* line 240, ../scss/app.scss */
 .footer-wrap footer .copyright ul li.right {
   float: right;
 }
-/* line 246, ../scss/app.scss */
+/* line 247, ../scss/app.scss */
 .footer-wrap footer ul {
   width: 200px;
   float: left;
   color: #666666;
   list-style: none;
 }
-/* line 251, ../scss/app.scss */
+/* line 252, ../scss/app.scss */
 .footer-wrap footer ul li.title {
   color: #999999;
 }
