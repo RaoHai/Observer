@@ -1,4 +1,5 @@
 var frontend    = require('../controllers/frontend'),
+    training = require('../controllers/training'),
     middleware = require('../middleware').middleware;
 
 
@@ -14,5 +15,8 @@ module.exports = function (server) {
     server.get('/signup', middleware.redirectToDashboard, frontend.signup);
 
     server.post('/signup', frontend.doSignup);
-    server.post('/login', frontend.doLogin)
+    server.post('/login', frontend.doLogin);
+
+
+    server.get('/t/:id', training.show);
 };

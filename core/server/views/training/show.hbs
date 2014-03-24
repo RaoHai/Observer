@@ -1,0 +1,83 @@
+{{!< ../default}}
+
+<div class="training-wrap">
+  <div class="training">
+  <div class="row">
+    <div class="columns large-12">
+      <h2 class="title">{{training.name}}</h2>
+      <em>{{training.short_desc}}</em>
+    </div>
+  </div>
+   
+    <div class="row">
+      <div class="columns large-7">
+        <img src="/uploads/{{training.adver}}" alt="" class="desc">
+      </div>
+      <div class="columns large-5">
+      <div class="details">
+          <dl>
+            <dt>年龄段：</dt><dd>{{training.ages_string}}</dd>
+            <dt>培训类型：</dt><dd>{{training.category_string}}</dd>
+            <dt>培训地区：</dt><dd>{{training.area_string}}</dd>
+
+          </dl>
+        </div>
+
+        <div class="price-tag">
+
+          <div class="price">
+            <strong>¥ {{training.price}}</strong>
+            <div class="cost">原价¥ 
+              <del>
+              {{training.price}}
+              </del>
+            </div>
+          </div>
+          <div class="buy-now">
+            
+          </div>
+        </div>
+        
+         <div class="offer">
+          <em>培训品牌：{{training.brand.name}}</em>
+          <a href='{{training.brand.url}}'>
+          <img src="/uploads/{{training.brand.image}}" alt="">
+          </a>
+        </div>
+
+      </div>
+
+
+    </div>
+    
+
+    
+  </div>
+</div>
+<div class="row">
+  <div class="columns large-12">
+    <div class="training-detail">
+      <dl class="tabs" data-tab>
+        <dd class="active"><a href="#detail">课程详情</a></dd>
+        <dd><a href="#curriculum">课程表</a></dd>
+        <dd><a href="#consulting">课程咨询</a></dd>
+        <dd><a href="#pay">购买支付</a></dd>
+      </dl>
+
+      <div class="tabs-content">
+        <div class="content active" id="detail">
+          {{training.desc}}
+        </div>
+        <div class="content" id="curriculum">
+          <p>Second panel content goes here...</p>
+        </div>
+        <div class="content" id="consulting">
+          <p>Third panel content goes here...</p>
+        </div>
+        <div class="content" id="pay">
+          <p>Fourth panel content goes here...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

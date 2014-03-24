@@ -7,15 +7,15 @@
 
 trainings = {
   // #### Browse
-  read: function read(args) {
+  read: function read(args, options) {
+    
+    return dataProvider.Training.read(args, options).then(function (result) {
+        if (result) {
+            return result.toJSON();
+        }
 
-        return dataProvider.Training.read(args).then(function (result) {
-            if (result) {
-                return result.toJSON();
-            }
-
-            return when.reject({errorCode: 404, message: 'Training not found'});
-        });
+        return when.reject({errorCode: 404, message: 'Training not found'});
+    });
   },
 
   findAll : function findAll(options) {

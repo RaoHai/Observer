@@ -1,7 +1,11 @@
 {{!< default}}
+<div class="banner-wrap">
+  <section class="banner">
+    <img src="/images/banner.png" alt="">
+  </section>
+</div>
 
 {{#if currentUser}}
-
     {{else}}
       <div class="sign-up-group">
         <div class="row">
@@ -50,13 +54,17 @@
         {{#each trainings}}
         <li>
         <div class="img-wrap">
+        <a href="/t/{{this.id}}">
           <img class='cover' src="/uploads/{{this.adver}}" alt="
         {{this.name}}">
+        </a>
         </div>
         <div class="meta">
-          <div class="brand"><img src="/uploads/{{this.brand.image}}" alt=""></div>
+          <div class="brand">
+            <img src="/uploads/{{this.brand.image}}" alt="">
+          </div>
           <div class='name'>{{this.name}}</div>
-          <button class="tiny">马上报名</button>
+          <a class="button tiny" href='/t/{{this.id}}'>马上报名</a>
         </div>
         </li>
         {{else}}

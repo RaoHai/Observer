@@ -7956,8 +7956,12 @@ header nav.main-nav ul > li.spec {
 .banner-wrap {
   background-color: #92d6fb;
 }
+/* line 61, ../scss/app.scss */
+.banner-wrap.login {
+  background-color: white;
+}
 
-/* line 63, ../scss/app.scss */
+/* line 66, ../scss/app.scss */
 section.banner {
   color: white;
   min-height: 300px;
@@ -7966,69 +7970,74 @@ section.banner {
   margin-right: auto;
 }
 
-/* line 72, ../scss/app.scss */
+/* line 75, ../scss/app.scss */
 .main {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   position: relative;
 }
 
-/* line 79, ../scss/app.scss */
+/* line 80, ../scss/app.scss */
+.brands {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 86, ../scss/app.scss */
 .sign-up-group {
   position: absolute;
-  top: -300px;
+  top: 80px;
   width: 100%;
 }
-/* line 85, ../scss/app.scss */
+/* line 92, ../scss/app.scss */
 .sign-up-group .signup-box, .sign-up-group .login-box {
   background-color: white;
   padding: 20px;
   border: 4px solid #16A085;
   border-radius: 10px;
 }
-/* line 92, ../scss/app.scss */
+/* line 99, ../scss/app.scss */
 .sign-up-group .signup-box button, .sign-up-group .login-box button {
   margin-bottom: 0;
 }
-/* line 96, ../scss/app.scss */
+/* line 103, ../scss/app.scss */
 .sign-up-group .signup-box .meta, .sign-up-group .login-box .meta {
   margin-top: 10px;
 }
-/* line 102, ../scss/app.scss */
+/* line 109, ../scss/app.scss */
 .sign-up-group .signup-banner h2, .sign-up-group .signup-banner h3 {
   color: white;
   line-height: 1;
 }
-/* line 107, ../scss/app.scss */
+/* line 114, ../scss/app.scss */
 .sign-up-group .signup-banner h2 {
   font-family: "source_sans_proregular";
   font-size: 3.75rem;
   font-weight: bold;
   margin: 10px 0;
 }
-/* line 114, ../scss/app.scss */
+/* line 121, ../scss/app.scss */
 .sign-up-group .signup-banner h3 {
   font-size: 1.3em;
 }
 
-/* line 121, ../scss/app.scss */
+/* line 128, ../scss/app.scss */
 img.height-fix {
   max-height: 50px;
 }
 
-/* line 125, ../scss/app.scss */
+/* line 132, ../scss/app.scss */
 table.full-width {
   width: 100%;
 }
 
-/* line 130, ../scss/app.scss */
+/* line 137, ../scss/app.scss */
 .brands h2.title {
   font-size: 1.3em;
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
 }
-/* line 136, ../scss/app.scss */
+/* line 143, ../scss/app.scss */
 .brands ul.lists {
   list-style: none;
   margin: 0;
@@ -8038,18 +8047,18 @@ table.full-width {
   -moz-box-shadow: 0 3px 3px -2px #595959;
   box-shadow: 0 3px 3px -2px #595959;
 }
-/* line 143, ../scss/app.scss */
+/* line 150, ../scss/app.scss */
 .brands ul.lists li {
   display: inline-block;
   width: 220px;
   height: 60px;
   text-align: center;
 }
-/* line 148, ../scss/app.scss */
+/* line 155, ../scss/app.scss */
 .brands ul.lists li img {
   max-height: 42px;
 }
-/* line 151, ../scss/app.scss */
+/* line 158, ../scss/app.scss */
 .brands ul.lists li .name {
   width: 100%;
   text-align: center;
@@ -8057,20 +8066,20 @@ table.full-width {
   color: #595959;
 }
 
-/* line 165, ../scss/app.scss */
+/* line 172, ../scss/app.scss */
 .trainings h2.title {
   font-size: 1.3em;
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
 }
-/* line 171, ../scss/app.scss */
+/* line 178, ../scss/app.scss */
 .trainings ul.lists {
   list-style: none;
   margin: 0;
   border: 1px solid #E2E2E2;
   padding: 12px 8px 8px 8px;
 }
-/* line 177, ../scss/app.scss */
+/* line 184, ../scss/app.scss */
 .trainings ul.lists li {
   display: inline-block;
   width: 100%;
@@ -8079,18 +8088,18 @@ table.full-width {
   overflow: hidden;
   position: relative;
 }
-/* line 184, ../scss/app.scss */
+/* line 191, ../scss/app.scss */
 .trainings ul.lists li .img-wrap {
   width: 75%;
   height: 120px;
   overflow: hidden;
 }
-/* line 189, ../scss/app.scss */
+/* line 196, ../scss/app.scss */
 .trainings ul.lists li img.cover {
   width: 100%;
   margin-top: -15%;
 }
-/* line 193, ../scss/app.scss */
+/* line 200, ../scss/app.scss */
 .trainings ul.lists li .meta {
   text-align: center;
   position: absolute;
@@ -8100,35 +8109,35 @@ table.full-width {
   height: 120px;
 }
 
-/* line 206, ../scss/app.scss */
+/* line 213, ../scss/app.scss */
 .search-panel {
   margin-top: 40px;
   border: 1px solid #E2E2E2;
   padding: 15px;
 }
 
-/* line 211, ../scss/app.scss */
+/* line 218, ../scss/app.scss */
 .reveal-modal {
   width: 1000px;
   margin-left: -500px;
 }
 
-/* line 216, ../scss/app.scss */
+/* line 223, ../scss/app.scss */
 li.blank {
   text-align: center;
 }
 
-/* line 220, ../scss/app.scss */
+/* line 227, ../scss/app.scss */
 .main {
   padding: 25px 0;
 }
 
-/* line 224, ../scss/app.scss */
+/* line 231, ../scss/app.scss */
 .footer-wrap {
   background-color: #323232;
   width: 100%;
 }
-/* line 229, ../scss/app.scss */
+/* line 236, ../scss/app.scss */
 .footer-wrap footer {
   max-width: 1200px;
   margin-left: auto;
@@ -8136,36 +8145,172 @@ li.blank {
   padding: 15px 0;
   font-family: "source_sans_proregular";
 }
-/* line 236, ../scss/app.scss */
+/* line 243, ../scss/app.scss */
 .footer-wrap footer .sitemap {
   float: left;
 }
-/* line 239, ../scss/app.scss */
+/* line 246, ../scss/app.scss */
 .footer-wrap footer .copyright {
   width: 100%;
   float: left;
 }
-/* line 242, ../scss/app.scss */
+/* line 249, ../scss/app.scss */
 .footer-wrap footer .copyright ul {
   width: 100%;
 }
-/* line 244, ../scss/app.scss */
+/* line 251, ../scss/app.scss */
 .footer-wrap footer .copyright ul li {
   padding: 0 10px;
   float: left;
 }
-/* line 247, ../scss/app.scss */
+/* line 254, ../scss/app.scss */
 .footer-wrap footer .copyright ul li.right {
   float: right;
 }
-/* line 254, ../scss/app.scss */
+/* line 261, ../scss/app.scss */
 .footer-wrap footer ul {
   width: 200px;
   float: left;
   color: #666666;
   list-style: none;
 }
-/* line 259, ../scss/app.scss */
+/* line 266, ../scss/app.scss */
 .footer-wrap footer ul li.title {
   color: #999999;
+}
+
+/* line 273, ../scss/app.scss */
+.training-detail {
+  margin: 20px 0;
+  border: 1px solid #D8D8D8;
+}
+/* line 277, ../scss/app.scss */
+.training-detail .tabs {
+  margin-top: -1px;
+}
+/* line 280, ../scss/app.scss */
+.training-detail .tabs dd {
+  height: 46px;
+  position: relative;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 1px !important;
+  border-right: 1px solid #d8d8d8;
+}
+/* line 283, ../scss/app.scss */
+.training-detail .tabs dd.active {
+  height: 45px;
+  margin-bottom: 0px !important;
+  border-bottom: none;
+}
+/* line 287, ../scss/app.scss */
+.training-detail .tabs dd.active:after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  top: -3px;
+  background: #60b534;
+}
+/* line 299, ../scss/app.scss */
+.training-detail .tabs dd a {
+  font-family: 'Microsoft YaHei','arial';
+  padding: 10px 35px;
+}
+/* line 305, ../scss/app.scss */
+.training-detail .tabs-content {
+  margin-top: 1px;
+  padding: 15px;
+}
+
+/* line 311, ../scss/app.scss */
+.training-wrap {
+  background-color: #f5f5f5;
+  padding: 10px 0;
+  border-top: 1px solid #ebebeb;
+}
+/* line 315, ../scss/app.scss */
+.training-wrap .training {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+  background-color: white;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 324, ../scss/app.scss */
+.training-wrap .training em {
+  display: block;
+  font-style: normal;
+  font-size: 14px;
+  padding: 0 10px 20px 0px;
+}
+/* line 330, ../scss/app.scss */
+.training-wrap .training h2.title {
+  font-size: 26px;
+  font-weight: bold;
+  font-family: 'Microsoft YaHei','arial';
+}
+/* line 338, ../scss/app.scss */
+.training-wrap .training .details dt, .training-wrap .training .details dd {
+  margin-bottom: 5px;
+  color: #5f5f5f;
+  font-size: 12px;
+  line-height: 24px;
+}
+/* line 345, ../scss/app.scss */
+.training-wrap .training .details dt {
+  font-weight: normal;
+  float: left;
+  width: 80px;
+  display: inline;
+  clear: both;
+}
+/* line 352, ../scss/app.scss */
+.training-wrap .training .details dd {
+  overflow: visible;
+  min-height: 24px;
+}
+/* line 359, ../scss/app.scss */
+.training-wrap .training .price-tag {
+  position: absolute;
+  top: 0;
+  right: -45px;
+  width: 363px;
+  height: 107px;
+  background-image: url(/images/price-tag.png);
+}
+/* line 366, ../scss/app.scss */
+.training-wrap .training .price-tag .price {
+  display: inline-block;
+  width: 180px;
+  margin: 10px 0;
+  text-align: center;
+}
+/* line 371, ../scss/app.scss */
+.training-wrap .training .price-tag .price strong {
+  color: #cc0000;
+  font-size: 40px;
+}
+/* line 379, ../scss/app.scss */
+.training-wrap .training .price-tag .cost {
+  font-size: 12px;
+  color: #696969;
+}
+/* line 382, ../scss/app.scss */
+.training-wrap .training .price-tag .cost del {
+  text-decoration: line-through;
+}
+/* line 386, ../scss/app.scss */
+.training-wrap .training .price-tag .buy-now {
+  cursor: pointer;
+  display: inline-block;
+  width: 130px;
+  height: 50px;
+  background-image: url(/images/price-tag.png);
+  background-position: 0 -107px;
+}
+/* line 394, ../scss/app.scss */
+.training-wrap .training .price-tag .buy-now:hover {
+  background-position: -130px -107px;
 }

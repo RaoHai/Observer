@@ -58,6 +58,9 @@ header {
 
 .banner-wrap {
   background-color: #92d6fb;
+  &.login {
+    background-color: white;
+  }
 }
 
 section.banner {
@@ -70,15 +73,19 @@ section.banner {
 }
 
 .main{
+  width: 100%;
+  position: relative;
+}
+
+.brands {
   max-width: $row-width;
   margin-left: auto;
   margin-right: auto;
-  position: relative;
 }
 
 .sign-up-group {
   position: absolute;
-  top:-300px;  
+  top: 80px;  
   width: 100%;
   
 
@@ -263,4 +270,132 @@ li.blank {
   }
 }
 
+.training-detail {
+  margin: 20px 0;
+  border:1px solid #D8D8D8;
+
+  .tabs{
+    margin-top: -1px;
+    
+    dd{
+      height: 46px;
+      position: relative;
+      &.active {
+        height: 45px;
+        margin-bottom: 0px !important;
+        border-bottom: none;
+        &:after {
+          content : '';
+          height: 3px;
+          width: 100%;
+          position: absolute;
+          top: -3px;
+          background: #60b534;
+        }
+      }
+      border-bottom: 1px solid #d8d8d8;
+      margin-bottom: 1px !important;
+      border-right:1px solid #d8d8d8;
+      a {
+        font-family: 'Microsoft YaHei','arial';
+        padding: 10px 35px;
+      }
+    }
+  }
+  .tabs-content {
+    margin-top: 1px;
+    padding: 15px;
+  }
+}
+
+.training-wrap {
+  background-color: #f5f5f5;
+  padding: 10px 0;
+  border-top: 1px solid #ebebeb;
+  .training {
+    position: relative;
+    padding: 20px;
+    border:1px solid #d9d9d9;
+    background-color: white;
+    max-width: $row-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    em {
+      display: block;
+      font-style: normal;
+      font-size: 14px;
+      padding: 0 10px 20px 0px;
+    }
+    h2.title{
+      font-size: 26px;
+      font-weight: bold;
+      font-family: 'Microsoft YaHei','arial';
+    }
+
+    .details{
+      
+      dt ,dd {
+        margin-bottom: 5px;
+        color: #5f5f5f;
+        font-size: 12px;
+        line-height: 24px;
+      }
+
+      dt {
+        font-weight: normal;
+        float: left;
+        width: 80px;
+        display: inline;
+        clear: both;
+      }
+      dd {
+        overflow: visible;
+        min-height: 24px;
+      }
+
+    }
+
+    .price-tag {
+      position: absolute;
+      top: 0;
+      right: -45px;
+      width: 363px;
+      height: 107px;
+      background-image: url(/images/price-tag.png);
+      .price {
+        display: inline-block;
+        width: 180px;
+        margin: 10px 0;
+        text-align: center;  
+        strong {
+
+          color: #cc0000;  
+          font-size: 40px;
+        }
+        
+      }
+
+      .cost {
+        font-size: 12px;
+        color: #696969;
+        del {
+          text-decoration: line-through;
+        }
+      }
+      .buy-now {
+        cursor: pointer;
+        display: inline-block;
+        width: 130px;
+        height: 50px;
+        background-image: url(/images/price-tag.png);
+        background-position: 0 -107px;
+
+        &:hover {
+          background-position: -130px -107px;
+        }
+      }
+    }
+  }
+}
 

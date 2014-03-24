@@ -5,6 +5,7 @@
     </button>
   </div>
 </div>
+
 <div class="row">
   <div class="columns large-12">
     <table class='full-width'>
@@ -12,6 +13,8 @@
         <tr>
           <th>#</th>
           <th>培训名称</th>
+          <th>简短介绍</th>
+          <th>价格</th>
           <th>描述</th>
           <th>培训图片</th>
           <th>年龄段</th>
@@ -28,8 +31,19 @@
   </div>
 </div>
 
+<div class="text-area-field">
+  <div class="row">
+    <div class="columns large-12">
+    <label for="ta-desc"> 描述信息： </label>
+      <textarea name="desc" id="test-area" class='fixed-size'>hello world</textarea>
+    </div>
+  </div>
+</div>
+
 
 <div id="create_training" class="reveal-modal" data-reveal>
+
+<div class="text-area-insert-point"></div>
   <h2>添加培训信息</h2>
   <div class="training-box">
     <form id="training" action='/trainings' class="training-form" method="post" novalidate="novalidate" enctype="multipart/form-data">
@@ -50,6 +64,14 @@
             <div class="error"></div>
         </div>
 
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns large-12">
+          <div class="input-wrap email-wrap">
+            <input class="short-desc" type="text" placeholder="简短介绍" name="short_desc" autocapitalize="off" autocorrect="off">
+            <div class="error"></div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -113,13 +135,8 @@
         </div>
 
       </div>
-      <div class="row">
-        <div class="columns large-12">
-        <label for="desc"> 描述信息： </label>
-          <textarea name="desc" id="desc" class='fixed-size'></textarea>
-        </div>
-      </div>
-
+      
+      
 
 
 

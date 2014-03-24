@@ -268,7 +268,7 @@
   });
 
 }());
-/*global Observer, $, confirm*/
+/*global Observer, $, confirm, tinymce*/
 /*login.js*/
 (function () {
   'use strict';
@@ -303,6 +303,16 @@
 
         option.appendTo($('#brandid'));
       });
+
+    
+
+      tinymce.init({
+        selector: "#test-area",
+        theme_url: 'js/vendor/tinymce/themes/modern/theme.min.js',
+        skin_url : 'js/vendor/tinymce/skins/lightgray'
+      });
+      
+      $('.text-area-field').appendTo($('.text-area-insert-point'));
 
       $(document).foundation();
       return this;
@@ -356,7 +366,12 @@
           }
         });
       }
+    },
+    afterRender : function () {
+
     }
+
+
   });
 
 

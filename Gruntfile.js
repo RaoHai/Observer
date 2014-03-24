@@ -60,8 +60,8 @@ module.exports = function(grunt) {
             'content/assets/bower_components/handlebars/handlebars.js',
             'content/assets/bower_components/underscore/underscore.js',
             'content/assets/bower_components/backbone/backbone.js',
-            'content/assets/bower_components/validator/validator.js'
-
+            'content/assets/bower_components/validator/validator.js',
+            'content/assets/js/vendor/tinymce/tinymce.min.js'
           ],
 
           'content/assets/js/helpers.js': [
