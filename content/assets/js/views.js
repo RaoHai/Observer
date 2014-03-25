@@ -304,13 +304,24 @@
         option.appendTo($('#brandid'));
       });
 
-    
-
-      tinymce.init({
-        selector: "#test-area",
-        theme_url: 'js/vendor/tinymce/themes/modern/theme.min.js',
-        skin_url : 'js/vendor/tinymce/skins/lightgray'
+      $('#create_training').bind('opened', function () {
+        console.log('opened');
+        tinymce.init({
+          selector: "#test-area",
+          theme_url: 'js/vendor/tinymce/themes/modern/theme.min.js',
+          skin_url : 'js/vendor/tinymce/skins/lightgray'
+        });
       });
+
+      $('#edit_training').bind('opened', function () {
+        console.log('opened');
+        tinymce.init({
+          selector: "#desc",
+          theme_url: 'js/vendor/tinymce/themes/modern/theme.min.js',
+          skin_url : 'js/vendor/tinymce/skins/lightgray'
+        });
+      });
+    
       
       $('.text-area-field').appendTo($('.text-area-insert-point'));
 
