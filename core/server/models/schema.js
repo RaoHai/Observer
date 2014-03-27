@@ -21,6 +21,8 @@ var db = {
         trainings : {
             id: {type: 'increments', nullable: false, primary: true},
             name :  {type: 'string', maxlength: 150, nullable: false, unique: true},
+            short_desc : {type: 'string', maxlength: 150, nullable: true},
+            price : {type: 'integer'},
             adver : {type: 'string', maxlength:150, nullable: true},
             desc : {type: 'string', maxlength: 4000, nullable: true},
             brand_id : {type: 'integer', nullable: false},

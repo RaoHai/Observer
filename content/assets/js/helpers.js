@@ -1,4 +1,4 @@
-/*globals _,Backbone, Validator*/
+/*globals _,Backbone, Validator, CKEDITOR, Handlebars*/
 (function () {
   'use strict';
 
@@ -89,6 +89,14 @@
 
   window.addEventListener('load', Observer.init, false);
 
+
+  Handlebars.registerHelper('trimString', function(passedString) {
+    var theString = passedString.substring(0,150);
+    return new Handlebars.SafeString(theString)
+  });
+
+
+  
   
 }());
 

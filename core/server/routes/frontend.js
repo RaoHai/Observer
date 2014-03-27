@@ -14,5 +14,6 @@ module.exports = function (server) {
     server.get('/signup', middleware.redirectToDashboard, frontend.signup);
 
     server.post('/signup', frontend.doSignup);
-    server.post('/login', frontend.doLogin)
+    server.post('/login', frontend.doLogin);
+
 };
