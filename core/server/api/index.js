@@ -2,8 +2,6 @@
 var api = {},
 settings = require('./settings'),
 users = require('./user'),
-brands = require('./brand'),
-trainings = require('./training'),
 init;
 
 init = function () {
@@ -13,7 +11,5 @@ init = function () {
 module.exports = {
   settings : settings,
   init : init,
-  users : users,
-  brands: brands,
-  trainings : trainings
+  users : users
 };

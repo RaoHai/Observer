@@ -11,6 +11,8 @@ $header-height : 75px;
 
 body {
   font-family: 'latoregular';
+  background-image: url('/images/bg.jpg');
+  background-size: 100%;
 }
 
 .clf {
@@ -57,7 +59,7 @@ header {
 }
 
 .banner-wrap {
-  background-color: #92d6fb;
+
 }
 
 section.banner {
@@ -70,6 +72,7 @@ section.banner {
 }
 
 .main{
+  min-height: 300px;
   max-width: $row-width;
   margin-left: auto;
   margin-right: auto;
@@ -78,7 +81,7 @@ section.banner {
 
 .sign-up-group {
   position: absolute;
-  top:-300px;  
+  top:-200px;  
   width: 100%;
   
 

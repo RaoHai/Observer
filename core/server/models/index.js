@@ -21,9 +21,7 @@
 
   module.exports = {
     User: require('./user').User,
-    Brand : require('./brand').Brand,
     Settings : require('./settings').Settings,
-    Training : require('./training').Training,
 
     init: function () {
       var deferred = when.defer();

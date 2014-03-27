@@ -28,17 +28,7 @@
     },
 
     admin : function () {
-      var brands = new Observer.Collections.Brands(),
-          trainings = new Observer.Collections.Trainings();
       
-      $.when(
-        brands.fetch(),
-        trainings.fetch()
-      ).then(function () {
-        brands.fetch().then(function () {
-          Observer.currentView = new Observer.Views.Admin({ el : '#main', brands: brands, trainings : trainings});
-        });
-      });
       
     }
 
