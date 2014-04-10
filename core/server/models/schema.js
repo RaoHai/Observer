@@ -9,28 +9,23 @@ var db = {
             updated_at: {type: 'dateTime', nullable: true},
         },
 
-        brands : {
+        subjects: {
             id: {type: 'increments', nullable: false, primary: true},
-            name : {type: 'string', maxlength: 150, nullable: false, unique: true},
-            url: {type: 'string', maxlength:150, nullable: true},
-            image : {type: 'string', maxlength:150, nullable: true},
+            name: {type: 'string', maxlength: 150, nullable: false, unique: true},
+            url : {type: 'string', maxlength: 150, nullable: false},
+            description: {type: 'string', maxlength: 300, nullable: true},
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
         },
-        
-        trainings : {
+
+        concreteSubject: {
             id: {type: 'increments', nullable: false, primary: true},
-            name :  {type: 'string', maxlength: 150, nullable: false, unique: true},
-            short_desc : {type: 'string', maxlength: 150, nullable: true},
-            price : {type: 'integer'},
-            adver : {type: 'string', maxlength:150, nullable: true},
-            desc : {type: 'string', maxlength: 4000, nullable: true},
-            brand_id : {type: 'integer', nullable: false},
-            ages : {type : 'integer', nullable: false},
-            category : {type: 'integer', nullable: false},
-            area : {type: 'integer', nullable: false},
+            subject_id : {type: 'integer', nullable: false},
+            title: {type: 'string', maxlength: 150, nullable: false},
+            contents: {type: 'string'},
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true}
+
         },
 
         settings: {
