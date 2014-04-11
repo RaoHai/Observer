@@ -16,3 +16,4 @@ node_modules
 *.db
 content/assets/uploads/
 !content/assets/uploads/*.md
+.idea/

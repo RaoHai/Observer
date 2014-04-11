@@ -63,7 +63,6 @@ header {
 }
 
 section.banner {
-  
   color: white;
   min-height: 300px;
   max-width: $row-width;
@@ -71,8 +70,12 @@ section.banner {
   margin-right: auto;
 }
 
+.main {
+  padding: 25px 0;
+}
+
 .main{
-  min-height: 300px;
+  min-height: 400px;
   max-width: $row-width;
   margin-left: auto;
   margin-right: auto;
@@ -220,10 +223,6 @@ li.blank {
   text-align: center;
 }
 
-.main {
-  padding: 25px 0;
-}
-
 .footer-wrap {
   
   background-color: #323232;
@@ -266,4 +265,9 @@ li.blank {
   }
 }
 
+
+.copyright {
+  padding-top: 20px;
+  border-top: 1px solid #222;
+}
 
