@@ -3,7 +3,7 @@
  * observer Bootloader
  */
 
-var observer = require('./core');
+var Observer = require('./core');
 
-var observer = new observer();
+var observer = new Observer();
 observer.watch();

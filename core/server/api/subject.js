@@ -19,6 +19,12 @@ subjects = {
 
     add : function add(subjectData) {
         return dataProvider.Subject.add(subjectData);
+    },
+
+    browse : function browe (options) {
+        return dataProvider.Subject.browse(options).then(function(result) {
+            return result.toJSON();
+        });
     }
 };
 

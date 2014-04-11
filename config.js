@@ -40,7 +40,7 @@ config = {
         database: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, '/content/data/ghost.db')
+                filename: path.join(__dirname, '/content/data/oberver.db')
             },
             debug: false
         },
@@ -49,6 +49,9 @@ config = {
             host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
             port: '2368'
+        },
+        paths: {
+            contentPath: path.join(__dirname, '/content/')
         }
     },
 
@@ -62,14 +65,17 @@ config = {
         database: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, '/content/data/ghost-test.db')
+                filename: path.join(__dirname, '/content/data/observer-test.db')
             }
         },
         server: {
             host: '127.0.0.1',
             port: '2369'
+        },
+        paths: {
+            contentPath: path.join(__dirname, '/content/')
         }
-    },
+    }
 
     
 };

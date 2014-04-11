@@ -50,6 +50,7 @@ function config() {
   // This is currently needed for tests to load config file
   // successfully.  While running application we should never
   // have to directly delegate to the config.js file.
+  console.log('config:', process.env.NODE_ENV);
   process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   
   if (_.isEmpty(observerConfig)) {

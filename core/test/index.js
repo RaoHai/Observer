@@ -1,12 +1,32 @@
 /*globals describe, it*/
 var
   assert = require('assert') ,
+  path = require('path'),
   should = require('should'),
-  api = require('../server/api');
+  api = require('../server/api'),
+  config = require('../server/config'),
+  model = require('../server/models'),
+  fs = require('fs');
 
   require("mocha-as-promised")();
 
 describe("Subject Api Test", function () {
+
+    process.env.NODE_ENV = 'testing';
+
+    before(function (done) {
+        var databasePath = path.join(config().paths.contentPath, 'data', 'observer-test.db');
+        console.log('database:', databasePath);
+        fs.exists(databasePath, function() {
+            fs.unlink(databasePath, function (err){
+                if (err) {
+                    console.log(err);
+                }
+                model.init().then(done);
+            });
+        });
+
+    });
 
     it ("subject add test", function() {
         var _subject = {
@@ -23,7 +43,7 @@ describe("Subject Api Test", function () {
 
     it("browse subject test", function () {
        return api.subject.browse().then(function (subjects){
-           subjects.shoud.be.above(0);
+           subjects.length.should.be.above(0);
        });
     });
 
@@ -31,7 +51,7 @@ describe("Subject Api Test", function () {
 
 describe("User Api Test", function() {
   // console.log("--> User Api Test <--");
-  
+
 
   it("user add test", function () {
     var _user = {

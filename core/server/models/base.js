@@ -13,7 +13,7 @@ observerBookshelf.client = config().database.client;
 
 
 observerBookshelf.Model = observerBookshelf.Model.extend({
-  hasTimestamps: true,
+  hasTimestamps: true
 },{
   findAll:  function (options) {
       options = options || {};

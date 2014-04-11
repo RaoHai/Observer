@@ -1,10 +1,9 @@
 var reloadPort = 35729;
 
-var request = require('request');
+var request    = require('request');
 module.exports = function(grunt) {
-  
-  
-  grunt.initConfig({
+
+  var cfg = {
     pkg: grunt.file.readJSON('package.json'),
     develop: {
       server: {
@@ -48,6 +47,12 @@ module.exports = function(grunt) {
             flatten: true
           }
         ]
+      }
+    },
+
+    clean: {
+      test : {
+          src: ['content/data/observer-test.db']
       }
     },
 
@@ -119,8 +124,7 @@ module.exports = function(grunt) {
 
     compass: {
       dev: {
-        config : 'config.rb',
-        
+        config : 'config.rb'
       }
     },
 
@@ -133,34 +137,36 @@ module.exports = function(grunt) {
         src: ['core/test/index.js']
       }
     },
-    // sass: {
-    //   options: {
-    //     includePaths: ['content/assets/bower_components/foundation/scss']
-    //   },
-    //   dist: {
-    //     options: {
-    //       outputStyle: 'compressed'
-    //     },
-    //     files: {
-    //       'content/assets/css/app.css': 'content/assets/scss/app.scss'
-    //     }        
-    //   }
-    // },
+
+      env : {
+          options: {
+              //Shared Options Hash
+          },
+          dev: {
+              NODE_ENV: 'testing',
+              DEST: 'temp'
+          }
+      },
 
     jshint: {
       jshintrc: './jshint.json',
       browser_files: ['./content/assets/**/*.js'],
       server_files: ['./core/**/*.js']
-    },
+    }
+
+  };
 
 
-  });
+  grunt.initConfig(cfg);
+
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-develop');
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
@@ -183,7 +189,28 @@ module.exports = function(grunt) {
     }, 500);
   });
 
+    grunt.registerTask('loadConfig', function () {
+        var bootstrap, model;
+        console.log('--> bootstrap <--');
+        process.env.NODE_ENV = 'testing';
+        bootstrap  = require('./core/bootstrap'),
+        model      = require('./core/server/models');
+        var done = this.async();
+        bootstrap().then(function() {
+            return model.init();
+        }).then(function() {
+           return done();
+        });
+
+    });
+
+   grunt.registerTask('setTestEnv', 'Use "testing" Ghost config; unless we are running on travis (then show queries for debugging)', function () {
+       process.env.NODE_ENV = 'testing';
+//       cfg.express.test.options.node_env = process.env.NODE_ENV;
+   });
+
   grunt.registerTask('default', ['compass', 'jshint']);
   grunt.registerTask('server', ['handlebars','concat:dev','develop', 'watch']);
-  grunt.registerTask('test', 'Run unit tests (mocha)', ['mochaTest']);
+  grunt.registerTask('test', 'Run unit tests (mocha)', ['env', 'clean:test', 'loadConfig', 'mochaTest']);
+
 };
