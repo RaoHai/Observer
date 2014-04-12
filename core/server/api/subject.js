@@ -25,6 +25,23 @@ subjects = {
         return dataProvider.Subject.browse(options).then(function(result) {
             return result.toJSON();
         });
+    },
+
+    edit : function edit (constraint, recent) {
+        return dataProvider.Subject.read(constraint).then(function (subject) {
+            var _key;
+            for (_key in recent) {
+                if (recent.hasOwnProperty(_key)) {
+                    subject.set(_key, recent[_key]);
+                }
+            }
+
+            console.log('update:', subject.toJSON());
+            return dataProvider.Subject.edit(subject.toJSON()).then(function (result) {
+                console.log('edit result:', result);
+                return when.resolve(result.toJSON());
+            });
+        });
     }
 };
 

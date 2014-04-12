@@ -29,8 +29,7 @@ User = observerBookshelf.Model.extend({
 
   permittedAttributes: [
     'id', 'name', 'password', 'email', 'image'
-  ],
-
+  ]
 
 }, {
   add: function(_user) {
@@ -85,7 +84,7 @@ User = observerBookshelf.Model.extend({
 
       return when.reject(new Error('NotFound'));
     });
-  },
+  }
 
 
 });

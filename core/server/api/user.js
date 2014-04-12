@@ -15,9 +15,10 @@ users = {
         }
 
         return dataProvider.User.read(args).then(function (result) {
-            if (result) {
+
+            if (result !== null) {
                 var omitted = _.omit(result.toJSON(), filteredAttributes);
-                return omitted;
+                return when.resolve(omitted);
             }
 
             return when.reject({errorCode: 404, message: 'User not found'});

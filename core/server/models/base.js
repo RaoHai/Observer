@@ -72,7 +72,7 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
 
   create: function () {
     return this.add.apply(this, arguments);
-  },
+  }
 });
 
 

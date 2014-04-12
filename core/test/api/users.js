@@ -3,56 +3,20 @@ var
   assert = require('assert') ,
   path = require('path'),
   should = require('should'),
-  api = require('../server/api'),
-  config = require('../server/config'),
-  model = require('../server/models'),
-  fs = require('fs');
+  api = require('../../server/api/index'),
+  config = require('../../server/config/index'),
+  model = require('../../server/models/index'),
+  fs = require('fs'),
+  setTestEnv = require('./index');
 
   require("mocha-as-promised")();
 
-describe("Subject Api Test", function () {
 
-    process.env.NODE_ENV = 'testing';
-
-    before(function (done) {
-        var databasePath = path.join(config().paths.contentPath, 'data', 'observer-test.db');
-        console.log('database:', databasePath);
-        fs.exists(databasePath, function() {
-            fs.unlink(databasePath, function (err){
-                if (err) {
-                    console.log(err);
-                }
-                model.init().then(done);
-            });
-        });
-
-    });
-
-    it ("subject add test", function() {
-        var _subject = {
-            name : 'test',
-            url : 'www.baidu.com',
-            description: 'test subject'
-        };
-
-        return api.subject.add(_subject).then(function (subject) {
-            subject.get('name').should.equal('test');
-            subject.get('url').should.equal('www.baidu.com');
-        });
-    });
-
-    it("browse subject test", function () {
-       return api.subject.browse().then(function (subjects){
-           subjects.length.should.be.above(0);
-       });
-    });
-
-});
 
 describe("User Api Test", function() {
+
+   before(setTestEnv);
   // console.log("--> User Api Test <--");
-
-
   it("user add test", function () {
     var _user = {
       name: 'tester',
@@ -90,6 +54,16 @@ describe("User Api Test", function() {
 
   });
 
+  it("user read not found", function () {
+      var _user = {
+          email: new Date().toString()
+      };
+
+      return api.users.read(_user).otherwise(function (err) {
+         err.errorCode.should.equal(404);
+      });
+  });
+
   it("user find test", function () {
     var _user = {
       email: 'tester@gmail.com'
@@ -97,6 +71,8 @@ describe("User Api Test", function() {
 
     return api.users.read(_user).then(function (user) {
       console.log("user: ", user);
+      user.name.should.equal('tester');
+
     });
   });
 
@@ -119,7 +95,14 @@ describe("User Api Test", function() {
       email: 'tester@gmail.com'
     };
 
-    return api.users.delete(_user);
+    return api.users.delete(_user).then(function (result){
+
+        return api.users.read(_user).then(function (deleteConfrim) {
+            console.log('delete result:', deleteConfrim);
+        }).otherwise(function (err) {
+            console.log('err:', err);
+        });
+    });
 
   });
 });
