@@ -1,7 +1,7 @@
 {{!< ../content}}
 
 <div class="inner-content">
-    <button class='flat small'>+ Add Subject</button>
+    <button class='flat small' data-reveal-id="subject_add" data-reveal>+ Add Subject</button>
     <ul>
         {{#each subjects}}
             <li>{{name}}</li>
@@ -9,4 +9,9 @@
             <li> THERE IS NO SUBJECTS</li>
         {{/each}}
     </ul>
+</div>
+
+
+<div id="subject_add">
+
 </div>
