@@ -14,6 +14,7 @@ var db = {
             name: {type: 'string', maxlength: 150, nullable: false, unique: true},
             url : {type: 'string', maxlength: 150, nullable: false},
             description: {type: 'string', maxlength: 300, nullable: true},
+            user_id: {type: 'integer', nullable: false},
             created_at: {type: 'dateTime', nullable: false},
             updated_at: {type: 'dateTime', nullable: true},
         },

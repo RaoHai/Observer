@@ -101,6 +101,7 @@ describe("User Api Test", function() {
             console.log('delete result:', deleteConfrim);
         }).otherwise(function (err) {
             console.log('err:', err);
+            err.errorCode.should.equal(404);
         });
     });
 

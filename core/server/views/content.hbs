@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-param" content="{{csrfToken}}">
+    <title>{{title}} - Observer</title>
+
+    {{{ObserverStyleTags}}}
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+</head>
+<body class="content">
+<header>
+    <a href="/" class="logo" title='Observer'></a>
+    <nav class="main-nav">
+        <ul>
+            <li>选课报班</li>
+            <li>在线咨询</li>
+            <li>在线测试</li>
+            <li>资料库</li>
+            <li>|</li>
+            {{#if currentUser}}
+                <li><a href='/admin'>{{currentUser.name}}</a></li>
+            {{else}}
+                <li class='spec'><a href='/signin'>登录</a></li>
+                <li><button class='flat small'><a href='/signup'>注册</a></button></li>
+            {{/if}}
+        </ul>
+    </nav>
+</header>
+
+<div class="main">
+
+    {{{body}}}
+
+</div>
+
+<div class="footer-wrap">
+    <footer>
+        <nav class='sitemap'>
+            <ul>
+                <li class="title">Product</li>
+                <li>Home</li>
+                <li>All Features</li>
+                <li>Product Tour</li>
+                <li>Integrations</li>
+            </ul>
+
+            <ul>
+                <li class="title">Top Features</li>
+                <li>Helpdesk Ticketing</li>
+                <li>Multi-channel Customer Support</li>
+            </ul>
+
+            <ul>
+                <li class="title">Support</li>
+                <li>About Us</li>
+                <li>Our Customers</li>
+                <li>Partners</li>
+                <li>Help & Support</li>
+            </ul>
+
+            <ul class="contact">
+                <li class="title">contact</li>
+                <li>+86 01234567890</li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            <ul>
+                <li>TERMS OF SERVICES</li>
+                <li>PRIVACY POLICY</li>
+                <li>SECURITY</li>
+                <li>SITEMAP</li>
+                <li class="right">
+                    Copyright © surgesoft@gmail.com. All Rights Reserved.
+                </li>
+            </ul>
+        </div>
+        <div class="clf"></div>
+    </footer>
+</div>
+
+{{{ObserverScriptTags}}}
+
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/foundation/js/foundation.min.js"></script>
+<script src="/js/app.js"></script>
+
+
+</body>
+</html>

@@ -13,6 +13,7 @@ body {
   font-family: 'latoregular';
   background-image: url('/images/bg.jpg');
   background-size: 100%;
+
 }
 
 .clf {
@@ -29,7 +30,7 @@ header {
   margin-right: auto;
 
   a.logo {
-    background-image: url(/images/logo.png);
+    background-image: url('/images/logo.png');
     width: 175px;
     height: $header-height;
     background-position: center;
@@ -271,3 +272,7 @@ li.blank {
   border-top: 1px solid #222;
 }
 
+.inner-content {
+  background-color: white;
+  padding: 20px;
+}

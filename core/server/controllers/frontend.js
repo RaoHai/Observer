@@ -15,7 +15,9 @@ frontendControllers = {
 
   'login': function(req, res) {
     /*jslint unparam:true*/
-    res.render('login');
+    res.render('login', {
+        url : req.query.url
+    });
   },
 
   'signup': function(req, res) {
@@ -55,7 +57,7 @@ frontendControllers = {
     }).then(function (userid) {
       if (userid) {
         req.session.user = userid; 
-        res.json(200, {redirect: '/'});
+        res.json(200, {redirect: req.query.redirect || '/'});
       } else {
         res.error(400, new Error('password incorrect!'));
       }

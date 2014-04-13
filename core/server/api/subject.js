@@ -42,6 +42,14 @@ subjects = {
                 return when.resolve(result.toJSON());
             });
         });
+    },
+
+    delete : function (constraint) {
+        return dataProvider.Subject.findOne(constraint).then(function (subject) {
+           if (subject.get('id')) {
+               return dataProvider.Subject.destroy(subject.get('id'));
+           }
+        });
     }
 };
 

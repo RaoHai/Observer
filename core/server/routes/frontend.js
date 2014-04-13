@@ -1,4 +1,5 @@
 var frontend    = require('../controllers/frontend'),
+    subject     = require('../controllers/subject'),
     middleware = require('../middleware').middleware;
 
 
@@ -16,4 +17,6 @@ module.exports = function (server) {
     server.post('/signup', frontend.doSignup);
     server.post('/login', frontend.doLogin);
 
+
+    server.get('/subjects', middleware.auth, subject.index);
 };

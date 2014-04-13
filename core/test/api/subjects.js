@@ -63,4 +63,17 @@ describe("Subject Api Test", function () {
         });
     });
 
+    it("remove subject test", function () {
+       var _subject = {
+           name : 'test'
+       };
+       return api.subject.delete(_subject).then(function(result) {
+
+           return api.subject.read(_subject).otherwise(function (err) {
+               err.errorCode.should.equal(404);
+           });
+
+       });
+    });
+
 });

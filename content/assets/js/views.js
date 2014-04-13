@@ -110,7 +110,7 @@
       }
 
         $.ajax({
-          url: '/login',
+          url: '/login?redirect=' + $(".login-box").attr('data-redirect'),
           type: 'POST',
           headers: {
             'X-CSRF-Token': $("meta[name='csrf-param']").attr('content')
@@ -194,6 +194,23 @@
   });
 
 }());
+/*global Observer, $ */
+/*login.js*/
+(function () {
+   'use strict';
+
+    Observer.Views.Subject = Observer.View.extend({
+        initialize: function () {
+            this.render();
+        },
+
+        templateName: 'subject',
+
+        events: {
+
+        }
+    }) ;
+});
 /*global  Observer, Backbone */
 (function () {
   'use strict';

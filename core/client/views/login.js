@@ -36,7 +36,7 @@
       }
 
         $.ajax({
-          url: '/login',
+          url: '/login?redirect=' + $(".login-box").attr('data-redirect'),
           type: 'POST',
           headers: {
             'X-CSRF-Token': $("meta[name='csrf-param']").attr('content')

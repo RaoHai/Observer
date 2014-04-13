@@ -10,13 +10,13 @@ config = {
     development: {
         // The url to use when providing links to the site, E.g. in RSS and email.
         url: 'http://my-ghost-blog.com',
-        debug: true,
+        debug: false,
         database: {
             client: 'sqlite3',
             connection: {
                 filename: path.join(__dirname, '/content/data/observer-dev.db')
             },
-            debug: true
+            debug: false
         },
         server: {
             // Host to be passed to node's `net.Server#listen()`

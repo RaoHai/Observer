@@ -14,13 +14,14 @@ function cacheServer(server) {
 var middleware = {
 
   auth: function (req, res, next) {
+    console.log('is Debug:', config().debug);
     if (config().debug === true) {
       return next();
     }
     
     console.log('middleware auth:', req.session);
     if (!req.session.user) {
-      return res.redirect('/signin/');
+      return res.redirect('/signin/?url=' +  req.url);
     }
 
     return next();
@@ -39,7 +40,7 @@ var middleware = {
     var csrf = express.csrf();
     // CSRF is needed for admin only
     csrf(req, res, next);
-  },
+  }
 };
 
 

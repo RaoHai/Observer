@@ -1,0 +1,12 @@
+{{!< ../content}}
+
+<div class="inner-content">
+    <button class='flat small'>+ Add Subject</button>
+    <ul>
+        {{#each subjects}}
+            <li>{{name}}</li>
+        {{else}}
+            <li> THERE IS NO SUBJECTS</li>
+        {{/each}}
+    </ul>
+</div>
