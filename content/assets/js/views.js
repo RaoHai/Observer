@@ -53,13 +53,12 @@
   Observer.Views.Admin = Observer.View.extend({
 
     initialize: function (options) {
-      var brandCollection = options.brands,
-          trainingCollection = options.trainings;
+      var subjectCollection = options.subjects;
 
       this.render();
       
-      this.brandView = new Observer.Views.Brand({ el : '#brands-content', collection: brandCollection});
-      this.trainingView = new Observer.Views.Training({ el : '#trainings-content', collection : trainingCollection, brands : brandCollection});
+      this.subjectView = new Observer.Views.Subject({ el : '.subjects-list', collection: subjectCollection});
+
       
     },
     templateName : 'admin',
@@ -201,49 +200,120 @@
 
     Observer.Views.Subject = Observer.View.extend({
         initialize: function () {
+            console.log('observer subject view initialized');
             this.render();
         },
 
         templateName: 'subject',
 
         events: {
+            "submit #subject_add_form": 'submitHandler'
+        },
+
+        afterRender : function () {
+            var self = this;
+            this.collection.each(function (model) {
+                var row = (new Observer.Views.SubjectRow({model: model})).render();
+                self.$el.find('tbody').append(row);
+            });
+        },
+
+        submitHandler : function (event) {
+            event.preventDefault();
+            var name = this.$el.find('.name').val(),
+                url = this.$el.find('.url').val(),
+                description = this.$el.find('.description').val();
+
+            Observer.Validate.clean();
+            Observer.Validate.check(this.$('.name'), 'name must not null').notNull();
+            Observer.Validate.check(this.$('.url'), 'url must be URL').isUrl();
+
+            console.log(Observer.Validate._errors);
+            if (Observer.Validate._errors.length > 0) {
+                return Observer.Validate.handleErrors();
+            }
+
+            $.ajax({
+                url : '/subjects',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-Token': $("meta[name='csrf-param']").attr('content')
+                },
+                data : {
+                    name : name,
+                    url : url,
+                    description: description
+                },
+                success: function (msg) {
+                    console.log(msg);
+                },
+                error: function (msg) {
+                    console.log('error:', msg);
+                }
+            })
 
         }
+
+
     }) ;
-});
+
+    Observer.Views.SubjectRow = Observer.View.extend({
+        tagName : "tr",
+        templateName: "subject_row",
+        events: {
+            "click a.delete": "deleteHandler"
+        },
+        initialize: function () {
+            this.render();
+        },
+
+        deleteHandler : function (event) {
+            event.preventDefault();
+        }
+    });
+})
 /*global  Observer, Backbone */
 (function () {
-  'use strict';
+    'use strict';
 
-  Observer.Router = Backbone.Router.extend({
-    routes: {
-      ''  : 'index',
-      'subject' : 'subject',
-      'signup\/*' : 'signup',
-      'signin\/*' : 'login',
-      'admin\/*' : 'admin'
-    },
+    Observer.Router = Backbone.Router.extend({
+        routes: {
+            '': 'index',
+            'subject': 'subject',
+            'signup\/*': 'signup',
+            'signin\/*': 'login',
+            'admin\/*': 'admin'
+        },
 
-    signup : function () {
-      Observer.currentView = new Observer.Views.Signup({ el : '.signup-box'});
-    },
+        signup: function () {
+            Observer.currentView = new Observer.Views.Signup({ el: '.signup-box'});
+        },
 
-    login : function () {
-      Observer.currentView = new Observer.Views.Login({ el : '.login-box'});
-    },
+        login: function () {
+            Observer.currentView = new Observer.Views.Login({ el: '.login-box'});
+        },
 
-    subject: function () {
+        subject: function () {
 
-    },
-    
-    index : function () {
-      Observer.currentView = new Observer.Views.Signup({ el : '.signup-box'});
-    },
+        },
 
-    admin : function () {
-      
-      
-    }
+        index: function () {
+            Observer.currentView = new Observer.Views.Signup({ el: '.signup-box'});
+        },
 
-  });
+        subjects: function () {
+            Observer.currentView = new Observer.Views.Subject({ el: '.subject-box'});
+        },
+
+        admin: function () {
+            var subjects = new Observer.Collections.Subjects();
+
+            subjects.fetch().then(function (){
+
+                Observer.currentView = new Observer.Views.Admin({ el : '.subjects-list' ,subjects: subjects});
+            });
+
+        }
+
+    });
 }());

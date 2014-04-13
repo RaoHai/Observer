@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="columns large-12">
+        <button class='flat small' data-reveal-id="subject_add" data-reveal>+ Add Subject</button>
+    </div>
+</div>
+<div class="row">
+    <div class="columns large-12">
+        <table class="full-width">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="subject_add" class="reveal-modal" data-reveal>
+    <h2>Add Subject</h2>
+
+    <div class="subject-box">
+
+        <form action="" id="subject_add_form">
+            <input type="hidden" name="_csrf" class="csrf"/>
+
+            <div class="row">
+                <div class="columns large-12">
+                    <div class="input-wrap name-wrap">
+                        <input type="text" class="name" name="name" placeholder="Subject Name" autocapitalize="off"
+                               autocorrect="off"/>
+
+                        <div class="error"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns large-12">
+                    <div class="input-wrap url-wrap">
+                        <input type="text" class="url" name="url" placeholder="Subject url" autocapitalize="off"
+                               autocorrect="off"/>
+
+                        <div class="error"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns large-12">
+                    <div class="input-wrap description-wrap">
+                        <input type="text" class="description" name="description" placeholder="Subject description"
+                               autocapitalize="off" autocorrect="off"/>
+
+                        <div class="error"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-12">
+                    <button class="button save flat full" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

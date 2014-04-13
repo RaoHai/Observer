@@ -9,13 +9,12 @@ function cacheServer(server) {
     expressServer = server;
 }
 
-
-
 var middleware = {
 
   auth: function (req, res, next) {
     console.log('is Debug:', config().debug);
     if (config().debug === true) {
+      req.session.user = 1;
       return next();
     }
     

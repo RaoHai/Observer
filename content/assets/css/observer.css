@@ -8176,6 +8176,7 @@ li.blank {
 
 /* line 275, ../scss/app.scss */
 .inner-content {
+  min-height: 350px;
   background-color: white;
   padding: 20px;
 }

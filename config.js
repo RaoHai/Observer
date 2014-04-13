@@ -10,7 +10,7 @@ config = {
     development: {
         // The url to use when providing links to the site, E.g. in RSS and email.
         url: 'http://my-ghost-blog.com',
-        debug: false,
+        debug: true,
         database: {
             client: 'sqlite3',
             connection: {

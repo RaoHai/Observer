@@ -6,13 +6,12 @@
   Observer.Views.Admin = Observer.View.extend({
 
     initialize: function (options) {
-      var brandCollection = options.brands,
-          trainingCollection = options.trainings;
+      var subjectCollection = options.subjects;
 
       this.render();
       
-      this.brandView = new Observer.Views.Brand({ el : '#brands-content', collection: brandCollection});
-      this.trainingView = new Observer.Views.Training({ el : '#trainings-content', collection : trainingCollection, brands : brandCollection});
+      this.subjectView = new Observer.Views.Subject({ el : '.subjects-list', collection: subjectCollection});
+
       
     },
     templateName : 'admin',

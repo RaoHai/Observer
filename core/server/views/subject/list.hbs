@@ -2,17 +2,19 @@
 
 <div class="inner-content">
     <button class='flat small' data-reveal-id="subject_add" data-reveal>+ Add Subject</button>
-    <ul>
-        {{#each subjects}}
-            <li>{{name}}</li>
-        {{else}}
-            <li> THERE IS NO SUBJECTS</li>
-        {{/each}}
-    </ul>
+        <ul>
+            {{#each subjects}}
+                <li>{{name}}</li>
+            {{else}}
+                <li> THERE IS NO SUBJECTS</li>
+            {{/each}}
+        </ul>
+
 </div>
 
 <div id="subject_add" class="reveal-modal" data-reveal>
-    <form action="" id="subject_add_form">
+        <h2>Add Subject</h2>
+        <div class="subject-box">
 
-    </form>
+        </div>
 </div>
