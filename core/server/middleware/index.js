@@ -10,18 +10,29 @@
   expressServer
 
 function ObserverLocals(req, res, next) {
-  res.locals = req.locals || {};
+  res.locals = res.locals || {};
 
   res.locals.csrfToken = req.csrfToken(); 
-  if (req.session && req.session.user) {
-    api.users.read({id: req.session.user}).then(function (user) {
-      res.locals.currentUser = user;
-
-      next();
-    });
-  } else {
-    next();
+  console.log('ObserverLocals: ',  req.session.user)
+  if (req.session && req.session.user) { 
+    res.locals.currentUser  = req.session.user;
   }
+
+  return next();
+  // if (res.locals.currentUser) {
+  //   return next();
+  // }
+  // if (req.session && req.session.user) {
+  //   console.log(" [ObserverLocals] here!", req.session.user)
+  //   api.users.read({id: req.session.user}).then(function (user) {
+  //     console.log(" [ObserverLocals] read from user:", user)
+  //     res.locals.currentUser = user;
+
+  //     return next();
+  //   });
+  // } else {
+  //   return next();
+  // }
 }
 
 function redirectToSignup(req, res, next) {

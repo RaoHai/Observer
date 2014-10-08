@@ -6,5 +6,8 @@ module.exports = function (server) {
     res.render('dashboard');
   });
 
+  server.get('/t2', function (req, res) {
+    res.render('theme2');
+  });
 
 };

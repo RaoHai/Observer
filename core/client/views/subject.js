@@ -21,9 +21,11 @@
                 var row = (new Observer.Views.SubjectRow({model: model})).render();
                 self.$el.find('tbody').append(row);
             });
+            $(document).foundation();
         },
 
         submitHandler : function (event) {
+            console.log( "[submitHandler] ", event)
             event.preventDefault();
             var name = this.$el.find('.name').val(),
                 url = this.$el.find('.url').val(),

@@ -10,6 +10,7 @@ var
 
 frontendControllers = {
   'homepage': function(req, res) {
+    // console.log(" [FETCH HOMEPAGE] ")
     return res.render('index');
   },
 
@@ -56,8 +57,12 @@ frontendControllers = {
       password: password
     }).then(function (userid) {
       if (userid) {
-        req.session.user = userid; 
-        res.json(200, {redirect: req.query.redirect || '/'});
+        // req.session.user = userid; 
+        api.users.read({id: userid}).then(function (user) {
+          req.session.user = user;
+          // res.locals.currentUser = user;
+          res.json(200, {redirect: req.query.redirect || '/'});
+        });
       } else {
         res.error(400, new Error('password incorrect!'));
       }

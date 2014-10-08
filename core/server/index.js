@@ -70,7 +70,8 @@ function setup(server) {
     return initDbHashAndFirstRun();
   })
   .then(function () {
-
+    server.use(express.static(path.join(config().paths.contentPath, "assets")));
+    
     middleware(server, dbHash);
 
     // console.log('subdir', config().paths.contentPath);
@@ -80,7 +81,7 @@ function setup(server) {
     server.engine('hbs', hbs.express3(hbsOptions));
     server.set('view engine', 'hbs');
     server.set('views', path.join(__dirname,"views"));
-    server.use(express.static(path.join(config().paths.contentPath, "assets")));
+    
     
     helper.loadCoreHelpers(assetHash);
 

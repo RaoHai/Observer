@@ -12,12 +12,7 @@ function cacheServer(server) {
 var middleware = {
 
   auth: function (req, res, next) {
-    console.log('is Debug:', config().debug);
-    if (config().debug === true) {
-      req.session.user = 1;
-      return next();
-    }
-    
+       
     console.log('middleware auth:', req.session);
     if (!req.session.user) {
       return res.redirect('/signin/?url=' +  req.url);
