@@ -12,7 +12,7 @@ module.exports = function done (done) {
     fs.exists(databasePath, function() {
         fs.unlink(databasePath, function (err){
             if (err) {
-                console.log(err);
+                // console.log(err);
             }
             model.init().then(done);
         });

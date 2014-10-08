@@ -33,7 +33,7 @@ User = observerBookshelf.Model.extend({
 
 }, {
   add: function(_user) {
-    console.log('custom add:', _user);
+    // console.log('custom add:', _user);
     var self = this,
       userData = _.extend({}, _user);
 

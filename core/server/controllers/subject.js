@@ -2,6 +2,9 @@
 var
     api = require('../api'),
     when = require('when'),
+    request = require('request'),
+    url = require('url'),
+    cheerio = require('cheerio'),
     Route = require('express').Route,
     errors = require('../../errorHandling'),
     config = require('../config'),
@@ -33,6 +36,27 @@ subjectControllders = {
            return res.json(subject);
         }).otherwise(function (err) {
            res.error(400, err);
+        });
+    },
+
+    'sniff' : function (req, res) {
+        var _url = req.query.url;
+        var domain = url.parse(_url);
+
+        request(_url, function (err, response, body) {
+            var $ = cheerio.load(body);
+            var rss = url.parse($('link[type="application/rss+xml"]').attr('href'));
+            if (/^https?:\/\//.test(rss) == false) {
+                domain.pathname = rss.pathname;
+                domain.path = rss.path;
+                domain.href = rss.href;
+                console.log(" [HERE] ", domain);
+                rss = url.format(domain);
+            }
+            res.json({
+                title : $('title').text(),
+                rss : rss
+            });
         });
     }
 };

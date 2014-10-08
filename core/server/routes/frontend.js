@@ -20,4 +20,6 @@ module.exports = function (server) {
 
     server.get('/subjects', middleware.auth, subject.index);
     server.post('/subjects', middleware.auth, subject.save);
+
+    server.get('/sniff', middleware.auth, subject.sniff);
 };

@@ -18,16 +18,29 @@ describe("Subject Api Test", function () {
     before(setTestEnv);
 
     it ("subject add test", function() {
-        var _subject = {
-            name : 'test',
-            url : 'www.baidu.com',
-            description: 'test subject'
+        var _user = {
+            name: 'tester',
+            email: 'tester@gmail.com',
+            password: 'password',
+            role: 'normal'
         };
 
-        return api.subject.add(_subject).then(function (subject) {
-            subject.get('name').should.equal('test');
-            subject.get('url').should.equal('www.baidu.com');
+        return api.users.add(_user).then(function (user) {
+            var userId = user.get('id');
+            var _subject = {
+                name : 'test',
+                url : 'www.baidu.com',
+                description: 'test subject',
+                user_id : userId
+            };
+
+            return api.subject.add(_subject).then(function (subject) {
+                subject.get('name').should.equal('test');
+                subject.get('url').should.equal('www.baidu.com');
+                subject.get('user_id').should.equal(userId);
+            });
         });
+
     });
 
     it("browse subject test", function () {
@@ -48,7 +61,7 @@ describe("Subject Api Test", function () {
        return api.subject.read({
            name : 'test'
        }).then(function (subject) {
-          console.log('find subject:', subject);
+          // console.log('find subject:', subject);
           subject.name.should.equal('test');
        });
     });
@@ -75,5 +88,7 @@ describe("Subject Api Test", function () {
 
        });
     });
+
+// // it("sniff")
 
 });

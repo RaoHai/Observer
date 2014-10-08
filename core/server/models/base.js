@@ -37,13 +37,13 @@ observerBookshelf.Model = observerBookshelf.Model.extend({
   },
 
   findOne: function (args, options) {
-    console.log('findOne:', args, options);
+    // console.log('findOne:', args, options);
       options = options || {};
       return this.forge(args).fetch(options);
   },
 
   read: function () {
-    console.log('read', arguments);
+    // console.log('read', arguments);
     return this.findOne.apply(this, arguments);
   },
 

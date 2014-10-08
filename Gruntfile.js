@@ -134,11 +134,11 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['core/test/../*.js']
+        src: ['core/test/api/users.js', 'core/test/api/subjects.js']
       }
     },
 
-      env : {
+      env : {   
           options: {
               //Shared Options Hash
           },

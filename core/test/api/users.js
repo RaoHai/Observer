@@ -39,7 +39,7 @@ describe("User Api Test", function() {
     };
 
     return api.users.add(_user).otherwise(function (error) {
-      console.log('error:', error);
+      // console.log('error:', error);
       error.should.be.an.Error;
     });
   });
@@ -70,7 +70,7 @@ describe("User Api Test", function() {
     };
 
     return api.users.read(_user).then(function (user) {
-      console.log("user: ", user);
+      // console.log("user: ", user);
       user.name.should.equal('tester');
 
     });
@@ -98,9 +98,9 @@ describe("User Api Test", function() {
     return api.users.delete(_user).then(function (result){
 
         return api.users.read(_user).then(function (deleteConfrim) {
-            console.log('delete result:', deleteConfrim);
+            // console.log('delete result:', deleteConfrim);
         }).otherwise(function (err) {
-            console.log('err:', err);
+            // console.log('err:', err);
             err.errorCode.should.equal(404);
         });
     });

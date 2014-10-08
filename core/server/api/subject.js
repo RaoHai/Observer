@@ -36,9 +36,9 @@ subjects = {
                 }
             }
 
-            console.log('update:', subject.toJSON());
+            // console.log('update:', subject.toJSON());
             return dataProvider.Subject.edit(subject.toJSON()).then(function (result) {
-                console.log('edit result:', result);
+                // console.log('edit result:', result);
                 return when.resolve(result.toJSON());
             });
         });
