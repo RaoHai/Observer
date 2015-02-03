@@ -1,0 +1,35 @@
+<button class="btn btn-default" data-toggle="modal" data-target="#subject-create">Add subject</button>
+
+<ul id="subjects" ng-show="subjects.length">
+  <li ng-repeat="subject in subjects | reverse">{{subject.title}}: {{subject.url}}</li>
+</ul>
+
+
+<div class="modal fade" id="subject-create" role="dialog" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add Subject</h4>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                <label for="newSubject.title">Title: 
+                    <input type="text" id="newSubject.title" class="form-control" ng-model="newSubject.title">
+                </label>
+                </div>
+                <div class="form-group">
+                <label for="newSubject.url">Url: 
+                    <input type="text" id="newSubject.url" class="form-control" ng-model="newSubject.url">
+                </label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="addSubject()">Save changes</button>
+        </div>
+    </div>
+</div>
+</div>
