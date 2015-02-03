@@ -67,6 +67,11 @@ angular.module('observerDevApp')
         controller: 'LoginCtrl'
       })
 
+      .when('/subjects', {
+        templateUrl: 'views/subjects.html',
+        controller: 'SubjectCtrl'
+      })
+
       .when('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
