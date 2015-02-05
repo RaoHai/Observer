@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    // bower:css
+    link(rel='stylesheet', href='components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='components/videojs/dist/video-js/video-js.css')
+    link(rel='stylesheet', href='components/flat-ui/dist/css/flat-ui.css')
+    // endbower
+    block css
+      link(rel='stylesheet', href='/css/style.css')
+    block js
+      script(src='http://localhost:35729/livereload.js')
+  body
+    .container
+      .col-xs-12
+        nav.navbar.navbar-inverse.navbar-embossed(role="navigation")
+          .nav-header
+            a.navbar-brand Observer
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href="/login") Login
+      .col-xs-12
+        block content
