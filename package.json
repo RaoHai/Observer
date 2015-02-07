@@ -20,7 +20,9 @@
     "wiredep": "~2.2.2",
     "grunt-wiredep": "~2.0.0",
     "moment": "~2.9.0",
-    "bcrypt-nodejs": "0.0.3"
+    "bcrypt-nodejs": "0.0.3",
+    "express-session": "~1.10.2",
+    "bluebird": "~2.9.6"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

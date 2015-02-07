@@ -4,8 +4,10 @@ var glob = require('glob');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var compress = require('compression');
+var resultHandle = require('../app/middlewares').resultHandle;
 var methodOverride = require('method-override');
 
 module.exports = function(app, config) {
@@ -22,6 +24,21 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+  
+  app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
+
+  app.use(resultHandle);
+
+  app.use(function (req, res, next) {
+    if (req.session && req.session.user) {
+      res.locals.user = req.session.user;
+    }
+    next();
+  });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {

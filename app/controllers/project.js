@@ -8,17 +8,11 @@ module.exports = function (app) {
     app.use('/', router);
 };
 
-router.get('/', function (req, res, next) {
-    
-    res.render('index', {
-        title: 'Generator-Express MVC'
+router.get('/projects', role(['user','admin']), function(req, res, next) {
+    db.project.findAll().then(function (projects) {
+        res.render("projects", {
+            projects: projects
+        });
     });
-
 });
-
-router.get('/admin', role('admin'), function(req, res, next) {
-    res.json("admin");
-});
-
-
 

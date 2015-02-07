@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    - var modalId = "project-creation"
+
+    .col-xs-3
+        button(type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="##{modalId}")
+            | Launch demo modal
+    .col-xs-12
+        each project in projects
+                li=project=name
+

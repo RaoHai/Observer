@@ -5,7 +5,8 @@ module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define('user', {
         username: DataTypes.STRING,
         password: { type: DataTypes.STRING, scopes: ['private'] },
-        email: DataTypes.STRING
+        email: DataTypes.STRING,
+        role: DataTypes.STRING
     }, {
         scopes : ['private', 'public'],
         instanceMethods: {
@@ -16,6 +17,11 @@ module.exports = function (sequelize, DataTypes) {
             },
             validPassword : function (password, next) {
                 bcrypt.compare(password, this.password, next)
+            }
+        },
+        classMethods : {
+            associate: function(models) {
+                User.hasMany(models.project)
             }
         }
     });

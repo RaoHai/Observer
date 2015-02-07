@@ -18,10 +18,23 @@ html(lang='en')
       .col-xs-12
         nav.navbar.navbar-inverse.navbar-embossed(role="navigation")
           .nav-header
-            a.navbar-brand Observer
+            a.navbar-brand(href="/") Observer
           .collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
-              li
-                a(href="/login") Login
+              if user
+                li
+                  a=user.username
+              else
+                li
+                  a(href="/login") Login
       .col-xs-12
         block content
+
+  include partials/modal
+
+  // bower:js
+  script(src='components/jquery/dist/jquery.js')
+  script(src='components/bootstrap/dist/js/bootstrap.js')
+  script(src='components/videojs/dist/video-js/video.js')
+  script(src='components/flat-ui/dist/js/flat-ui.js')
+  // endbower
