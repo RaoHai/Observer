@@ -60,7 +60,8 @@ module.exports = function (grunt) {
           'app/views/*.jade',
           'app/views/**/*.jade'
         ],
-        ignorePath : '../../public/'
+        ignorePath : '../../public/',
+        exclude : [/bootstrap.js/]
       }
     }
   });

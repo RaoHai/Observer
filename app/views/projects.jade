@@ -4,9 +4,33 @@ block content
     - var modalId = "project-creation"
 
     .col-xs-3
-        button(type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="##{modalId}")
+        button.btn.btn-primary.btn-lg(type="button" data-toggle="modal" data-target="##{modalId}")
             | Launch demo modal
     .col-xs-12
         each project in projects
-                li=project=name
+                li=project.name
+                    | [
+                    span=project.url
+                    | ]
+                    button(type="button").btn.btn-primary.btn-small.pull-right
+                        | Edit
+                    button(type="button" data-confirm).btn.btn-warning.btn-small.pull-right
+                        | Delete
 
+block modalTitle
+    div| Create Project
+
+block modalBody
+    div
+        form(action="/projects" method="post" enctype="application/x-www-form-urlencoded")
+            .form-group
+                label(for="project-name") project name:
+                input.form-control#project-name(name="project-name" type="text" placeholder="project name")
+            .form-group
+                label(for="project-url") project url:
+                input.form-control#project-url(name="project-url" type="text" placeholder="project url")
+            .form-group
+                label(for="project-description") project description:
+                textarea.form-control#project-description(name="project-description" )
+            input.btn.btn-primary.btn-lg.btn-block(type="submit"  value="Create")
+            input.btn.btn-danger.btn-lg.btn-block(type="cancel"  value="Cancel" data-dismiss="modal" aria-label="Close")    

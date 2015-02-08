@@ -8,6 +8,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.2",
-    "flat-ui": "~2.2.2"
+    "flat-ui": "~2.2.2",
+    "angular-bootstrap": "~0.12.0"
   }
 }

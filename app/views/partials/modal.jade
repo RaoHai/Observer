@@ -2,9 +2,11 @@
     .modal-dialog
         .modal-content
             .modal-header
+                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                    span(aria-hidden="true")&times;
                 h4.modal-title
                     block modalTitle
             .modal-body
-                |hello world
+                block modalBody
             .modal-footer
                 block modalFooter
