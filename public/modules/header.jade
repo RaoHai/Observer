@@ -1,0 +1,11 @@
+.container
+    .col-xs-12
+      nav.navbar.navbar-inverse.navbar-embossed(role="navigation")
+        .nav-header
+          a.navbar-brand(href="/") Observer 
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li(ng-show="user")
+              a{{user.username}}
+            li(ng-show="!user")
+              a(href="#/login") Login

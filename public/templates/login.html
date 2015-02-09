@@ -1,0 +1,26 @@
+
+<div class="col-xs-12">
+  <div class="login-screen">
+    <div class="login-icon"><img src="components/flat-ui/dist/img/icons/svg/paper-bag.svg"/>
+      <h4>Start to use <b>Observer</b></h4>
+    </div>
+    <div class="login-form">
+      <form ng-submit="doLogin()">
+        <div class="form-group">
+          <input id="login-email" ng-model="login.email" type="email" placeholder="Your Email" class="form-control login-field"/>
+          <label for="login-email" class="login-field-icon fui-mail"></label>
+        </div>
+        <div class="form-group">
+          <input id="login-password" ng-model="login.password" type="password" placeholder="Password" class="form-control login-field"/>
+          <label for="login-password" class="login-field-icon fui-lock"></label>
+        </div>
+        <div class="form-group">
+          <label for="remember" class="checkbox">
+            <input id="remember" type="checkbox" ng-model="login.remember" data-toggle="checkbox" class="custom-checkbox"/><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>Remember me
+          </label>
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block"/><a href="/#register" class="login-link">-> create account</a>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.col-xs-12
+    .login-screen
+        .login-icon
+            img(src="components/flat-ui/dist/img/icons/svg/paper-bag.svg")
+            h4 Start to use 
+                b Observer
+        .login-form
+            form(ng-submit="doLogin()")
+                .form-group
+                    input.form-control.login-field#login-email(ng-model="login.email" type="email" placeholder="Your Email")
+                    label.login-field-icon.fui-mail(for="login-email")
+                .form-group
+                    input.form-control.login-field#login-password(ng-model="login.password" type="password" placeholder="Password")
+                    label.login-field-icon.fui-lock(for="login-password")
+                .form-group
+                    label.checkbox(for='remember')
+                        input#remember.custom-checkbox(type='checkbox' ng-model="login.remember" data-toggle='checkbox')
+                        span.icons
+                            span.icon-unchecked
+                            span.icon-checked
+                        |Remember me
+                input.btn.btn-primary.btn-lg.btn-block(type="submit"  value="Login")
+                
+                a.login-link(href="/#register") -> create account

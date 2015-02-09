@@ -12,18 +12,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    develop: {
-      server: {
-        file: 'app.js'
-      }
-    },
-    sass: {
-      dist: {
-        files: {
-          'public/css/style.css': 'public/css/style.scss'
-        }
-      }
-    },
+
     watch: {
       options: {
         nospawn: true,
@@ -33,9 +22,16 @@ module.exports = function (grunt) {
         files: [
           'app.js',
           'app/**/*.js',
-          'config/*.js'
+          'config/*.js',
+          'public/js/application/{,*/}*.js'
         ],
-        tasks: ['develop', 'delayed-livereload']
+        tasks: ['develop', 'concat', 'delayed-livereload']
+      },
+      jade : {
+        files: [
+          'public/modules/*.jade'
+        ],
+        tasks: ['jade']
       },
       css: {
         files: [
@@ -54,6 +50,47 @@ module.exports = function (grunt) {
         options: { livereload: reloadPort }
       }
     },
+
+    jade: {
+      compile: {
+          options: {
+              client: false,
+              pretty: true
+          },
+          files: [ {
+            cwd: "public/modules",
+            src: "**/*.jade",
+            dest: "public/templates",
+            expand: true,
+            ext: ".html"
+          } ]
+      }
+    },
+
+    develop: {
+      server: {
+        file: 'app.js'
+      }
+    },
+
+    sass: {
+      dist: {
+        files: {
+          'public/css/style.css': 'public/css/style.scss'
+        }
+      }
+    },
+
+    concat : {
+      options: {
+        separator: ';',
+      },
+      dist : {
+        src : ['public/js/application/{,*/}*.js'],
+        dest : 'public/js/all.js'
+      }
+    },
+
     wiredep: {
       task: {
         src: [
@@ -87,6 +124,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'sass',
     'wiredep',
+    'concat',
+    'jade',
     'develop',
     'watch'
   ]);

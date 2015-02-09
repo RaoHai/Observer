@@ -1,0 +1,19 @@
+.container
+    .login-screen
+        .login-icon
+            img(src="components/flat-ui/dist/img/icons/svg/paper-bag.svg")
+            h4 Start to use 
+                b Observer
+        .login-form
+            form(ng-submit="doRegister()")
+                .form-group
+                    input.form-control.login-field#login-email(name="register.email" type="email" placeholder="Your Email")
+                    label.login-field-icon.fui-mail(for="login-email")
+                .form-group
+                    input.form-control.login-field#login-password(name="register.password" type="password" placeholder="Password")
+                    label.login-field-icon.fui-lock(for="login-password")
+                .form-group
+                    input.form-control.login-field#login-password(type="password" placeholder="Confirm Password")
+                    label.login-field-icon.fui-lock(for="login-password")
+                input.btn.btn-primary.btn-lg.btn-block(type="submit"  value="Register")
+                a.login-link(href="#/login") -> Log in

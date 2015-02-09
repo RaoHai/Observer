@@ -9,8 +9,8 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-    var username        = req.body["login-email"],
-        password        = req.body["login-password"],
+    var username        = req.body.email,
+        password        = req.body.password,
       
         registerAsAdmin = false;
 
@@ -60,9 +60,9 @@ router.get('/login', function (req, res, next) {
 
 
 router.post('/login', function (req, res, next) {
-    var username = req.body["login-email"],
-        password = req.body["login-password"],
-        remember = req.body["remember"],
+    var username = req.body.email,
+        password = req.body.password,
+        remember = req.body.remember,
         session  = req.session;
 
 
@@ -72,15 +72,13 @@ router.post('/login', function (req, res, next) {
         }
     }).then(function (user) {
         if (!user) {
-            return res.reject(401, {error: "username or password invalid"}, function () {
-                res.redirect('back');
-            });
+            res.status(401);
+            return res.json({error: "username or password invalid"});
         }
         user.validPassword(password, function (err, validResult) {
             if (err) {
-                return res.reject(401, {error: "username or password invalid"}, function () {
-                    res.redirect('back');
-                });
+                res.status(401);
+                return res.json({error: "username or password invalid"});
             }
             var values = user.get();
             delete values.password;
@@ -90,7 +88,7 @@ router.post('/login', function (req, res, next) {
                 res.cookie('user', values, {maxAge: 60 * 1000});
             }
 
-            res.redirect(req.query.redirect || "/");
+            return res.json(values);
             
         });
     });

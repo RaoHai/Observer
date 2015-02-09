@@ -13,22 +13,11 @@ html(lang='en')
       link(rel='stylesheet', href='/css/style.css')
     block js
       script(src='http://localhost:35729/livereload.js')
-  body
+  body(data-ng-controller="AppCtrl")
+    div(ng-controller="HeaderController" ng-include="'templates/header.html'")
+    .alert(role="alert" class="{{alertCategory}}" ng-show="showAlert"){{alertMessage}}
     .container
-      .col-xs-12
-        nav.navbar.navbar-inverse.navbar-embossed(role="navigation")
-          .nav-header
-            a.navbar-brand(href="/") Observer
-          .collapse.navbar-collapse
-            ul.nav.navbar-nav.navbar-right
-              if user
-                li
-                  a=user.username
-              else
-                li
-                  a(href="/login") Login
-      .col-xs-12
-        block content
+      div(ng-view)
 
   include partials/modal
 
@@ -38,5 +27,10 @@ html(lang='en')
   script(src='components/flat-ui/dist/js/flat-ui.js')
   script(src='components/angular/angular.js')
   script(src='components/angular-bootstrap/ui-bootstrap-tpls.js')
+  script(src='components/angular-cookies/angular-cookies.js')
+  script(src='components/angular-sanitize/angular-sanitize.js')
+  script(src='components/angular-route/angular-route.js')
+  script(src='components/angular-resource/angular-resource.js')
   // endbower
-  script(src="js/app.js")
+
+  script(src="js/all.js")
