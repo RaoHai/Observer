@@ -7,6 +7,7 @@ angular.module('observer-webclient', [
     'ngSanitize',
     'ngRoute',
     'alertHandler',
+    'managers',
     'sessionManager',
     'modalManager',
     'base64',
@@ -42,6 +43,8 @@ angular.module('observer-webclient', [
 }]);
 
 
+angular.module('managers', ['userMgr']);
+
 
 
 
@@ -54,13 +57,15 @@ angular.module('observer-webclient', [
 });
 ;angular.module('observer-webclient')
 
-.controller('HeaderController', ['$cookieStore', '$scope', function ($cookieStore, $scope) {
+.controller('HeaderController', ['$cookieStore', '$scope', 'userMgr', function ($cookieStore, $scope, userMgr) {
     
-    console.log(">>>", $cookieStore.get('user'));
-    $scope.user = $cookieStore.get('user');
+    var user = userMgr.user;
+    $scope.user = user;
+
+    console.log("HeaderController:", user);
 }]);;angular.module('observer-webclient')
 
-.controller('LoginCtrl', ['$cookieStore', '$scope', '$http', '$rootScope', 'alertHandler', '$location', '$base64', function ($cookieStore, $scope, $http, $rootScope, alertHandler, $location, $base64) {
+.controller('LoginCtrl', ['$cookieStore', '$scope', '$http', '$rootScope', 'alertHandler', '$location', '$base64' ,'sessionManager', 'userMgr', function ($cookieStore, $scope, $http, $rootScope, alertHandler, $location, $base64, sessionManager, userMgr) {
     $scope.user = $cookieStore.get('user');
 
     $scope.login = {
@@ -78,7 +83,9 @@ angular.module('observer-webclient', [
         $cookieStore.put('credentials', credentials);
         if ($scope.login.remember) {
             $cookieStore.put('user', result.data);  
+            userMgr.setUser(result.data);
         }
+        sessionManager.setAuthorization();
         alertHandler.alert('success', "login success!", function () {
             $location.path("/"); 
         });
@@ -90,15 +97,34 @@ angular.module('observer-webclient', [
     };
 
 
+}]);;
+angular.module('observer-webclient')
+
+.controller('ProjectCreationCtrl', ['$scope', '$http', function ($scope, $http) {
+    $scope.createProject = function () {
+        console.log(" > ", $scope.newProject);
+        $http.post('/projects', $scope.newProject).then(function (result) {
+            console.log("createProject:", result);
+        });
+    };
 }]);;angular.module('observer-webclient')
 
-.controller('ProjectCtrl', ['$scope', '$http', '$modal', '$rootScope', function ($scope, $http, $modal, $rootScope) {
+.controller('ProjectCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $http.get('/projects').then(function (projects) {
         console.log("get projects:", projects);
         $scope.projects = projects.data;
     });
 
     
+    $scope.openModal = function (size) {
+        var options = {
+            templateUrl: 'projectCreateModal.html',
+            size: size,
+            controller: 'ProjectCreationCtrl'
+        };
+
+        $rootScope.openModal(options);
+    };
 }]);;angular.module('observer-webclient')
 
 .controller('RegisterCtrl', ['$cookieStore', '$scope', '$http', '$rootScope', 'alertHandler', '$location', function ($cookieStore, $scope, $http, $rootScope, alertHandler, $location) {
@@ -121,6 +147,34 @@ angular.module('observer-webclient', [
     $scope.doRegister = function () {
         $http.post('/register', $scope.register).then(registerSuccessHandler, registerErrorHandle);
     };
+}]);;angular.module('userMgr', [])
+    .factory('userMgr', [function() {
+        var userMgr = {};
+
+        var user = {};
+
+        var setUser = function (json) {
+            json.active = true;
+            angular.extend(userMgr.user, json);
+        };
+
+        var updateLoggedUser = function (updatedUser) {
+            user.username = updatedUser.username;
+            user.role = updatedUser.role;
+        };
+
+
+
+
+        angular.extend(userMgr, {
+            //properties
+            user : user,
+            //methods
+            setUser: setUser,
+            updateLoggedUser: updateLoggedUser
+        });
+
+        return userMgr;
 }]);;angular.module('alertHandler', [])
 .service('alertHandler', ['$rootScope', function ($rootScope) {
     this.alert = function (type, message, callback) {
@@ -138,15 +192,12 @@ angular.module('observer-webclient', [
 
     };
 }]);;angular.module('modalManager', [])
-.factory('modalManager', ['$rootScope', function ($rootScope) {
+.factory('modalManager', ['$rootScope', '$modal', function ($rootScope, $modal) {
     var self = this;
 
-    $rootScope.openModal = function (size) {
+    $rootScope.openModal = function (options) {
 
-        self.$modalInstance = $modal.open({
-            templateUrl: 'templates/projectCreationModal.html',
-            size: size
-        });
+        self.$modalInstance = $modal.open(options);
 
         self.$modalInstance.result.then(function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -159,32 +210,45 @@ angular.module('observer-webclient', [
         self.$modalInstance.dismiss('cancel');
     };
 
+    return {
+
+    };
+
 
 }]);;angular.module('sessionManager', [])
 .factory('sessionManager', ['$cookieStore', '$rootScope' ,'$location', '$http', function ($cookieStore, $rootScope, $location, $http) {
-    var credentials = $cookieStore.get('credentials');
-    console.log(">> get credentials:", credentials);
-    if (credentials) {
-        $http.defaults.headers.common.Authorization = credentials
-    }
+    
+    var setAuthorization = function () {
+        var credentials = $cookieStore.get('credentials');
 
+        if (credentials) {
+            $http.defaults.headers.common.Authorization = credentials
+        }
+    };
 
     var checkSession = function (event, next, current) {
-        console.log("checkSession> ", next);
+        console.log("checkSession > ", next);
 
-        if (next && next.secure) {
+        if (next.$$route && next.$$route.secure) {
             if (!$cookieStore.get('user')) {
+                console.log("here!");
                 event.preventDefault();
                 $rootScope.$evalAsync(function() {
-                    $location.path('#/login?redirect=' + next.$$route.originalPath);
+                    $location.path('/login');
                 });
             }
         }
     };
 
+    
+
+
     $rootScope.$on("$routeChangeStart", checkSession);
+    
+    setAuthorization();
 
     return {
-        check: checkSession
+        check: checkSession,
+        setAuthorization : setAuthorization
     };
 }]);

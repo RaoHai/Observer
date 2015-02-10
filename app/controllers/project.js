@@ -19,9 +19,9 @@ router.get('/projects', passport.authenticate('basic', { session: false }),
 
 router.post('/projects', role(['user', 'admin']), function (req, res, next) {
     var newProject = {
-        name : req.body["project-name"],
-        url : req.body["project-url"],
-        description : req.body["project-description"],
+        name : req.body.name,
+        url : req.body.url,
+        description : req.body.description,
         userId : req.session.user.id
     };
 

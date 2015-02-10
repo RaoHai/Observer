@@ -1,7 +1,9 @@
 angular.module('observer-webclient')
 
-.controller('HeaderController', ['$cookieStore', '$scope', function ($cookieStore, $scope) {
+.controller('HeaderController', ['$cookieStore', '$scope', 'userMgr', function ($cookieStore, $scope, userMgr) {
     
-    console.log(">>>", $cookieStore.get('user'));
-    $scope.user = $cookieStore.get('user');
+    var user = userMgr.user;
+    $scope.user = user;
+
+    console.log("HeaderController:", user);
 }]);

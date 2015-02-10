@@ -2,11 +2,11 @@
 <div class="container">
   <div class="col-xs-12">
     <nav role="navigation" class="navbar navbar-inverse navbar-embossed">
-      <div class="nav-header"><a href="/" class="navbar-brand">Observer </a></div>
+      <div class="nav-header"><a href="/#/" class="navbar-brand">Observer </a></div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li ng-show="user"><a>{{user.username}}</a></li>
-          <li ng-show="!user"><a href="#/login">Login</a></li>
+          <li ng-show="user.id"><a>{{user.username}}</a></li>
+          <li ng-show="!user.id"><a href="#/login">Login</a></li>
         </ul>
       </div>
     </nav>

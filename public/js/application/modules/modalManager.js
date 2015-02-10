@@ -1,13 +1,10 @@
 angular.module('modalManager', [])
-.factory('modalManager', ['$rootScope', function ($rootScope) {
+.factory('modalManager', ['$rootScope', '$modal', function ($rootScope, $modal) {
     var self = this;
 
-    $rootScope.openModal = function (size) {
+    $rootScope.openModal = function (options) {
 
-        self.$modalInstance = $modal.open({
-            templateUrl: 'templates/projectCreationModal.html',
-            size: size
-        });
+        self.$modalInstance = $modal.open(options);
 
         self.$modalInstance.result.then(function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -18,6 +15,10 @@ angular.module('modalManager', [])
     $rootScope.cancel = function () {
         console.log("cancel:");
         self.$modalInstance.dismiss('cancel');
+    };
+
+    return {
+
     };
 
 

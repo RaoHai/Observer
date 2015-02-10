@@ -7,6 +7,7 @@ angular.module('observer-webclient', [
     'ngSanitize',
     'ngRoute',
     'alertHandler',
+    'managers',
     'sessionManager',
     'modalManager',
     'base64',
@@ -41,6 +42,8 @@ angular.module('observer-webclient', [
 
 }]);
 
+
+angular.module('managers', ['userMgr']);
 
 
 
