@@ -2,19 +2,18 @@ var express = require('express'),
      moment = require('moment'),
      router = express.Router(),
        role = require('../middlewares').requireRole,
+       passport = require('passport'),
          db = require('../models');
 
 module.exports = function (app) {
     app.use('/', router);
 };
 
-router.get('/projects', role(['user','admin']), function(req, res, next) {
-    db.project.findAll().then(function (projects) {
-        console.log(">", projects);
-        res.render("projects", {
-            projects: projects
+router.get('/projects', passport.authenticate('basic', { session: false }), 
+    function(req, res, next) {
+        db.project.findAll().then(function (projects) {
+            res.json(projects);
         });
-    });
 });
 
 

@@ -6,7 +6,10 @@ angular.module('observer-webclient', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'alertHandler'
+    'alertHandler',
+    'sessionManager',
+    'modalManager',
+    'base64',
 ])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -25,10 +28,20 @@ angular.module('observer-webclient', [
         controller: 'RegisterCtrl'
     });
 
+    $routeProvider.when('/projects', {
+        secure: true,
+        templateUrl: 'templates/projects.html',
+        controller: 'ProjectCtrl'
+    })
+
     $routeProvider.otherwise({redirectTo: '/dashboard'});
 }])
 
-.controller('AppCtrl', function () {
+.controller('AppCtrl', ['sessionManager', 'modalManager', function (sessionManager, modalManager) {
 
-});
+}]);
+
+
+
+
 

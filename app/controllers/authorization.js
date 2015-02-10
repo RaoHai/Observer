@@ -58,7 +58,6 @@ router.get('/login', function (req, res, next) {
     });
 });
 
-
 router.post('/login', function (req, res, next) {
     var username = req.body.email,
         password = req.body.password,
@@ -83,10 +82,6 @@ router.post('/login', function (req, res, next) {
             var values = user.get();
             delete values.password;
             session.user = values;
-
-            if (remember == "on") {
-                res.cookie('user', values, {maxAge: 60 * 1000});
-            }
 
             return res.json(values);
             

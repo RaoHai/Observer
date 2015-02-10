@@ -7,7 +7,7 @@ angular.module('observer-webclient')
     };
 
     var registerSuccessHandler = function (result) {
-        $cookieStore.put('user', result.data);
+        // $cookieStore.put('user', result.data);
         alertHandler.alert('success', "register success!");
         $location.path("/#register")
     };

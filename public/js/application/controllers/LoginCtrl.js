@@ -1,6 +1,6 @@
 angular.module('observer-webclient')
 
-.controller('LoginCtrl', ['$cookieStore', '$scope', '$http', '$rootScope', 'alertHandler', '$location', function ($cookieStore, $scope, $http, $rootScope, alertHandler, $location) {
+.controller('LoginCtrl', ['$cookieStore', '$scope', '$http', '$rootScope', 'alertHandler', '$location', '$base64', function ($cookieStore, $scope, $http, $rootScope, alertHandler, $location, $base64) {
     $scope.user = $cookieStore.get('user');
 
     $scope.login = {
@@ -10,16 +10,18 @@ angular.module('observer-webclient')
     };
 
     var loginErrorHandle = function (err) {
-        // $rootScope.showAlert = true;
-        // $rootScope.alertCategory = "alert-danger";
-        // $rootScope.alertMessage = err.data.error;
         alertHandler.alert('danger', err.data.error)
     };
 
     var loginSucceesHandle = function (result) {
-        $cookieStore.put('user', result.data);
-        alertHandler.alert('success', "login success!");
-        $location.path("/")
+        var credentials = "Basic " + $base64.encode($scope.login.email + ":" + $scope.login.password);
+        $cookieStore.put('credentials', credentials);
+        if ($scope.login.remember) {
+            $cookieStore.put('user', result.data);  
+        }
+        alertHandler.alert('success', "login success!", function () {
+            $location.path("/"); 
+        });
 
     };
 

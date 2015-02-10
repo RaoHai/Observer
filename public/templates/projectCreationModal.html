@@ -1,0 +1,28 @@
+
+<form ng-submit="createProject()">
+  <div class="modal-header">
+    <h3>create project</h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="project-name">project name:</label>
+      <input id="project-name" name="project-name" type="text" placeholder="project name" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="project-url">project url:</label>
+      <input id="project-url" name="project-url" type="text" placeholder="project url" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="project-description">project description:</label>
+      <textarea id="project-description" name="project-description" class="form-control"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="col-xs-3">
+      <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="cancel" value="Cancel" data-dismiss="modal" aria-label="Close" ng-click="cancel()" class="btn btn-danger btn-lg btn-block"/>
+    </div>
+  </div>
+</form>

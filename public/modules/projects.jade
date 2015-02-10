@@ -1,0 +1,6 @@
+.col-xs-3
+    button.btn.btn-block.btn-lg.btn-primary(ng-click="openModal('lg')")
+        | + Add Project
+ul
+    li(ng-repeat="project in projects")
+        | {{project.url}}

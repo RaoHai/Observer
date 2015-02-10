@@ -1,7 +1,7 @@
 angular.module('alertHandler', [])
 .service('alertHandler', ['$rootScope', function ($rootScope) {
-    this.alert = function (type, message, timeout) {
-        timeout = timeout || 5000;
+    this.alert = function (type, message, callback) {
+        var timeout =  5000;
 
         $rootScope.showAlert = true;
         $rootScope.alertCategory = 'alert-' + type;
@@ -9,6 +9,7 @@ angular.module('alertHandler', [])
 
         setTimeout(function () {
             $rootScope.showAlert = false;
+            callback();
             $rootScope.$apply();
         }, timeout);
 
