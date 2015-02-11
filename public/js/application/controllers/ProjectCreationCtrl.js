@@ -1,11 +1,9 @@
 
 angular.module('observer-webclient')
 
-.controller('ProjectCreationCtrl', ['$scope', '$http', function ($scope, $http) {
+.controller('ProjectCreationCtrl', ['$scope', '$http', 'projectsManager', function ($scope, $http, projectsManager) {
     $scope.createProject = function () {
         console.log(" > ", $scope.newProject);
-        $http.post('/projects', $scope.newProject).then(function (result) {
-            console.log("createProject:", result);
-        });
+        projectsManager.createProject($scope.newProject);
     };
 }]);

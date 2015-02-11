@@ -1,18 +1,18 @@
-form(ng-submit="createProject()")
+form(ng-submit="createProject()" name="createProject")
     .modal-header
         h3 create project
     .modal-body
         .form-group
             label(for="project-name") project name:
-            input.form-control#project-name(name="project-name" type="text" placeholder="project name")
+            input.form-control#project-name(name="project-name" type="text" placeholder="project name" required)
         .form-group
             label(for="project-url") project url:
-            input.form-control#project-url(name="project-url" type="text" placeholder="project url")
+            input.form-control#project-url(name="project-url" type="text" placeholder="project url" required)
         .form-group
             label(for="project-description") project description:
-            textarea.form-control#project-description(name="project-description" )
+            textarea.form-control#project-description(name="project-description" required)
     .modal-footer
         .col-xs-3
-            input.btn.btn-primary.btn-lg.btn-block(type="submit"  value="Create")
+            input.btn.btn-primary.btn-lg.btn-block(type="submit" value="Create" ng-disabled="createProject.$invalid")
         .col-xs-3
             input.btn.btn-danger.btn-lg.btn-block(type="cancel"  value="Cancel" data-dismiss="modal" aria-label="Close" ng-click="cancel()")    

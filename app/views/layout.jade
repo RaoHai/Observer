@@ -15,7 +15,7 @@ html(lang='en')
       script(src='http://localhost:35729/livereload.js')
   body(data-ng-controller="AppCtrl")
     div(ng-controller="HeaderController" ng-include="'templates/header.html'")
-    .alert(role="alert" class="{{alertCategory}}" ng-show="showAlert"){{alertMessage}}
+    .alert(role="alert" class="{{alertCategory}}" ng-show="showAlert") {{alertMessage}}
     .container
       div(ng-view)
 

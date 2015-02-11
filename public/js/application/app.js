@@ -43,7 +43,7 @@ angular.module('observer-webclient', [
 }]);
 
 
-angular.module('managers', ['userMgr']);
+angular.module('managers', ['userMgr', 'projectsManager']);
 
 
 

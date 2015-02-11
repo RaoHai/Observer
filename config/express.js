@@ -60,30 +60,19 @@ module.exports = function(app, config) {
     if(app.get('env') === 'development'){
         app.use(function (err, req, res, next) {
             res.status(err.status || 500);
-            res.render('error', {
-                message: err.message,
-                error: err,
-                title: 'error'
-            });
+            res.json(err);
         });
     }
 
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: {},
-            title: 'error'
-        });
-    });
-
     passport.use(new BasicStrategy(
       function(username, password, done) {
+        console.log(">>> BasicStrategy: ", done);
         // console.log(">> BasicStrategy:", username, password);
         db.user.find({ where : { username: username } }).then(function (user) {
-            console.log("find result:", user);
-            done(null, user);
+            console.log("BasicStrategy : pass");
+            done(undefined, user);
         }, function (err) {
+            console.log("BasicStrategy : reject");
             done(err);
         });
     }
