@@ -1,18 +1,26 @@
 angular.module('projectsManager', [])
-    .factory('projectsManager', ['$http','$q', function($http, $q) {
+    .factory('projectsManager', ['$http','$q','$rootScope', function($http, $q, $rootScope) {
         var projectsManager = {},
         projects            = [],
         currentProject      = {};
 
         var setCurrentProject = function (project) {
             project.active = true;
-            angular.extend(projectsManager.currentProject, json);
+            angular.extend(projectsManager.currentProject, project);
         };
 
         var updateCurrentProject = function (updatedProject) {
             currentProject.name = updatedProject.name;
             currentProject.url = updatedProject.url;
-            currentProject.production = currentProject.description;
+            currentProject.production = updatedProject.description;
+            
+            angular.forEach(projects, function (item) {
+                if (item.id == updatedProject.id) {
+                    item.name = updatedProject.name;
+                    item.url = updatedProject.url;
+                    item.production = updatedProject.description;
+                }
+            });
         };
 
         var fetch = function () {
@@ -28,15 +36,25 @@ angular.module('projectsManager', [])
             return defer.promise
         };
 
+        var updateProject = function (project) {
+            return $http.put('/projects/' + project.id, project).then(function (result) {
+                updateCurrentProject(result.data);
+                $rootScope.$broadcast('project.update');
+            });
+        };
+
         var createProject = function (project) {
-            $http.post('/projects', project).then(function (result) {
+            return $http.post('/projects', project).then(function (result) {
                 angular.forEach(result.data, function (item) {
                     projects.push(item);
                 });
-
-                $rootScope.cancel();
+                $rootScope.$broadcast('project.created');
             });
         }
+
+        var deleteProject = function (project) {
+            return $http.delete('/projects/' + project.id);
+        };
 
 
 
@@ -46,8 +64,10 @@ angular.module('projectsManager', [])
             //methods
             setCurrentProject: setCurrentProject,
             updateCurrentProject: updateCurrentProject,
+            updateProject : updateProject,
             fetch : fetch,
-            createProject : createProject
+            createProject : createProject,
+            deleteProject : deleteProject
         });
 
         return projectsManager;

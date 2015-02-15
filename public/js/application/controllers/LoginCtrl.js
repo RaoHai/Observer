@@ -15,11 +15,9 @@ angular.module('observer-webclient')
 
     var loginSucceesHandle = function (result) {
         var credentials = "Basic " + $base64.encode($scope.login.email + ":" + $scope.login.password);
-        $cookieStore.put('credentials', credentials);
-        if ($scope.login.remember) {
-            $cookieStore.put('user', result.data);  
-            userMgr.setUser(result.data);
-        }
+        $cookieStore.put('observer-credentials', credentials);
+        $cookieStore.put('login-user', result.data);  
+        userMgr.setUser(result.data);
         sessionManager.setAuthorization();
         alertHandler.alert('success', "login success!", function () {
             $location.path("/"); 

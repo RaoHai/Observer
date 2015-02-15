@@ -1,5 +1,5 @@
 angular.module('userMgr', [])
-    .factory('userMgr', [function() {
+    .factory('userMgr', ['$cookieStore', function($cookieStore) {
         var userMgr = {};
 
         var user = {};
@@ -14,8 +14,9 @@ angular.module('userMgr', [])
             user.role = updatedUser.role;
         };
 
-
-
+        if ($cookieStore && $cookieStore.get('observer-user')) {
+            setUser($cookieStore.get('observer-user'));
+        }
 
         angular.extend(userMgr, {
             //properties

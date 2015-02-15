@@ -1,18 +1,59 @@
 
 <div class="row">   
   <div class="col-xs-3">
-    <button ng-click="openModal('lg')" class="btn btn-block btn-lg btn-primary">+ Add Project</button>
+    <button ng-click="newProject('lg')" class="btn btn-block btn-lg btn-primary">+ Add Project</button>
+    <ul class="projects">
+      <li ng-repeat="project in projects" ng-click="setCurrentProject(project)" ng-class="{true: 'active'}[currentProject.id == project.id]">{{project.name}} 
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <button ng-click="editProject(project);" class="btn btn-tiny btn-primary"><span class="fui-new"></span></button>
+            <button ng-click="deleteProject(project);" class="btn btn-tiny btn-danger"><span class="fui-trash"></span></button>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
-</div>
-<div class="row">
-  <ul>
-    <li ng-repeat="project in projects">{{project.url}}</li>
-  </ul>
+  <div class="col-xs-9"><b ng-show="!currentProject.id">please select a project</b>
+    <div ng-show="currentProject.id">
+      <h5>{{currentProject.name}}</h5>
+      <p>{{currentProject.url}}</p>
+      <button ng-click="fetchRss()" class="btn btn-large btn-primary">Fetch</button>
+    </div>
+  </div>
 </div>
 <script type="text/ng-template" id="projectCreateModal.html" name="createProject">        
   <form ng-submit="createProject()">
     <div class="modal-header">
-      <h3>create project</h3>
+      <h3>{{modalTitle}}</h3>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="project-name">project name:</label>
+        <input id="project-name" ng-model="newProject.name" type="text" placeholder="project name" required="required" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="project-url">project url:</label>
+        <input id="project-url" ng-model="newProject.url" type="text" placeholder="project url" required="required" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="project-description">project description:</label>
+        <textarea id="project-description" ng-model="newProject.description" required="required" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="col-xs-3">
+        <input type="submit" value="Create" ng-disaeled="createProject.$invalid" class="btn btn-primary btn-lg btn-block"/>
+      </div>
+      <div class="col-xs-3">
+        <input type="cancel" value="Cancel" data-dismiss="modal" aria-label="Close" ng-click="cancel()" class="btn btn-danger btn-lg btn-block"/>
+      </div>
+    </div>
+  </form>
+</script>
+<script type="text/ng-template" id="projectEditModal.html" name="editProject">        
+  <form ng-submit="updateProject()">
+    <div class="modal-header">
+      <h3>{{modalTitle}}</h3>
     </div>
     <div class="modal-body">
       <div class="form-group">

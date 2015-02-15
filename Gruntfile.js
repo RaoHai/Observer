@@ -29,7 +29,7 @@ module.exports = function (grunt) {
       },
       jade : {
         files: [
-          'public/modules/*.jade'
+          'public/modules/{,*/}*.jade'
         ],
         tasks: ['jade']
       },

@@ -7,7 +7,9 @@ module.exports = function (req, res, next) {
         }
 
         res.locals.message = message;
-        callback();
+        if (callback && typeof callback == "function") {
+            callback();
+        }
     };
 
     res.ok = responsefn;

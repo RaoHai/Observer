@@ -33,6 +33,33 @@ router.post('/projects', passport.authenticate('basic', { session: false }),
     }
 );
 
+router.delete('/projects/:id', passport.authenticate('basic', { session: false }),
+    function (req, res, next) {
+        var projectId = req.params.id;
+        db.project.find(projectId).then(function (project) {
+            project.destroy().then(function (result) {
+                res.json(result);
+            });
+        });
+    }
+);
+
+router.put('/projects/:id',  passport.authenticate('basic', { session: false }),
+    function (req, res, next) {
+        var projectId = req.params.id,
+        targetProject = {  
+            name : req.body.name,
+            url : req.body.url,
+            description: req.body.description
+        };
+
+        db.project.find(projectId).then(function (project) {
+            project.updateAttributes(targetProject).then(function (result) {
+                res.json(result);
+            })
+        });
+    }
+);
 // router.post('/projects', passport.authenticate('basic', { session: false }), 
 //     function (req, res, next) {
 

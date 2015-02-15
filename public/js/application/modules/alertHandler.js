@@ -9,7 +9,9 @@ angular.module('alertHandler', [])
 
         setTimeout(function () {
             $rootScope.showAlert = false;
-            callback();
+            if (callback && typeof callback == "function") {
+                callback();
+            }
             $rootScope.$apply();
         }, timeout);
 

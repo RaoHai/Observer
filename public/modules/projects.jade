@@ -1,27 +1,30 @@
 .row    
     .col-xs-3
-        button.btn.btn-block.btn-lg.btn-primary(ng-click="openModal('lg')")
+        button.btn.btn-block.btn-lg.btn-primary(ng-click="newProject('lg')")
             | + Add Project
-.row
-    ul
-        li(ng-repeat="project in projects")
-            | {{project.url}}
+        ul.projects
+            li(ng-repeat="project in projects" ng-click="setCurrentProject(project)" ng-class="{true: 'active'}[currentProject.id == project.id]")
+                | {{project.name}} 
+                .btn-toolbar
+                    .btn-group
+                        button.btn.btn-tiny.btn-primary(ng-click="editProject(project);")
+                            span.fui-new
+                        button.btn.btn-tiny.btn-danger(ng-click="deleteProject(project);")
+                            span.fui-trash
+    .col-xs-9
+        b(ng-show="!currentProject.id") please select a project
+        div(ng-show="currentProject.id")
+            h5 {{currentProject.name}}
+            p {{currentProject.url}}
+            button.btn.btn-large.btn-primary(ng-click="fetchRss()")
+                | Fetch
+
+
+
 script(type="text/ng-template" id="projectCreateModal.html" name="createProject")         
     form(ng-submit="createProject()")
-        .modal-header
-            h3 create project
-        .modal-body
-            .form-group
-                label(for="project-name") project name:
-                input.form-control#project-name(ng-model="newProject.name" type="text" placeholder="project name" required)
-            .form-group
-                label(for="project-url") project url:
-                input.form-control#project-url(ng-model="newProject.url" type="text" placeholder="project url" required)
-            .form-group
-                label(for="project-description") project description:
-                textarea.form-control#project-description(ng-model="newProject.description" required)
-        .modal-footer
-            .col-xs-3
-                input.btn.btn-primary.btn-lg.btn-block(type="submit"  value="Create" ng-disaeled="createProject.$invalid")
-            .col-xs-3
-                input.btn.btn-danger.btn-lg.btn-block(type="cancel"  value="Cancel" data-dismiss="modal" aria-label="Close" ng-click="cancel()")    
+       include modals/projectModal.jade
+
+script(type="text/ng-template" id="projectEditModal.html" name="editProject")         
+    form(ng-submit="updateProject()")
+       include modals/projectModal.jade

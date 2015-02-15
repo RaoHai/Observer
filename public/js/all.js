@@ -80,11 +80,9 @@ angular.module('managers', ['userMgr', 'projectsManager']);
 
     var loginSucceesHandle = function (result) {
         var credentials = "Basic " + $base64.encode($scope.login.email + ":" + $scope.login.password);
-        $cookieStore.put('credentials', credentials);
-        if ($scope.login.remember) {
-            $cookieStore.put('user', result.data);  
-            userMgr.setUser(result.data);
-        }
+        $cookieStore.put('observer-credentials', credentials);
+        $cookieStore.put('login-user', result.data);  
+        userMgr.setUser(result.data);
         sessionManager.setAuthorization();
         alertHandler.alert('success', "login success!", function () {
             $location.path("/"); 
@@ -100,35 +98,79 @@ angular.module('managers', ['userMgr', 'projectsManager']);
 }]);;
 angular.module('observer-webclient')
 
-.controller('ProjectCreationCtrl', ['$scope', '$http', 'projectsManager', function ($scope, $http, projectsManager) {
+.controller('ProjectCreationCtrl', ['$scope','$rootScope', '$http', 'projectsManager','alertHandler', function ($scope, $rootScope, $http, projectsManager,alertHandler) {
+    $scope.modalTitle = "Create Project";
+
     $scope.createProject = function () {
         console.log(" > ", $scope.newProject);
-        projectsManager.createProject($scope.newProject);
+        projectsManager.createProject($scope.newProject).then(function () {
+            alertHandler.alert('success', "create success!");
+            $rootScope.cancel();
+        });
     };
 }]);;angular.module('observer-webclient')
 
-.controller('ProjectCtrl', ['$scope', '$http', '$rootScope', 'projectsManager', function ($scope, $http, $rootScope, projectsManager) {
+.controller('ProjectCtrl', ['$scope', '$http', '$rootScope', 'projectsManager', 'alertHandler', function ($scope, $http, $rootScope, projectsManager, alertHandler) {
     
     $scope.projects = projectsManager.projects;
-    projectsManager.fetch().then(function (result) {
-        console.log("fetch result: ", result);
-        console.log("projectsManager:", projectsManager.projects);
-        console.log("scope projects:" , $scope.projects);
-    });
-    // $http.get('/projects').then(function (projects) {
-    //     console.log("get projects:", projects);
-    //     $scope.projects = projects.data;
-    // });
+    $scope.currentProject = projectsManager.currentProject;
+    projectsManager.fetch();
 
+
+    $scope.deleteProject = function (project) {
+        if (confirm("sure to delete project : " + project.name + " ?")) {
+            projectsManager.deleteProject(project).then(function () {
+                alertHandler.alert('success', "delete success!");
+                projectsManager.fetch();
+            });
+        }
+    };
+
+    $scope.editProject = function (project) {
+        projectsManager.setCurrentProject(project);
+
+        var options = {
+            templateUrl: 'projectEditModal.html',
+            size: 'lg',
+            controller: 'ProjectEditCtrl'
+        };
+
+        $rootScope.openModal(options);
+    };
     
-    $scope.openModal = function (size) {
+    $scope.fetchRss = function () {
+        $http.get('/feed/?url=' + encodeURIComponent($scope.currentProject.url)).then(function (result) {
+            console.log(" --> rss", result);
+        });
+    };
+
+    $scope.setCurrentProject = function (project) {
+        projectsManager.setCurrentProject(project);
+    };
+
+    $scope.newProject = function () {
         var options = {
             templateUrl: 'projectCreateModal.html',
-            size: size,
+            size: 'lg',
             controller: 'ProjectCreationCtrl'
         };
 
         $rootScope.openModal(options);
+    };
+}]);;angular.module('observer-webclient')
+
+.controller('ProjectEditCtrl', ['$scope','$rootScope', '$http', 'projectsManager','alertHandler', function ($scope, $rootScope, $http, projectsManager,alertHandler) {
+    
+    $scope.modalTitle = "Edit Project";
+
+    $scope.newProject = angular.copy(projectsManager.currentProject);
+
+    $scope.updateProject = function () {
+        console.log(" > ", $scope.newProject);
+        projectsManager.updateProject($scope.newProject).then(function () {
+            alertHandler.alert('success', "create success!");
+            $rootScope.cancel();
+        });
     };
 }]);;angular.module('observer-webclient')
 
@@ -153,7 +195,7 @@ angular.module('observer-webclient')
         $http.post('/register', $scope.register).then(registerSuccessHandler, registerErrorHandle);
     };
 }]);;angular.module('userMgr', [])
-    .factory('userMgr', [function() {
+    .factory('userMgr', ['$cookieStore', function($cookieStore) {
         var userMgr = {};
 
         var user = {};
@@ -168,8 +210,9 @@ angular.module('observer-webclient')
             user.role = updatedUser.role;
         };
 
-
-
+        if ($cookieStore && $cookieStore.get('observer-user')) {
+            setUser($cookieStore.get('observer-user'));
+        }
 
         angular.extend(userMgr, {
             //properties
@@ -181,20 +224,28 @@ angular.module('observer-webclient')
 
         return userMgr;
 }]);;angular.module('projectsManager', [])
-    .factory('projectsManager', ['$http','$q', function($http, $q) {
+    .factory('projectsManager', ['$http','$q','$rootScope', function($http, $q, $rootScope) {
         var projectsManager = {},
         projects            = [],
         currentProject      = {};
 
         var setCurrentProject = function (project) {
             project.active = true;
-            angular.extend(projectsManager.currentProject, json);
+            angular.extend(projectsManager.currentProject, project);
         };
 
         var updateCurrentProject = function (updatedProject) {
             currentProject.name = updatedProject.name;
             currentProject.url = updatedProject.url;
-            currentProject.production = currentProject.description;
+            currentProject.production = updatedProject.description;
+            
+            angular.forEach(projects, function (item) {
+                if (item.id == updatedProject.id) {
+                    item.name = updatedProject.name;
+                    item.url = updatedProject.url;
+                    item.production = updatedProject.description;
+                }
+            });
         };
 
         var fetch = function () {
@@ -210,15 +261,25 @@ angular.module('observer-webclient')
             return defer.promise
         };
 
+        var updateProject = function (project) {
+            return $http.put('/projects/' + project.id, project).then(function (result) {
+                updateCurrentProject(result.data);
+                $rootScope.$broadcast('project.update');
+            });
+        };
+
         var createProject = function (project) {
-            $http.post('/projects', project).then(function (result) {
+            return $http.post('/projects', project).then(function (result) {
                 angular.forEach(result.data, function (item) {
                     projects.push(item);
                 });
-
-                $rootScope.cancel();
+                $rootScope.$broadcast('project.created');
             });
         }
+
+        var deleteProject = function (project) {
+            return $http.delete('/projects/' + project.id);
+        };
 
 
 
@@ -228,8 +289,10 @@ angular.module('observer-webclient')
             //methods
             setCurrentProject: setCurrentProject,
             updateCurrentProject: updateCurrentProject,
+            updateProject : updateProject,
             fetch : fetch,
-            createProject : createProject
+            createProject : createProject,
+            deleteProject : deleteProject
         });
 
         return projectsManager;
@@ -244,7 +307,9 @@ angular.module('observer-webclient')
 
         setTimeout(function () {
             $rootScope.showAlert = false;
-            callback();
+            if (callback && typeof callback == "function") {
+                callback();
+            }
             $rootScope.$apply();
         }, timeout);
 
@@ -277,7 +342,8 @@ angular.module('observer-webclient')
 .factory('sessionManager', ['$cookieStore', '$rootScope' ,'$location', '$http', function ($cookieStore, $rootScope, $location, $http) {
     
     var setAuthorization = function () {
-        var credentials = $cookieStore.get('credentials');
+        var credentials = $cookieStore.get('observer-credentials');
+        console.log("setAuthorization:", credentials);
 
         if (credentials) {
             $http.defaults.headers.common.Authorization = credentials
@@ -288,7 +354,7 @@ angular.module('observer-webclient')
         console.log("checkSession > ", next);
 
         if (next.$$route && next.$$route.secure) {
-            if (!$cookieStore.get('user')) {
+            if (!$cookieStore.get('observer-credentials')) {
                 console.log("here!");
                 event.preventDefault();
                 $rootScope.$evalAsync(function() {

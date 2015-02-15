@@ -1,3 +1,28 @@
 .login-screen {
     width: 800px;
 }
+
+ul.projects {
+    padding: 0;
+    margin: 0;
+    li {
+        cursor: pointer;
+        padding: 5px;
+        list-style: none;
+        line-height: 50px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        .btn-toolbar {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        &:hover, &.active {
+            background-color: #f3f3f3;
+        }
+
+        button {
+            margin-top: 5px;
+        }
+    }
+}
